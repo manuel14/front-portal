@@ -1,0 +1,54 @@
+.App {
+    height: 100%;
+    display: grid;
+    grid-template-columns: 20% 80%;
+    grid-template-rows: auto 1fr;
+    /* prettier-ignore */
+    grid-template-areas:
+      'header   header'
+      'employeesBar  content'
+      'adminsBar content'
+      ;
+  }
+
+
+  
+  @media (max-width: 64em) {
+    .App {
+      grid-template-rows: auto auto 1fr;
+      /* prettier-ignore */
+      grid-template-areas:
+        'header   header'
+        'sidebar  sidebar'
+        'content  content';
+    }
+  }
+  
+  .App-header {
+    grid-area: header;
+  }
+  
+  .App-employeesBar {
+    grid-area: employeesBar;
+    background: #555;
+  }
+
+  .App-adminsBar {
+    grid-area: adminsBar;
+    background: #555;
+  }
+  
+  .App-content {
+    grid-area: content;
+    overflow: auto;
+    overflow-y: scroll;
+  }
+  
+  .App-footer {
+    grid-area: footer;
+  }
+
+  .LoginForm{
+    background-color:#ccc;
+  }
+  
