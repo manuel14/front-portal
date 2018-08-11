@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { withRouter } from 'react-router';
 import { connect } from "react-redux";
 import { Box, Flex } from 'grid-styled';
 import { Link } from 'react-router-dom';
@@ -22,7 +23,7 @@ class Receipts extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      modalIsOpen: false
+      isModalOpen: false
     }
 
     this.closeModal = this.closeModal.bind(this);
@@ -39,7 +40,6 @@ class Receipts extends Component {
     })
   }
 
-  // open modal (set isModalOpen, false)
   openModal() {
     this.setState({
       isModalOpen: true
@@ -47,20 +47,19 @@ class Receipts extends Component {
   }
   showReceipt(event) {
     const id = event.target.id;
-    console.log(event.target)
-    console.log("llego a show receipt")
+    console.log(id);
     this.setState({
       isModalOpen: false
     })
     this.props.onConfirm(id);
+    this.props.history.push(`/recibo/${id}`);
 
   }
 
   render() {
-
     const modalStyle = {
       overlay: {
-        backgroundColor: 'white'
+        backgroundColor: '#292b2c'
       }
     };
 
@@ -71,23 +70,7 @@ class Receipts extends Component {
 
       }
     };
-    return this.props.items ? (
-      /*  <Flex align="center">
-         <Box mt={20} mx='auto' width={512}>
-           <Title center size={'24px'} color='#006aa3'>Recibos</Title>
-           {this.props.items.map((receipt) => {
-             return <Receipt
-               opened={receipt.abierto}
-               type={receipt.tipo}
-               url={receipt.archivo}
-               date={receipt.periodo}
-             />
-           })}
-  
-           
-         </Box>
-       </Flex> */
-
+    return this.props.receipts ? (
       <Table>
         <TableHead>
           <TableRow>
@@ -98,36 +81,34 @@ class Receipts extends Component {
           </TableRow>
         </TableHead>
         <TableBody>
-          {this.props.items.map(receipt => (
-            <TableRow key={receipt.id}>
+          {this.props.receipts.map(receipt => (
+            <TableRow key={receipt.pk}>
               <TableData>
-                <Link to={`/recibo/${receipt.id}`}
-                  component={Receipt}>
-                  <div>
-                    <Button primary onClick={this.openModal}>
-                      {receipt.periodo}
+                <Text margin={'0px 5px 0px'}>{receipt.periodo}</Text>
+                <div>
+                  <Button primary onClick={e => {receipt.abierto ? 
+                    this.props.history.push(`/recibo/${receipt.id}`)
+                    : this.openModal(e)}
+                  }>
+                    Abrir
                     </Button>
-
-                    {receipt.opened && <div style={mainStyle.app}>
-                      <NiceModal
-                        isModalOpen={this.state.isModalOpen}
-                        closeModal={this.closeModal}
-                        style={modalStyle}>
-
-                        <Text block>Si presiona en continuar dará su consentimiento de haber visto este recibo de sueldo</Text>
-                        <Button id={receipt.id} primary onClick={this.showReceipt}>Continuar
+                  {!receipt.abierto && <div style={mainStyle.app}>
+                    <NiceModal
+                      isModalOpen={this.state.isModalOpen}
+                      closeModal={this.closeModal}
+                      style={modalStyle}>
+                      <Text block>Si presiona en continuar dará su consentimiento de haber visto este recibo de sueldo</Text>
+                      <Button id={receipt.pk} primary onClick={this.showReceipt}>Continuar
                                         </Button>
-                        <Button danger onClick={this.closeModal}>Cerrar
+                      <Button danger onClick={this.closeModal}>Cerrar
                                         </Button>
-
-                      </NiceModal>
-                    </div>
-                    }
+                    </NiceModal>
                   </div>
-                </Link>
+                  }
+                </div>
               </TableData>
               <TableData>{receipt.abierto ? receipt.abierto : 'No'}</TableData>
-              <TableData>{receipt.tipo}</TableData>
+              <TableData>{receipt.tipo === "R" ? "Recibo" : "Aguinaldo"}</TableData>
 
             </TableRow>
           ))}
@@ -149,4 +130,4 @@ const mapDispatchToProps = dispatch => ({
   dispatch
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Receipts);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(Receipts));

@@ -175,7 +175,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route path="/recibo/:receiptId" component={Receipt}>
+                <Route path="/recibo/:receiptId?" component={Receipt}>
                 </Route>
                 <Route exact path='/' render={() => (
                   token ? (
