@@ -1,6 +1,7 @@
 .App {
     height: 100%;
     display: grid;
+    overflow-y: hidden;
     grid-template-columns: 20% 80%;
     grid-template-rows: auto 1fr;
     /* prettier-ignore */
@@ -41,7 +42,7 @@
   .App-content {
     grid-area: content;
     overflow: auto;
-    overflow-y: scroll;
+    overflow-y: hidden;
   }
   
   .App-footer {

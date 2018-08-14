@@ -9,7 +9,7 @@ import {
   NiceModal,
   Text
 } from "../../components";
-import { getReceipts, patchReceipt } from '../Receipt/action';
+import { getReceipts, patchReceipt } from './action';
 import {
   Table,
   TableBody,
@@ -25,7 +25,6 @@ class Receipts extends Component {
     this.state = {
       isModalOpen: false
     }
-
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
     this.showReceipt = this.showReceipt.bind(this);
@@ -34,6 +33,7 @@ class Receipts extends Component {
   componentDidMount() {
     this.props.onLoad();
   }
+
   closeModal() {
     this.setState({
       isModalOpen: false
@@ -45,12 +45,18 @@ class Receipts extends Component {
       isModalOpen: true
     })
   }
-  showReceipt(event) {
-    const id = event.target.id;
-    console.log(id);
+  showReceipt = receipt => event => {
+    if(!receipt.opened){
+      this.openModal();
+    }
+    console.log(receipt);
+    const id = receipt.pk;
     this.setState({
       isModalOpen: false
     })
+    if (receipt.opened) {
+      this.props.history.push(`/recibo/${id}`);
+    }
     this.props.onConfirm(id);
     this.props.history.push(`/recibo/${id}`);
 
@@ -82,23 +88,19 @@ class Receipts extends Component {
         </TableHead>
         <TableBody>
           {this.props.receipts.map(receipt => (
-            <TableRow key={receipt.pk}>
+            <TableRow onClick={this.showReceipt(receipt)}
+              key={receipt.pk}>
               <TableData>
                 <Text margin={'0px 5px 0px'}>{receipt.periodo}</Text>
                 <div>
-                  <Button primary onClick={e => {receipt.abierto ? 
-                    this.props.history.push(`/recibo/${receipt.id}`)
-                    : this.openModal(e)}
-                  }>
-                    Abrir
-                    </Button>
+
                   {!receipt.abierto && <div style={mainStyle.app}>
                     <NiceModal
                       isModalOpen={this.state.isModalOpen}
                       closeModal={this.closeModal}
                       style={modalStyle}>
-                      <Text block>Si presiona en continuar dará su consentimiento de haber visto este recibo de sueldo</Text>
-                      <Button id={receipt.pk} primary onClick={this.showReceipt}>Continuar
+                      <Text block>Si presiona en abrir dará su consentimiento de haber visto este recibo de sueldo</Text>
+                      <Button id={receipt.pk} primary onClick={this.showReceipt}>Abrir
                                         </Button>
                       <Button danger onClick={this.closeModal}>Cerrar
                                         </Button>

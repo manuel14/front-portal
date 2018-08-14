@@ -5,7 +5,7 @@ import {
   } from "./action";
   
   const defaultState = {
-    receipts: []
+    receipt: {}
   };
   
   export default function(state = defaultState, action) {
@@ -13,7 +13,7 @@ import {
       case RECEIPT_RESPONSE: {
         return {
           ...state,
-          receipts: action.response
+          receipt: action.response
         };
       }
       

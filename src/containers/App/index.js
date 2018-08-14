@@ -6,8 +6,8 @@ import { Button, InputText, Label, Nav, Select, SideBar } from '../../components
 import { Box, Flex } from 'grid-styled';
 import { getTheme } from '../../utils/theme';
 import { signUpUser, loginUser, logoutUser } from './action';
-import Receipts from '../Receipt';
-import {Receipt} from '../../components/index';
+import Receipts from '../Receipts';
+import ReceiptDetail from '../ReceiptDetail/index';
 import './styles.css';
 import 'react-select/dist/react-select.css';
 
@@ -79,8 +79,8 @@ class App extends Component {
 
   render() {
     const token = localStorage.jwtToken;
+    console.log(token);
     const staff = localStorage.staff;
-    console.log(staff);
     const { username } = this.props;
     return (
       <BrowserRouter>
@@ -103,19 +103,12 @@ class App extends Component {
                 />
               </div>
             }
-            {
-              staff && <div className="App-adminsBar">
-                <SideBar
-                  links={["/ladero1", "/ladero2", "/ladero3"]}
-                />
-              </div>
-            }
             <div className="App-content">
               <Switch>
                 <Route path="/login"
                   render={() => (token ?
                     (
-                      <h1>Logueado</h1>
+                      <Redirect to="/recibos" />
                     )
                     : (
                       <Flex align="center">
@@ -133,20 +126,6 @@ class App extends Component {
                               <Box>
                                 <Button onClick={this.handleLogin} margin={'0px 5px 0px 0px'} center primary>Login</Button>
                                 <Button onClick={this.handleSignUp} center success>SignUp</Button>
-                                {/* <Select 
-                                name="empresasSelect"
-                                value={this.state.selectedOption}
-                                onChange={this.handleChange}
-                                autoFocus
-                                placeholder="Elija empresa"
-                                options={[
-                                    {value: 'uv', label: 'Ushuaiavisión'},
-                                    {value: 'tvf', label: 'Tvfuego'}
-                                ]}
-                              
-                              /> */}
-
-
                               </Box>
                             </form>
                           </div>
@@ -154,9 +133,7 @@ class App extends Component {
                       </Flex>
                     )
                   )}
-
                 />
-
                 <Route path="/user"
                   render={() => (
                     token ? (
@@ -175,8 +152,18 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route path="/recibo/:receiptId?" component={Receipt}>
-                </Route>
+                <Route path="/admin"
+                  render={() => (
+                    staff ? (
+                      <Receipts />
+                    )
+                      : (
+                        <h1>No tiene los permisos necesarios</h1>
+                      )
+                  )} />
+                <Route path="/recibo/:receiptId"
+                  Component={ReceiptDetail}
+                />
                 <Route exact path='/' render={() => (
                   token ? (
                     <Redirect to="/recibos" />)

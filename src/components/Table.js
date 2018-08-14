@@ -21,7 +21,7 @@ const Table = styled.table`
 
   ${TableHead} {
     ${TableRow} {
-      background-color: #3e4444;
+      background-color: #292b2c;
       border-left: 1px solid #006aa3;
       border-right: 1px solid #006aa3;
     }

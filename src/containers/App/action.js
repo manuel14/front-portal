@@ -7,7 +7,7 @@ export function loginRequest() {
   };
 }
 
-export const LOGIN_RESPONSE = "prode/user/USER_RESPONSE";
+export const LOGIN_RESPONSE = "prode/user/LOGIN_RESPONSE";
 export function loginResponse(response) {
   return {
     type: LOGIN_RESPONSE,
