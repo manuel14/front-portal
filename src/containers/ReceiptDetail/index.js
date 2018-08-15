@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 import { getReceipt } from './action';
 import { Box, Flex } from 'grid-styled';
-import { connect } from 'react-router-redux'
+import { connect } from 'react-redux'
+import { withRouter } from 'react-router';
 
 class ReceiptDetail extends Component {
 
     componentDidMount() {
-        this.props.onLoad(this.props.params.receiptId);
+        console.log("llego a detail");
+        console.log(this.props);
+        this.props.onLoad(this.props.match.params.receiptId);
     }
 
     render() {
@@ -27,7 +30,7 @@ class ReceiptDetail extends Component {
 
 
 const mapStateToProps = state => ({
-    ...state.receiptDetail,
+    ...state.receiptDetailReducer,
 });
 
 const mapDispatchToProps = dispatch => ({

@@ -4,8 +4,9 @@ import Card from './Card';
 import CardHeader from './CardHeader';
 import Center from './Center';
 import CustomModal from './CustomModal'
-import CustomModalContainer from './CustomModalContainer'
-import CustomModalMain from './CustomModalMain' 
+import CustomModalContainer from './CustomModalContainer';
+import CustomModalMain from './CustomModalMain';
+import AdminRecibo from './AdminRecibo'; 
 import Image from './Image';
 import InputText from './InputText';
 import Label from './Label';
@@ -31,6 +32,7 @@ import Title from './Title';
 import Toast from './Toast';
 
 export {
+    AdminRecibo,
     Avatar,
     Button,
     Card,

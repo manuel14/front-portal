@@ -23,7 +23,7 @@ class NiceModal extends React.Component {
 			height: "100%",
 			overflow: "auto",
 			height: "100%",
-			zIndex: 10001,
+			zIndex: 10001
 		};
 
 		// default style

@@ -1,16 +1,11 @@
 import React, { Component } from "react";
 import { withRouter } from 'react-router';
 import { connect } from "react-redux";
-import { Box, Flex } from 'grid-styled';
-import { Link } from 'react-router-dom';
-import {
-  Button,
-  Receipt,
-  NiceModal,
-  Text
-} from "../../components";
 import { getReceipts, patchReceipt } from './action';
 import {
+  Button,
+  NiceModal,
+  Text,
   Table,
   TableBody,
   TableData,
@@ -28,13 +23,15 @@ class Receipts extends Component {
     this.closeModal = this.closeModal.bind(this);
     this.openModal = this.openModal.bind(this);
     this.showReceipt = this.showReceipt.bind(this);
+    this.openReceipt = this.openReceipt.bind(this);
   }
 
   componentDidMount() {
     this.props.onLoad();
   }
 
-  closeModal() {
+  closeModal(event) {
+    console.log("entro a close modal");
     this.setState({
       isModalOpen: false
     })
@@ -46,21 +43,30 @@ class Receipts extends Component {
     })
   }
   showReceipt = receipt => event => {
-    if(!receipt.opened){
+    event.preventDefault();
+    console.log("llego a show receipt");
+    console.log(receipt.opened);
+    if (!receipt.opened) {
       this.openModal();
     }
+    else {
+      this.openReceipt(receipt);
+      
+    }
+  }
+
+  openReceipt = receipt => event => {
+    event.preventDefault();
     console.log(receipt);
     const id = receipt.pk;
-    this.setState({
-      isModalOpen: false
-    })
+    console.log(id);
     if (receipt.opened) {
       this.props.history.push(`/recibo/${id}`);
     }
     this.props.onConfirm(id);
     this.props.history.push(`/recibo/${id}`);
-
   }
+
 
   render() {
     const modalStyle = {
@@ -73,7 +79,7 @@ class Receipts extends Component {
       app: {
         margin: '120px 0',
         display: this.state.isModalOpen ? 'block' : 'none'
-
+        
       }
     };
     return this.props.receipts ? (
@@ -93,20 +99,19 @@ class Receipts extends Component {
               <TableData>
                 <Text margin={'0px 5px 0px'}>{receipt.periodo}</Text>
                 <div>
-
-                  {!receipt.abierto && <div style={mainStyle.app}>
+                  <div style={mainStyle.app}>
                     <NiceModal
                       isModalOpen={this.state.isModalOpen}
                       closeModal={this.closeModal}
                       style={modalStyle}>
                       <Text block>Si presiona en abrir dará su consentimiento de haber visto este recibo de sueldo</Text>
-                      <Button id={receipt.pk} primary onClick={this.showReceipt}>Abrir
+                      <Button id={receipt.pk} primary onClick={this.openReceipt(receipt)}>Abrir
                                         </Button>
                       <Button danger onClick={this.closeModal}>Cerrar
                                         </Button>
                     </NiceModal>
                   </div>
-                  }
+
                 </div>
               </TableData>
               <TableData>{receipt.abierto ? receipt.abierto : 'No'}</TableData>

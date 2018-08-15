@@ -7,7 +7,8 @@ import { Box, Flex } from 'grid-styled';
 import { getTheme } from '../../utils/theme';
 import { signUpUser, loginUser, logoutUser } from './action';
 import Receipts from '../Receipts';
-import ReceiptDetail from '../ReceiptDetail/index';
+import ReceiptDetail from '../ReceiptDetail';
+import Admin from '../Admin';
 import './styles.css';
 import 'react-select/dist/react-select.css';
 
@@ -94,6 +95,7 @@ class App extends Component {
                 onMenu={this.onToggleMenu}
                 handleLogout={this.handleLogout}
                 userName={username}
+                staff={localStorage.staff}
               />
             </div>
             {
@@ -152,17 +154,11 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route path="/admin"
-                  render={() => (
-                    staff ? (
-                      <Receipts />
-                    )
-                      : (
-                        <h1>No tiene los permisos necesarios</h1>
-                      )
-                  )} />
+                <Route path="/admin" component={Admin}
+                    
+                  />
                 <Route path="/recibo/:receiptId"
-                  Component={ReceiptDetail}
+                  component={ReceiptDetail}
                 />
                 <Route exact path='/' render={() => (
                   token ? (
