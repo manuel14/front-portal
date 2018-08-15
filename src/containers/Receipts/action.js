@@ -45,13 +45,28 @@ export function getReceipts() {
 }
 
 export function patchReceipt(receiptId){
+    console.log("llego a patch");
     return dispatch => {
         dispatch(receiptsRequest());
         const current = new Date().toISOString();
         const body = {abierto: current}
         return patch(`/api/recibo/${receiptId}/`, body)
             .then(response => {
+                this.props.history.push(`/recibo/${receiptId}`);
                 dispatch(getReceipts())
+            })
+            .catch(err => {
+                console.log(err)
+            })
+    }
+}
+
+export function postReceipt(receipt){
+    return dispatch => {
+        dispatch(receiptsRequest());
+        return post(`/api/recibo/`, receipt)
+            .then(response => {
+                console.log(response)
             })
             .catch(err => {
                 console.log(err)

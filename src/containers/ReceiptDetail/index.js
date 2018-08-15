@@ -14,11 +14,12 @@ class ReceiptDetail extends Component {
 
     render() {
         const { receipt } = this.props;
+        console.log(receipt);
         return (
             <div className="receipt">
                 <Flex align="center">
                     <Box mt={'20px'} mx="auto">
-                        <iframe height="512px" src={receipt.url}>
+                        <iframe height="512px" src={receipt.archivo}>
 
                         </iframe>
                     </Box>

@@ -6,7 +6,6 @@ import {
   SIGNUP_RESPONSE,
   USER_LOGOUT,
 } from "./action";
-import {push} from 'react-router-redux';
 
 const defaultState = {
   username: ""
@@ -16,7 +15,7 @@ export default function (state = defaultState, action) {
   switch (action.type) {
     case LOGIN_RESPONSE: {
       localStorage.setItem('jwtToken', action.response.token)
-      localStorage.setItem('userid', action.response.userid)
+      localStorage.setItem('username', action.response.userid)
       localStorage.setItem('staff', action.response.staff)
       return {
         ...state,
@@ -30,7 +29,7 @@ export default function (state = defaultState, action) {
     }
     case USER_LOGOUT: {
       localStorage.removeItem('jwtToken');
-      localStorage.removeItem('userid');
+      localStorage.removeItem('username');
       localStorage.removeItem('staff');
       return {
         ...state,

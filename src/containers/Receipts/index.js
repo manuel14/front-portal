@@ -30,41 +30,37 @@ class Receipts extends Component {
     this.props.onLoad();
   }
 
-  closeModal(event) {
+  closeModal() {
     console.log("entro a close modal");
-    this.setState({
-      isModalOpen: false
+    this.setState((prevState) => {
+      console.log(prevState.isModalOpen);
+      return {isModalOpen: !prevState.isModalOpen}
     })
   }
 
   openModal() {
-    this.setState({
-      isModalOpen: true
+    console.log("entro a open modal");
+    this.setState((prevState) => {
+      console.log(prevState.isModalOpen);
+      return {isModalOpen: !prevState.isModalOpen}
     })
   }
   showReceipt = receipt => event => {
+    console.log("entro a show receipt");
     event.preventDefault();
-    console.log("llego a show receipt");
-    console.log(receipt.opened);
-    if (!receipt.opened) {
+    const id = receipt.pk;
+    if (!receipt.abierto) {
       this.openModal();
     }
     else {
-      this.openReceipt(receipt);
-      
+      this.props.history.push(`/recibo/${id}`);
     }
   }
 
-  openReceipt = receipt => event => {
+  openReceipt = id => event => {
     event.preventDefault();
-    console.log(receipt);
-    const id = receipt.pk;
-    console.log(id);
-    if (receipt.opened) {
-      this.props.history.push(`/recibo/${id}`);
-    }
     this.props.onConfirm(id);
-    this.props.history.push(`/recibo/${id}`);
+    
   }
 
 
@@ -79,7 +75,7 @@ class Receipts extends Component {
       app: {
         margin: '120px 0',
         display: this.state.isModalOpen ? 'block' : 'none'
-        
+
       }
     };
     return this.props.receipts ? (
@@ -105,7 +101,8 @@ class Receipts extends Component {
                       closeModal={this.closeModal}
                       style={modalStyle}>
                       <Text block>Si presiona en abrir dará su consentimiento de haber visto este recibo de sueldo</Text>
-                      <Button id={receipt.pk} primary onClick={this.openReceipt(receipt)}>Abrir
+                      <Button id={receipt.pk} primary onClick={this.openReceipt(receipt.pk)}
+                      >Abrir
                                         </Button>
                       <Button danger onClick={this.closeModal}>Cerrar
                                         </Button>

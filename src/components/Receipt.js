@@ -3,12 +3,11 @@ import { Box, Flex } from 'grid-styled';
 
 class Receipt extends Component {
 
+
     render() {
-        console.log(this.props.items);
         const match = this.props.match
-        console.log(match.params);
         const receiptId = match.params.receiptId;
-        const url = this.props.url
+        const url = this.props.location.state.url;
 
         //const i = this.props.items.findIndex((receipt) => receipt.id === receiptId);
         //const receipt = this.props.receipt[i];

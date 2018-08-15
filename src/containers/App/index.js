@@ -11,6 +11,7 @@ import ReceiptDetail from '../ReceiptDetail';
 import Admin from '../Admin';
 import './styles.css';
 import 'react-select/dist/react-select.css';
+import Notifications from 'react-notification-system-redux';
 
 
 class App extends Component {
@@ -83,10 +84,26 @@ class App extends Component {
     console.log(token);
     const staff = localStorage.staff;
     const { username } = this.props;
+    const style = {
+      NotificationItem: { // Override the notification item
+        DefaultStyle: { // Applied to every notification, regardless of the notification level
+          margin: '10px 5px 2px 1px'
+        },
+
+        success: { // Applied only to the success notification item
+          color: 'red'
+        }
+      }
+    };
     return (
       <BrowserRouter>
         <ThemeProvider theme={getTheme(this.props.theme)}>
           <div className="App">
+          <Notifications
+              notifications={this.props.notifications}
+              style={style}
+              noAnimation={true}
+            />
             <div className="App-header">
               <Nav
                 compact={false}
@@ -154,7 +171,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route path="/admin" component={Admin}
+                <Route onEnter={this.requireAuth} path="/admin" component={Admin}
                     
                   />
                 <Route path="/recibo/:receiptId"
@@ -184,6 +201,7 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   ...state.appReducer,
+  notifications: state.notifications
 });
 
 const mapDispatchToProps = dispatch => ({

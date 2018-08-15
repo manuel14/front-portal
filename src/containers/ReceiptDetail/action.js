@@ -38,4 +38,17 @@ export function getReceipt(receiptId) {
     };
 }
 
-
+export function patchReceipt(receiptId) {
+    return dispatch => {
+        dispatch(receiptRequest());
+        return get(`/api/recibo/${receiptId}/`)
+            .then(res => {
+                console.log(res)
+                dispatch(receiptResponse(res))
+            })
+            .catch(err => {
+               console.log(err);
+            }
+            );
+    };
+}
