@@ -32,22 +32,22 @@ class Receipts extends Component {
 
   closeModal() {
     console.log("entro a close modal");
-    this.setState((prevState) => {
-      console.log(prevState.isModalOpen);
-      return {isModalOpen: !prevState.isModalOpen}
-    })
+    console.log(this.state.isModalOpen);
+    this.setState(
+      {isModalOpen: false}
+    )
   }
 
   openModal() {
     console.log("entro a open modal");
-    this.setState((prevState) => {
-      console.log(prevState.isModalOpen);
-      return {isModalOpen: !prevState.isModalOpen}
-    })
+    this.setState(
+      {isModalOpen: true}
+    )
   }
   showReceipt = receipt => event => {
-    console.log("entro a show receipt");
     event.preventDefault();
+    console.log(event);
+    console.log("entro a show receipt");
     const id = receipt.pk;
     if (!receipt.abierto) {
       this.openModal();
@@ -101,10 +101,10 @@ class Receipts extends Component {
                       closeModal={this.closeModal}
                       style={modalStyle}>
                       <Text block>Si presiona en abrir dará su consentimiento de haber visto este recibo de sueldo</Text>
-                      <Button id={receipt.pk} primary onClick={this.openReceipt(receipt.pk)}
+                      <Button className="open" id={receipt.pk} primary onClick={this.openReceipt(receipt.pk)}
                       >Abrir
                                         </Button>
-                      <Button danger onClick={this.closeModal}>Cerrar
+                      <Button className="close" id={receipt.pk} danger onClick={this.closeModal}>Cerrar
                                         </Button>
                     </NiceModal>
                   </div>

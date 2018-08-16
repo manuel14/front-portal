@@ -2,13 +2,14 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect, Link } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Button, InputText, Label, Nav, Select, SideBar } from '../../components';
+import { Button, InputText, Label, Nav, Select, SideBar, AdminIndex} from '../../components';
 import { Box, Flex } from 'grid-styled';
 import { getTheme } from '../../utils/theme';
 import { signUpUser, loginUser, logoutUser } from './action';
 import Receipts from '../Receipts';
 import ReceiptDetail from '../ReceiptDetail';
 import Admin from '../Admin';
+import AdminNotifications from '../AdminNotifications';
 import './styles.css';
 import 'react-select/dist/react-select.css';
 import Notifications from 'react-notification-system-redux';
@@ -25,7 +26,6 @@ class App extends Component {
     this.handleLogout = this.handleLogout.bind(this);
     this.handleSignUp = this.handleSignUp.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleChange = this.handleChange.bind(this);
 
   }
 
@@ -71,17 +71,9 @@ class App extends Component {
     event.preventDefault();
   }
 
-  handleChange = (selectedOption) => {
-    this.setState({ selectedOption });
-    // selectedOption can be null when the `x` (close) button is clicked
-    if (selectedOption) {
-      console.log(`Selected: ${selectedOption.label}`);
-    }
-  }
 
   render() {
     const token = localStorage.jwtToken;
-    console.log(token);
     const staff = localStorage.staff;
     const { username } = this.props;
     const style = {
@@ -91,7 +83,7 @@ class App extends Component {
         },
 
         success: { // Applied only to the success notification item
-          color: 'red'
+          color: 'green'
         }
       }
     };
@@ -171,7 +163,9 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route onEnter={this.requireAuth} path="/admin" component={Admin}
+                <Route onEnter={this.requireAuth} path="/admin/recibos" component={Admin}/>
+                <Route onEnter={this.requireAuth} path="/admin/notificaciones" component={AdminNotifications}/>
+                <Route onEnter={this.requireAuth} path="/admin" component={AdminIndex}
                     
                   />
                 <Route path="/recibo/:receiptId"

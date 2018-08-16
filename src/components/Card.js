@@ -7,8 +7,13 @@ const Container = ({ children, headed, error, ...rest }) => (
 );
 
 const Card = styled(Container)`
-  background-color: #fff;
-  overflow-x: auto;
+  background-color: #b2b2b2;
+  overflow-x: none;
+  overflow-y: none;
+
+  margin: ${props => props.margin} || auto;
+  width: ${props => props.width};
+  height: ${props => props.height};
 
   ${props =>
     props.headed &&

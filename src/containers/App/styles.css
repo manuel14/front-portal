@@ -8,7 +8,6 @@
     grid-template-areas:
       'header   header'
       'employeesBar  content'
-      'adminsBar content'
       ;
   }
 
@@ -32,13 +31,7 @@
   .App-employeesBar {
     grid-area: employeesBar;
     background: #555;
-  }
-
-  .App-adminsBar {
-    grid-area: adminsBar;
-    background: #555;
-  }
-  
+  }  
   .App-content {
     grid-area: content;
     overflow: auto;
