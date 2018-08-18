@@ -63,6 +63,9 @@ export function loginUser(user_creds) {
 
 export const USER_LOGOUT = "prode/user/USER_LOGOUT";
 export function logoutUser() {
+  localStorage.removeItem("staff");
+  localStorage.removeItem("username");
+  localStorage.removeItem("jwtToken");
   return {
     type: USER_LOGOUT
   };

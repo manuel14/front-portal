@@ -32,13 +32,7 @@ export function getReceipts() {
                 dispatch(receiptsResponse(res))
             })
             .catch(err => {
-                if (err.status == 401) {
-                    dispatch(push('/login'));
-                    localStorage.removeItem('jwtToken')
-                    localStorage.removeItem('userid')
-                    localStorage.removeItem('staff')
-                    
-                }
+                dispatch(receiptsError(err))
             }
             );
     };
@@ -59,6 +53,7 @@ export function patchReceipt(receiptId){
             })
             .catch(err => {
                 console.log(err)
+                dispatch(receiptsError(err))
             })
     }
 }
@@ -72,6 +67,7 @@ export function postReceipt(receipt){
             })
             .catch(err => {
                 console.log(err)
+                dispatch(receiptsError(err))
             })
     }
 }

@@ -25,7 +25,7 @@ import {
       case RECEIPTS_ERROR: {
         return {
           ...state,
-          error: action.response
+          error: action.error
         };
       }
       default: {

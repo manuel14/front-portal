@@ -31,7 +31,8 @@
   .App-employeesBar {
     grid-area: employeesBar;
     background: #555;
-  }  
+  }
+    
   .App-content {
     grid-area: content;
     overflow: auto;

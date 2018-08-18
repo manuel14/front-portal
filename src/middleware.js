@@ -11,11 +11,11 @@ const DEFAULT_ERROR = {
 };
 
 const authMiddleware = ({ dispatch }) => next => action => {
-  //const isError = action.type.match(new RegExp(`${ERROR_SUFFIX}$`, 'g'));
   console.log(action);
-  if (action.error.status === 401) {
-    console.log("entro al if de authmid");
-    console.log(action.error);
+  if (action.error && action.error.status === 401) {
+    localStorage.removeItem("staff");
+    localStorage.removeItem("username");
+    localStorage.removeItem("jwtToken");
     window.location = action.error.body.redirect;
   }
   if (action.response && action.response.redirect) {
@@ -25,11 +25,9 @@ const authMiddleware = ({ dispatch }) => next => action => {
 };
 
 const errorMiddleware = ({ dispatch }) => next => action => {
-  const isError = action.type.match(new RegExp(`${ERROR_SUFFIX}$`, 'g'));
-  console.log(isError);
-  if (isError && action.error && !action.error.skipNotification) {
+  console.log(action);
+  if (action.error) {
     const error = get(action.error.body, 'error');
-    console.log(error);
     const { title, message } = error ? error : DEFAULT_ERROR;
     const notification = {
       autoDismiss: action.error.autoDismiss || DEFAULT_ERROR_AUTODISMISS,

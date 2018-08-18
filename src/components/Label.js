@@ -2,12 +2,9 @@ import styled, { css } from 'styled-components';
 
 const Label = styled.label`
   display: inline-block;
-  background-color: ${props => props.color || '#006aa3'};
   padding: 2px 4px 2px 2px;
-  margin: 10px 0px 10px 0px; 
-  border: 1px solid ${props => '#ccc'};
-  color: white;
-
+  margin: ${props => props.margin || '10px 0px 10px 0px'}; 
+  font-size: ${props => props.size || '18px'};
   ${props =>
     props.danger &&
     css`

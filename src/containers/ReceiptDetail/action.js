@@ -33,6 +33,7 @@ export function getReceipt(receiptId) {
             })
             .catch(err => {
                console.log(err);
+               dispatch(receiptError(err));
             }
             );
     };
@@ -48,6 +49,7 @@ export function patchReceipt(receiptId) {
             })
             .catch(err => {
                console.log(err);
+               dispatch(receiptError(err));
             }
             );
     };

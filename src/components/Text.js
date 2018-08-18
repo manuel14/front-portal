@@ -4,7 +4,7 @@ const Text = styled.span`
   /* prettier-ignore */
   ${props =>
     props.size &&
-    css`
+    css`|
       font-size: ${props.size};
     `};
   /* prettier-ignore */

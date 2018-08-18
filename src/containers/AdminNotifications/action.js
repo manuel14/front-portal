@@ -1,4 +1,5 @@
-import { get } from "../../api";
+import { get, post } from "../../api";
+import {success, error} from 'react-notification-system-redux';
 
 export const ADMIN_NOTIFICATIONS_REQUEST = 'ADMIN_NOTIFICATIONS_REQUEST';
 export function notificationsRequest() {
@@ -31,18 +32,38 @@ export function notificationsSuccess(response) {
     }
 }
 
-export function getEmployees(){
-    console.log("get employees");
+export function getEmployees() {
     return dispatch => {
         dispatch(notificationsRequest());
         return get(`/api/empleado/`)
             .then(res => {
-                console.log("volvio del backend employees")
-                console.log(res)
                 dispatch(notificationsResponse(res))
             })
             .catch(err => {
                 console.log(err);
+                dispatch(notificationsError(err))
+            });
+    }
+}
+
+export function postMensaje(msg) {
+    return dispatch => {
+        dispatch(notificationsRequest());
+        return post('/api/mensaje/', msg)
+            .then(res => {
+                const notificationOpts = {
+                    // uid: 'once-please', // you can specify your own uid if required
+                    title: 'Éxito',
+                    message: 'Su notificación fue enviada correctamente',
+                    position: 'tr',
+                    autoDismiss: 0
+                };
+                dispatch(success(notificationOpts))
+
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(notificationsError(err));
             })
     }
 }

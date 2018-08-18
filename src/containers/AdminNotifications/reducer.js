@@ -32,7 +32,7 @@ import {
       case ADMIN_NOTIFICATIONS_ERROR: {
         return {
           ...state,
-          error: action.response,
+          error: action.error,
           employees: []
         };
       }

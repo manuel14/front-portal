@@ -6,7 +6,11 @@ const Container = ({ children, ...rest }) => (
   <Box {...rest}>{children}</Box>
 );
 
-const Form = styled.form`
+const Form = styled.form.attrs({
+  onSubmit: props => props.onSubmit,
+  name: props => props.name,
+  id: props => props.id
+})`
 
   ${props =>
     props.borderTop &&

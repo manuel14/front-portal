@@ -1,23 +1,24 @@
 import styled, { css } from 'styled-components';
 
-const Button = styled.button`
-  font-family: FiraSansMedium;
+const Button = styled.button.attrs({
+  type: props => props.type
+})`
+  font-family: Arial;
   color: #ffffff;
   background-color: #d6d6d6;
   text-transform: uppercase;
   border: 0;
-  border-radius: 25px;
+  border-radius: 15px;
   text-align: center;
     cursor: pointer;
   padding: 0.5rem 1rem;
-  margin: ${props => props.margin}
+  margin: ${props => props.margin};
   font-size: 14px;
-
 
   ${props =>
     props.primary &&
     css`
-      background-color: #006aa3;
+      background-color: #0e97e0;
     `};
 
   ${props =>
@@ -31,7 +32,11 @@ const Button = styled.button`
     css`
         background-color: #4CAF50;
       `};
-    
+        ${props =>
+    props.success &&
+    css`
+        background-color: #4CAF50;
+      `};
 `;
 
 export default Button;

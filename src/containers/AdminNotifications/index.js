@@ -1,26 +1,46 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
-import {Button, Form, InputText, Select} from '../../components/index';
-import { getEmployees } from './action';
-import {connect} from 'react-redux';
+import { Button, Form, InputText, Label, Select, TextArea } from '../../components/index';
+import { getEmployees, postMensaje } from './action';
+import { connect } from 'react-redux';
 
 class AdminNotifications extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
-            selectedOption: null
+            selectedOption: null,
         }
         this.handleChange = this.handleChange.bind(this);
+        this.onSubmit = this.onSubmit.bind(this);
 
     }
-    componentDidMount(){
+    componentDidMount() {
         this.props.onLoad();
     }
-    
-    handleChange(selected){
+
+    handleChange(event){
+        console.log(event);
+        //console.log((document.querySelector("input[name='emp']")).value);
         this.setState({
-            selectedOption: selected
+            selectedOption: event.value
+        })
+    }
+    onSubmit(e){
+        const contenidoArea = document.querySelector('textarea[name="contenido"]');
+        const contenido = contenidoArea.value;
+        e.preventDefault();
+        const msg = {
+            asunto: "Mensaje de Manu",
+            contenido,
+            empleado: this.state.selectedOption
+
+        }
+        console.log(msg)
+        this.props.msgSend(msg);
+        contenidoArea.value = "";
+        this.setState({
+            selectedOption: ""
         })
     }
 
@@ -30,12 +50,20 @@ class AdminNotifications extends Component {
                 <Flex align="center">
                     <Box mx="auto" width={512}>
                         <h1>Notificaciones</h1>
-                        <Form id="notifs">
-                            <Select options={this.props.employees} value={this.state.selectedOption} onChange={this.handleChange} placeholder="Seleccione destinatario">
+                        <Label color={"gray"} margin={'0px 0px 20px 0px'}>Seleccione un empleado o un sector al cual irá dirigida su notificación</Label>
+                        <form onSubmit={this.onSubmit} id="notifs">
+                            <Select required={"required"} name={"emp"} label={"Destinatario"} name={"emp"} options={this.props.employees.map(
+                                emp => ({ value: emp.id, label: emp.nombre })
+                            )} value={this.state.selectedOption} onChange={this.handleChange} placeholder="Seleccione destinatario">
 
                             </Select>
-                            <textarea></textarea>
-                        </Form>
+                            
+                            <Box mt={10}>
+                                <Label margin={'0px 10px 0px 0px'}>Mensaje</Label>
+                                <TextArea name={"contenido"} required={"required"} rows="6" cols="50"></TextArea>
+                                <Button type={"submit"} margin={"10px auto 0px auto"} primary>Enviar</Button>
+                            </Box>
+                        </form>
                     </Box>
                 </Flex>
 
@@ -50,7 +78,8 @@ const mapStateToProps = state => ({
 })
 
 const matchDispatchToProps = dispatch => ({
-    onLoad: () => getEmployees(),
+    onLoad: () => dispatch(getEmployees()),
+    msgSend: (msg) => dispatch(postMensaje(msg)),
     dispatch
 })
 

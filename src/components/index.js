@@ -33,6 +33,7 @@ import TableHead from './TableHead';
 import TableHeader from './TableHeader';
 import TableRow from './TableRow';
 import Text from './Text';
+import TextArea from './TextArea';
 import Title from './Title';
 import Toast from './Toast';
 
@@ -72,6 +73,7 @@ export {
     TableHeader,
     TableRow,
     Text,
+    TextArea,
     Title,
     Toast
 }
