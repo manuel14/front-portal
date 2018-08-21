@@ -9,6 +9,8 @@ const Title = styled.span`
   padding-bottom: ${props => props.pb || 0};
   padding-left: ${props => props.pl || 0};
   padding-right: ${props => props.pr || 0};
+  margin: ${props => props.margin};
+  text-align: ${props => props.align || 'left'}
 
   ${Badge} {
     color: #fff;

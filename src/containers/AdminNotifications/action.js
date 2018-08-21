@@ -62,7 +62,6 @@ export function postMensaje(msg) {
 
             })
             .catch(err => {
-                console.log(err);
                 dispatch(notificationsError(err));
             })
     }

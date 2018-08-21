@@ -37,7 +37,6 @@ export function postReceipt(receipt){
         dispatch(receiptsRequest());
         return post(`/api/recibo/`, receipt)
             .then(response => {
-                console.log("entro por el then");
                 const notificationOpts = {
                     // uid: 'once-please', // you can specify your own uid if required
                     title: 'Éxito',

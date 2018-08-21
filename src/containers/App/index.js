@@ -104,7 +104,7 @@ class App extends Component {
                 onMenu={this.onToggleMenu}
                 handleLogout={this.handleLogout}
                 userName={username}
-                staff={localStorage.staff}
+                staff={staff}
               />
             </div>
             {
@@ -154,7 +154,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route path="/recibos"
+                <Route onEnter={this.requireAuth} path="/recibos"
                   render={() => (
                     token ? (
                       <Receipts />
@@ -168,10 +168,10 @@ class App extends Component {
                 <Route onEnter={this.requireAuth} path="/admin" component={AdminIndex}
                     
                   />
-                <Route path="/recibo/:receiptId"
+                <Route onEnter={this.requireAuth} path="/recibo/:receiptId"
                   component={ReceiptDetail}
                 />
-                <Route exact path='/' render={() => (
+                <Route onEnter={this.requireAuth} exact path='/' render={() => (
                   token ? (
                     <Redirect to="/recibos" />)
                     : (

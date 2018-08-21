@@ -1,4 +1,4 @@
-import { get} from "../../api";
+import { get } from "../../api";
 
 export const NOTIFICATIONS_REQUEST = 'NOTIFICATIONS_REQUEST';
 export function notificationsRequest() {
@@ -26,28 +26,14 @@ export function notificationsError(error) {
 export function getNofications() {
     return dispatch => {
         dispatch(NOTIFICATIONSRequest());
-        return get(`/api/recibo/${NOTIFICATIONSId}/`)
+        return get(`/api/mensaje/`)
             .then(res => {
                 console.log(res)
-                dispatch(NOTIFICATIONSResponse(res))
+                dispatch(notificationsResponse(res))
             })
             .catch(err => {
-               console.log(err);
-            }
-            );
-    };
-}
-
-export function patchNOTIFICATIONS(NOTIFICATIONSId) {
-    return dispatch => {
-        dispatch(NOTIFICATIONSRequest());
-        return get(`/api/recibo/${NOTIFICATIONSId}/`)
-            .then(res => {
-                console.log(res)
-                dispatch(NOTIFICATIONSResponse(res))
-            })
-            .catch(err => {
-               console.log(err);
+                dispatch(notificationsError(err))
+                console.log(err);
             }
             );
     };

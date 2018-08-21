@@ -6,16 +6,14 @@ const Container = ({ children, headed, error, ...rest }) => (
     <Box width={1000} height={1000} {...rest}>{children}</Box>
   );
 
-const Image = styled(Container)`
-    border: 1px solid #000;
-    width: 1000px;
-    height: 1000px;
-
-    ${props =>
-        props.source &&
-        css`
-        background-image: url(${props.source});
-        `};
+const Image = styled.img.attrs({
+    src: props => props.source
+})`
+    width: ${props => props.width};
+    height: ${props => props.height};
+    align: center;
+    margin: ${props => props.margin}
+    display: block;
 `;
 
 export default Image

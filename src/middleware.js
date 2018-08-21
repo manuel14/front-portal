@@ -26,7 +26,7 @@ const authMiddleware = ({ dispatch }) => next => action => {
 
 const errorMiddleware = ({ dispatch }) => next => action => {
   console.log(action);
-  if (action.error) {
+  if (action.error && action.error.status !== 401) {
     const error = get(action.error.body, 'error');
     const { title, message } = error ? error : DEFAULT_ERROR;
     const notification = {

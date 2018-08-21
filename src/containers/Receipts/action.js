@@ -33,14 +33,11 @@ export function getReceipts() {
             })
             .catch(err => {
                 dispatch(receiptsError(err))
-            }
-            );
+            });
     };
 }
 
 export function patchReceipt(receiptId){
-    console.log("llego a patch");
-    console.log(receiptId);
     return dispatch => {
         dispatch(receiptsRequest());
         const current = new Date().toISOString();

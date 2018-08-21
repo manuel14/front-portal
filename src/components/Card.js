@@ -16,10 +16,16 @@ const Card = styled(Container)`
   height: ${props => props.height};
 
   ${props =>
+    props.center &&
+    css`
+      text-align: center;
+    `};
+
+    ${props =>
     props.headed &&
     css`
-      border-top: 0;
-    `};
+        border-top: 0;
+      `};
 
   ${props =>
     props.error &&

@@ -10,7 +10,7 @@ const Button = styled.button.attrs({
   border: 0;
   border-radius: 15px;
   text-align: center;
-    cursor: pointer;
+  cursor: pointer;
   padding: 0.5rem 1rem;
   margin: ${props => props.margin};
   font-size: 14px;
@@ -20,6 +20,20 @@ const Button = styled.button.attrs({
     css`
       background-color: #0e97e0;
     `};
+  
+    ${props =>
+    props.small &&
+    css`
+        width: 64px;
+        height: 32px
+      `};
+    
+    ${props =>
+    props.large &&
+    css`
+            width: 96px;
+            height: 32px
+          `};
 
   ${props =>
     props.danger &&
