@@ -47,7 +47,6 @@ class Nav extends Component {
               {this.props.staff && <NavLink
                 to="/admin"
                 icon={hammerIcon}
-                onClick={push('/admin')}
                 iconify
                 />
               }

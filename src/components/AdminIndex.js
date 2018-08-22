@@ -1,12 +1,10 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
 import { Button, Card, CardContainer, Image, Title } from './index';
-import FileIcon from './icons/FileIcon';
+import { Link } from 'react-router-dom'
 
 class AdminIndex extends Component {
     render() {
-        const fileIcon = <FileIcon size={24} color="#ffffff" />;
-        console.log(this.props);
         return (
             <div>
                 <Flex align="center">
@@ -21,11 +19,12 @@ class AdminIndex extends Component {
                                 height={'100px'} 
                                 source={require('../assets/recibo.png')}>
                                 </Image>
-                                <Button margin={'10px 0px 0px 0px'} 
-                                    large onClick={(e) => {
-                                        e.preventDefault()
-                                        this.props.history.push("/admin/recibos")}
-                                    } primary>Ir</Button>
+                                <Link to="/admin/recibos">
+                                    <Button margin={'10px 0px 0px 0px'} 
+                                        large
+                                        primary>Ir
+                                    </Button>
+                                </Link>
                             </Card>
                             <Card center width={"200px"} height={"200px"}>
                                 <Title>Notificaciones</Title>
@@ -35,12 +34,13 @@ class AdminIndex extends Component {
                                 height={'100px'} 
                                 source={require('../assets/notification.png')}>
                                 </Image>
-                                <Button 
-                                    margin={'10px 0px 0px 0px'} 
-                                    large onClick={(e) => {
-                                    e.preventDefault()
-                                    this.props.history.push("/admin/notificaciones")}
-                            } primary>Ir</Button>
+                                <Link to="/admin/notificaciones">
+                                    <Button 
+                                        margin={'10px 0px 0px 0px'} 
+                                        large 
+                                        primary>Ir
+                                    </Button>
+                                </Link>
                             </Card>
                             <Card center width={"200px"} height={"200px"}>
                                 <Title center>Eventos</Title>
@@ -50,12 +50,13 @@ class AdminIndex extends Component {
                                 height={'100px'} 
                                 source={require('../assets/event.png')}>
                                 </Image>
-                                <Button 
-                                    margin={'10px 0px 0px 0px'} 
-                                    large onClick={(e) => {
-                                    e.preventDefault()
-                                    this.props.history.push("/admin/eventos")}
-                            } primary>Ir</Button>
+                                <Link to ="/admin/eventos">
+                                    <Button 
+                                        margin={'10px 0px 0px 0px'} 
+                                        large  
+                                        primary>Ir
+                                    </Button>
+                                </Link>
                             </Card>
                         </CardContainer>
                     </Box>

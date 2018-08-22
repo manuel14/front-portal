@@ -1,5 +1,7 @@
 import Notifications from 'react-notification-system-redux';
 import { get } from 'lodash';
+import {push} from 'react-router-redux';
+import {logoutUser} from './containers/App/action'
 
 const ERROR_SUFFIX = 'detail';
 const DEFAULT_ERROR_MESSAGE = 'Ha ocurrido un error al conectarse con el servidor';
@@ -11,12 +13,9 @@ const DEFAULT_ERROR = {
 };
 
 const authMiddleware = ({ dispatch }) => next => action => {
-  console.log(action);
   if (action.error && action.error.status === 401) {
-    localStorage.removeItem("staff");
-    localStorage.removeItem("username");
-    localStorage.removeItem("jwtToken");
-    window.location = action.error.body.redirect;
+    //window.location = action.error.body.redirect;
+    dispatch(logoutUser())
   }
   if (action.response && action.response.redirect) {
     window.location = action.response.redirect;

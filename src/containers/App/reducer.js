@@ -17,7 +17,7 @@ export default function (state = defaultState, action) {
   switch (action.type) {
     case LOGIN_RESPONSE: {
       localStorage.setItem('jwtToken', action.response.token)
-      localStorage.setItem('username', action.response.userid)
+      localStorage.setItem('username', action.response.username)
       localStorage.setItem('staff', action.response.staff)
       return {
         ...state,
@@ -33,7 +33,6 @@ export default function (state = defaultState, action) {
       localStorage.removeItem('jwtToken');
       localStorage.removeItem('username');
       localStorage.removeItem('staff');
-      push("/login")
       return {
         ...state,
         username: ""

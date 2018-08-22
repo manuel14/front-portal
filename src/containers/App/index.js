@@ -163,11 +163,33 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route onEnter={this.requireAuth} path="/admin/recibos" component={Admin}/>
-                <Route onEnter={this.requireAuth} path="/admin/notificaciones" component={AdminNotifications}/>
-                <Route onEnter={this.requireAuth} path="/admin" component={AdminIndex}
-                    
-                  />
+                <Route onEnter={this.requireAuth} path="/admin/recibos"
+                  render={() => (
+                    token ? (
+                      <Admin />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )} />
+                 <Route onEnter={this.requireAuth} path="/admin/notificaciones"
+                  render={() => (
+                    token ? (
+                      <AdminNotifications />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )} />
+                 <Route onEnter={this.requireAuth} path="/admin"
+                  render={() => (
+                    token ? (
+                      <AdminIndex />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )} />
                 <Route onEnter={this.requireAuth} path="/recibo/:receiptId"
                   component={ReceiptDetail}
                 />
