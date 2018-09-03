@@ -33,6 +33,11 @@ class App extends Component {
     return window.history.back();
   };
 
+  onAdmin = () => {
+    return window.history.go('/admin');
+  }
+  
+
   onToggleMenu() {
     this.setState(prevState => {
       return { displayMenu: !prevState.displayMenu };
@@ -105,6 +110,7 @@ class App extends Component {
                 handleLogout={this.handleLogout}
                 userName={username}
                 staff={staff}
+                onAdmin={this.onAdmin}
               />
             </div>
             {

@@ -44,12 +44,10 @@ export function patchReceipt(receiptId){
         const body = {abierto: current}
         return patch(`/api/recibo/${receiptId}/`, body)
             .then(response => {
-                console.log(response)
                 this.props.history.push(`/recibo/${receiptId}`);
 
             })
             .catch(err => {
-                console.log(err)
                 dispatch(receiptsError(err))
             })
     }
@@ -60,10 +58,8 @@ export function postReceipt(receipt){
         dispatch(receiptsRequest());
         return post(`/api/recibo/`, receipt)
             .then(response => {
-                console.log(response)
             })
             .catch(err => {
-                console.log(err)
                 dispatch(receiptsError(err))
             })
     }

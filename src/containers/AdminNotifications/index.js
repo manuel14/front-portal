@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
-import { Button, Form, InputText, Label, Select, TextArea } from '../../components/index';
+import { Button, Label, Select, TextArea } from '../../components';
 import { getEmployees, postMensaje } from './action';
 import { connect } from 'react-redux';
 
@@ -20,8 +20,6 @@ class AdminNotifications extends Component {
     }
 
     handleChange(event){
-        console.log(event);
-        //console.log((document.querySelector("input[name='emp']")).value);
         this.setState({
             selectedOption: event.value
         })

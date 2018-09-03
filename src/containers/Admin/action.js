@@ -1,5 +1,5 @@
 import { post} from "../../api";
-import {success, error} from 'react-notification-system-redux';
+import {success} from 'react-notification-system-redux';
 
 export const ADMIN_RECEIPTS_REQUEST = 'ADMIN_RECEIPTS_REQUEST';
 export function receiptsRequest() {

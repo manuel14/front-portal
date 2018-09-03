@@ -1,5 +1,5 @@
 import React from 'react';
-import { Label, RadioInput, RadioLabel, RadioSpan } from './index';
+import { Label, RadioInput, RadioLabel, RadioSpan } from '.';
 
 
 

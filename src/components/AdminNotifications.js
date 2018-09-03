@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
-import {Button, Form, InputText, Select} from './index';
+import {Button, Form, InputText, Select} from '.';
 
 class AdminNotifications extends Component {
 

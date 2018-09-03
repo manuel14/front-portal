@@ -4,7 +4,7 @@ import Dropzone from 'react-dropzone';
 import { postReceipt, receiptsResponse } from './action';
 import { connect } from 'react-redux';
 import * as moment from 'moment';
-import { Button } from '../../components/index';
+import { Button } from '../../components';
 import { error } from 'react-notification-system-redux';
 
 class Admin extends Component {

@@ -1,4 +1,4 @@
-import { get} from "../../api";
+import { get, patch} from "../../api";
 
 export const RECEIPT_REQUEST = 'RECEIPT_REQUEST';
 export function receiptRequest() {
@@ -28,29 +28,28 @@ export function getReceipt(receiptId) {
         dispatch(receiptRequest());
         return get(`/api/recibo/${receiptId}/`)
             .then(res => {
-                console.log(res)
                 dispatch(receiptResponse(res))
             })
             .catch(err => {
-               console.log(err);
                dispatch(receiptError(err));
             }
             );
     };
 }
 
-export function patchReceipt(receiptId) {
+
+export function patchReceipt(receiptId){
     return dispatch => {
         dispatch(receiptRequest());
-        return get(`/api/recibo/${receiptId}/`)
-            .then(res => {
-                console.log(res)
-                dispatch(receiptResponse(res))
+        const current = new Date().toISOString();
+        const body = {abierto: current}
+        return patch(`/api/recibo/${receiptId}/`, body)
+            .then(response => {
+                receiptResponse(response)
+
             })
             .catch(err => {
-               console.log(err);
-               dispatch(receiptError(err));
-            }
-            );
-    };
+                dispatch(receiptError(err))
+            })
+    }
 }

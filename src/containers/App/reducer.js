@@ -33,6 +33,7 @@ export default function (state = defaultState, action) {
       localStorage.removeItem('jwtToken');
       localStorage.removeItem('username');
       localStorage.removeItem('staff');
+      push('/login')
       return {
         ...state,
         username: ""

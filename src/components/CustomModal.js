@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, CustomModalContainer, CustomModalMain, Text} from './index';
+import {Button, CustomModalContainer, CustomModalMain, Text} from '.';
 
 class CustomModal extends Component {
     constructor(props){

@@ -1,4 +1,4 @@
-import React ,{Component} from 'react';
+import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 
 class NiceModal extends React.Component {
@@ -21,7 +21,6 @@ class NiceModal extends React.Component {
 			left: '100px',
 			width: "100%",
 			height: "100%",
-			overflow: "auto",
 			height: "100%",
 			zIndex: 10001
 		};
@@ -37,6 +36,7 @@ class NiceModal extends React.Component {
 				margin: '40px auto',
 				borderRadius: 3,
 				zIndex: 10002,
+				pointerEvents: "none",
 				textAlign: 'center',
 				boxShadow: '0 20px 30px rgba(0, 0, 0, 0.2)',
 				...this.props.style.modal,
@@ -48,7 +48,7 @@ class NiceModal extends React.Component {
 				left: 0,
 				right: 0,
 				width: "100%",
-                height: "100%",
+				height: "100%",
 				backgroundColor: 'rgba(0,0,0,0.5)',
 				...this.props.style.overlay
 			}
@@ -57,13 +57,14 @@ class NiceModal extends React.Component {
 
 	// render modal
 	render() {
-		return (<div style={{...this.outerStyle, display: this.props.isModalOpen ? 'block' : 'none'}}>
-						<div style={this.style.overlay} onClick={this.props.closeModal}></div>
-												<div onClick={this.props.closeModal}></div>
-                <div style={this.style.modal}>
-                    {this.props.children}
-                </div>
-            </div>)
+		return (<div style={{
+					...this.outerStyle,
+					display: this.props.isModalOpen ? "block" : "none"
+				}}>
+			<div style={this.style.overlay} onClick={this.props.closeModal} />
+			<div onClick={this.props.closeModal} />
+			<div style={this.style.modal}>{this.props.children}</div>
+		</div>)
 	}
 }
 

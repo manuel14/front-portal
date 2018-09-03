@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
-import { Avatar, Radios, Text } from './index'
+import { Avatar, Radios, Text } from '.'
 
 class Match extends Component {
     constructor(props) {

@@ -4,6 +4,8 @@ import NavContainer from './NavContainer';
 import NavGroup from './NavGroup';
 import NavLink from './NavLink';
 import NavBrand from './NavBrand';
+import {withRouter} from 'react-router';
+import {connect} from 'react-redux';
 import {push} from 'react-router-redux';
 import { HammerIcon, HomeIcon, BackIcon, CloseIcon, MenuIcon, UserIcon } from './icons';
 
@@ -28,6 +30,11 @@ class Nav extends Component {
   handleLogout(event){
     event.preventDefault();
     return this.props.handleLogout && this.props.handleLogout();
+  }
+
+  onAdmin = event => {
+    event.preventDefault();
+    this.props.onAdmin && this.props.onAdmin()
   }
 
   render() {

@@ -34,7 +34,6 @@ export function getNofications() {
             .catch(err => {
                 dispatch(notificationsError(err))
                 console.log(err);
-            }
-            );
+            });
     };
 }
