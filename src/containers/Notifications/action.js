@@ -23,9 +23,9 @@ export function notificationsError(error) {
     }
 }
 
-export function getNofications() {
+export function getNotifications() {
     return dispatch => {
-        dispatch(NOTIFICATIONSRequest());
+        dispatch(notificationsRequest());
         return get(`/api/mensaje/`)
             .then(res => {
                 console.log(res)

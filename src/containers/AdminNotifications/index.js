@@ -28,10 +28,15 @@ class AdminNotifications extends Component {
         const contenidoArea = document.querySelector('textarea[name="contenido"]');
         const contenido = contenidoArea.value;
         e.preventDefault();
+        console.log(localStorage.id);
+        const rem = this.props.employees.find(emp => 
+            emp.id === parseInt(localStorage.id));
+        console.log(rem);
         const msg = {
-            asunto: "Mensaje de Manu",
+            asunto: `Mensaje de ${localStorage.username}`,
             contenido,
-            empleado: this.state.selectedOption
+            empleado: this.state.selectedOption,
+            remitente: rem.id
 
         }
         console.log(msg)

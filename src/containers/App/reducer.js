@@ -19,6 +19,7 @@ export default function (state = defaultState, action) {
       localStorage.setItem('jwtToken', action.response.token)
       localStorage.setItem('username', action.response.username)
       localStorage.setItem('staff', action.response.staff)
+      localStorage.setItem('id', action.response.id)
       return {
         ...state,
         username: action.response.username
@@ -33,6 +34,7 @@ export default function (state = defaultState, action) {
       localStorage.removeItem('jwtToken');
       localStorage.removeItem('username');
       localStorage.removeItem('staff');
+      localStorage.removeItem('id');
       push('/login')
       return {
         ...state,

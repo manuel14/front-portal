@@ -8,6 +8,7 @@ import { getTheme } from '../../utils/theme';
 import { signUpUser, loginUser, logoutUser } from './action';
 import Receipts from '../Receipts';
 import ReceiptDetail from '../ReceiptDetail';
+import Notification from '../Notifications';
 import Admin from '../Admin';
 import AdminNotifications from '../AdminNotifications';
 import './styles.css';
@@ -198,6 +199,9 @@ class App extends Component {
                   )} />
                 <Route onEnter={this.requireAuth} path="/recibo/:receiptId"
                   component={ReceiptDetail}
+                />
+                <Route onEnter={this.requireAuth} path="/notificaciones"
+                  component={Notification}
                 />
                 <Route onEnter={this.requireAuth} exact path='/' render={() => (
                   token ? (
