@@ -7,6 +7,7 @@ import adminReducer from "./containers/Admin/reducer";
 import adminNotificationsReducer from "./containers/AdminNotifications/reducer";
 import { reducer as notifications } from 'react-notification-system-redux';
 import notificationReducer from './containers/Notifications/reducer';
+import notificationDetailReducer from './containers/NotificationDetail/reducer';
 
 export default combineReducers({
   appReducer,
@@ -16,5 +17,6 @@ export default combineReducers({
   adminReducer,
   adminNotificationsReducer,
   notifications,
-  notificationReducer
+  notificationReducer,
+  notificationDetailReducer
 });

@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { keyframes } from 'styled-components';
-import { KBSIcon } from './icons';
+import { LoadingIcon2 } from './icons';
 
 const SizedContainer = ({ size, color, children, ...rest }) => (
   <div {...rest}>{children}</div>
@@ -42,6 +42,8 @@ const LogoSpinnerContainer = styled(SizedContainer)`
   height: ${props => props.size}px;
   width: ${props => props.size}px;
   position: relative;
+  animation: ${rotate360} 2s ease infinite;
+  border-radius: 10%;
 
   * {
     position: absolute;
@@ -53,11 +55,10 @@ const LogoSpinnerContainer = styled(SizedContainer)`
   }
 `;
 
-function LogoSpinner({ size = 64, bg = '#555', color = '#FFF' }) {
+function LogoSpinner({ size = 256, bg = '#555', color = 'blue' }) {
   return (
     <LogoSpinnerContainer size={size}>
-      <SquareLoader size={`${size}px`} color={bg} />
-      <KBSIcon size={size - 8} color={color} />
+      <LoadingIcon2 size={size} color={color} />
     </LogoSpinnerContainer>
   );
 }

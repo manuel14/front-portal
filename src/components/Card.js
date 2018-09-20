@@ -7,7 +7,7 @@ const Container = ({ children, headed, error, ...rest }) => (
 );
 
 const Card = styled(Container)`
-  background-color: #b2b2b2;
+  background-color: ${props => props.color || "#b2b2b2"};
   overflow-x: none;
   overflow-y: none;
 

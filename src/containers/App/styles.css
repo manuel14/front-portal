@@ -36,7 +36,6 @@
   .App-content {
     grid-area: content;
     overflow: auto;
-    overflow-y: hidden;
   }
   
   .App-footer {

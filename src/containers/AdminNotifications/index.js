@@ -19,27 +19,26 @@ class AdminNotifications extends Component {
         this.props.onLoad();
     }
 
-    handleChange(event){
+    handleChange(event) {
         this.setState({
             selectedOption: event.value
         })
     }
-    onSubmit(e){
+    onSubmit(e) {
         const contenidoArea = document.querySelector('textarea[name="contenido"]');
         const contenido = contenidoArea.value;
         e.preventDefault();
-        console.log(localStorage.id);
-        const rem = this.props.employees.find(emp => 
+        const rem = this.props.employees.find(emp =>
             emp.id === parseInt(localStorage.id));
-        console.log(rem);
+        const emp = this.props.employees.find(emp =>
+            emp.id === this.state.selectedOption);
         const msg = {
             asunto: `Mensaje de ${localStorage.username}`,
             contenido,
-            empleado: this.state.selectedOption,
-            remitente: rem.id
+            empleado: emp,
+            remitente: rem
 
         }
-        console.log(msg)
         this.props.msgSend(msg);
         contenidoArea.value = "";
         this.setState({
@@ -60,7 +59,7 @@ class AdminNotifications extends Component {
                             )} value={this.state.selectedOption} onChange={this.handleChange} placeholder="Seleccione destinatario">
 
                             </Select>
-                            
+
                             <Box mt={10}>
                                 <Label margin={'0px 10px 0px 0px'}>Mensaje</Label>
                                 <TextArea name={"contenido"} required={"required"} rows="6" cols="50"></TextArea>

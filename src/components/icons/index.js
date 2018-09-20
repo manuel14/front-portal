@@ -14,6 +14,8 @@ import HammerIcon from './HammerIcon';
 import HistoryIcon from './HistoryIcon';
 import HomeIcon from './HomeIcon';
 import KBSIcon from './KBSIcon';
+import LoadingIcon from './LoadingIcon';
+import LoadingIcon2 from './LoadingIcon2';
 import LocationIcon from './LocationIcon';
 import MenuIcon from './MenuIcon';
 import NaIcon from './NaIcon';
@@ -41,6 +43,8 @@ export {
   HistoryIcon,
   HomeIcon,
   KBSIcon,
+  LoadingIcon,
+  LoadingIcon2,
   LocationIcon,
   MenuIcon,
   NaIcon,

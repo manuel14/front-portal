@@ -1,4 +1,4 @@
-import { get } from "../../api";
+import { get, patch } from "../../api";
 
 export const NOTIFICATIONS_REQUEST = 'NOTIFICATIONS_REQUEST';
 export function notificationsRequest() {
@@ -18,7 +18,7 @@ export function notificationsResponse(response) {
 export const NOTIFICATIONS_ERROR = 'NOTIFICATIONS_ERROR';
 export function notificationsError(error) {
     return {
-        type: NOTIFICATIONS_REQUEST,
+        type: NOTIFICATIONS_ERROR,
         error
     }
 }
@@ -26,14 +26,27 @@ export function notificationsError(error) {
 export function getNotifications() {
     return dispatch => {
         dispatch(notificationsRequest());
-        return get(`/api/mensaje/`)
+        return get(`/api/mensaje/mensajes_empleado/${localStorage.id}/`)
             .then(res => {
-                console.log(res)
                 dispatch(notificationsResponse(res))
             })
             .catch(err => {
                 dispatch(notificationsError(err))
-                console.log(err);
+            });
+    };
+}
+
+export function patchNotification(id) {
+    return dispatch => {
+        dispatch(notificationsRequest());
+        const current = new Date().toISOString();
+        const body = {leido: current}
+        return patch(`/api/mensaje/${id}/`, body)
+            .then(res => {
+                this.props.history.push(`/notificacion/${id}`)
+            })
+            .catch(err => {
+                dispatch(notificationsError(err))
             });
     };
 }

@@ -6,7 +6,7 @@ import {
   } from "./action";
   
   const defaultState = {
-    files: []
+    employees: []
   };
   
   export default function(state = defaultState, action) {
@@ -14,13 +14,14 @@ import {
       case ADMIN_RECEIPTS_RESPONSE: {
         return {
           ...state,
-          files: action.response
+          employees: action.response,
+
         };
       }
       case ADMIN_RECEIPTS_SUCCESS: {
         return {
           ...state,
-          files: []
+          employees: []
         };
       }
       
@@ -33,7 +34,7 @@ import {
         return {
           ...state,
           error: action.response,
-          files: []
+          employees: []
         };
       }
       default: {

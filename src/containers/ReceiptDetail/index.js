@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 import { getReceipt, patchReceipt } from './action';
 import { Box, Flex } from 'grid-styled';
 import { connect } from 'react-redux'
-import {Button, Text} from '../../components/index';
+import {Button, Text, Title} from '../../components/index';
 import Modal from 'react-responsive-modal';
+import * as moment from 'moment';
+import {withRouter} from 'react-router';
 
 class ReceiptDetail extends Component {
     constructor(props){
@@ -55,7 +57,10 @@ class ReceiptDetail extends Component {
                   </Modal>
                 <Flex align="center">
                     <Box mt={'20px'} mx="auto">
-                        <iframe height="512px" src={receipt.archivo}>
+                        <Title center>
+                            Periodo: {moment(receipt.periodo, moment.ISO_8601).format('MM/YYYY')}
+                        </Title>
+                        <iframe width="396px" height="496px" src={receipt.archivo}>
 
                         </iframe>
                     </Box>
@@ -76,4 +81,4 @@ const mapDispatchToProps = dispatch => ({
     dispatch,
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(ReceiptDetail);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(ReceiptDetail));

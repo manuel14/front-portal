@@ -1,4 +1,4 @@
-import { post} from "../../api";
+import { get, post} from "../../api";
 import {success} from 'react-notification-system-redux';
 
 export const ADMIN_RECEIPTS_REQUEST = 'ADMIN_RECEIPTS_REQUEST';
@@ -44,14 +44,25 @@ export function postReceipt(receipt){
                     position: 'tr',
                     autoDismiss: 0
                   };
-                console.log(response)
                 dispatch(success(notificationOpts))
-                dispatch(receiptsSuccess(response))
+                //dispatch(receiptsSuccess(response))
             })
             .catch(err => {
-                console.log("entro por el error")
                 dispatch(receiptsError(err))
-                console.log(err)
             })
+    }
+}
+
+export function getEmployees() {
+    return dispatch => {
+        dispatch(receiptsRequest());
+        return get(`/api/empleado/`)
+            .then(res => {
+                dispatch(receiptsResponse(res))
+            })
+            .catch(err => {
+                console.log(err);
+                dispatch(receiptsError(err))
+            });
     }
 }

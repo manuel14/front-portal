@@ -1,7 +1,7 @@
 import styled, { css } from 'styled-components';
 
 const Label = styled.label`
-  display: inline-block;
+  display: ${props => props.display || "inline-block"};
   padding: 2px 4px 2px 2px;
   margin: ${props => props.margin || '10px 0px 10px 0px'}; 
   font-size: ${props => props.size || '18px'};

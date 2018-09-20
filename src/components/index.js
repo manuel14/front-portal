@@ -14,8 +14,11 @@ import Form from './Form';
 import Image from './Image';
 import InputText from './InputText';
 import Label from './Label';
+import List from './List';
+import LogoSpinner from './LogoSpinner';
 import Match from './Match';
 import Modal from './Modal';
+import MySelect from './MySelect';
 import Nav from './Nav';
 import NavLink from './NavLink'
 import NiceModal from './NiceModal';
@@ -54,8 +57,11 @@ export {
     Image,
     InputText,
     Label,
+    List,
+    LogoSpinner,
     Match,
     Modal,
+    MySelect,
     Nav,
     NavLink,
     NiceModal,

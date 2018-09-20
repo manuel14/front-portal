@@ -1,5 +1,4 @@
 import { post, get, patch } from "../../api";
-import {push} from 'react-router-redux';
 
 export const RECEIPTS_REQUEST = 'RECEIPTS_REQUEST';
 export function receiptsRequest() {
