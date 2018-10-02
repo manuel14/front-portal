@@ -74,16 +74,12 @@ class Nav extends Component {
                   iconify
                 />
               )}
-
-              
               <NavLink
                 to="/login"
                 icon={closeIcon}
                 onClick={this.props.handleLogout}
                 iconify
                 />
-              
-              
             </NavGroup>
           </NavContainer>
         )}

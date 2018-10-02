@@ -140,9 +140,9 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
+    onLoad: () => dispatch(getEmployees()),
     onUpload: (receipts) => dispatch(postReceipt(receipts)),
     onFormatError: (not) => dispatch(error(not)),
-    onSuccessDrop: (files) => dispatch(receiptsResponse(files)),
     dispatch
 });
 

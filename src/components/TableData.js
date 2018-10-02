@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 const TableData = styled.td`
   margin: 0;
+  color: #292b2c;
   padding: 0;
   vertical-align: middle;
   width: ${props => props.width || 'auto'};

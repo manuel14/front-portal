@@ -1,5 +1,6 @@
 import { get, patch} from "../../api";
 
+
 export const RECEIPT_REQUEST = 'RECEIPT_REQUEST';
 export function receiptRequest() {
     return {

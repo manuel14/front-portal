@@ -9,8 +9,11 @@ import { signUpUser, loginUser, logoutUser } from './action';
 import Receipts from '../Receipts';
 import ReceiptDetail from '../ReceiptDetail';
 import Notification from '../Notifications';
+import NotificationDetail from '../NotificationDetail';
 import Admin from '../Admin';
+import AdminEvents from '../AdminEvents';
 import AdminNotifications from '../AdminNotifications';
+import Events from '../Events';
 import './styles.css';
 import 'react-select/dist/react-select.css';
 import Notifications from 'react-notification-system-redux';
@@ -117,7 +120,7 @@ class App extends Component {
             {
               token && <div className="App-employeesBar">
                 <SideBar
-                  links={["/recibos", "/notificaciones", "/calendario"]}
+                  links={["/recibos", "/notificaciones", "/eventos"]}
                 />
               </div>
             }
@@ -142,8 +145,8 @@ class App extends Component {
                                 <InputText margin={"0px 0px 0px 10px"} type="password" name="password" />
                               </Label>
                               <Box>
-                                <Button onClick={this.handleLogin} margin={'0px 5px 0px 0px'} center primary>Login</Button>
-                                <Button onClick={this.handleSignUp} center success>SignUp</Button>
+                                <Button onClick={this.handleLogin} margin={'0px 5px 0px 5px'} center primary>Ingresar</Button>
+                                {/* <Button onClick={this.handleSignUp} center success>SignUp</Button> */}
                               </Box>
                             </form>
                           </div>
@@ -188,6 +191,15 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
+                  <Route onEnter={this.requireAuth} path="/admin/eventos"
+                  render={() => (
+                    token ? (
+                      <AdminEvents />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )} />
                  <Route onEnter={this.requireAuth} path="/admin"
                   render={() => (
                     token ? (
@@ -198,10 +210,44 @@ class App extends Component {
                       )
                   )} />
                 <Route onEnter={this.requireAuth} path="/recibo/:receiptId"
-                  component={ReceiptDetail}
+                  render={() => (
+                    token ? (
+                      <ReceiptDetail />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
                 />
                 <Route onEnter={this.requireAuth} path="/notificaciones"
-                  component={Notification}
+                  render={() => (
+                    token ? (
+                      <Notification />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
+                <Route onEnter={this.requireAuth} path="/eventos"
+                  render={() => (
+                    token ? (
+                      <Events />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
+                <Route onEnter={this.requireAuth} path="/notificacion/:notificationId"
+                  render={() => (
+                    token ? (
+                      <NotificationDetail />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
                 />
                 <Route onEnter={this.requireAuth} exact path='/' render={() => (
                   token ? (

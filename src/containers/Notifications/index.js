@@ -20,7 +20,6 @@ class Notifications extends Component {
 
     handleClick(notif) {
         if (!notif.leido) {
-            console.log("entro por el if");
             this.props.onRead(notif.pk);
         }
         this.props.history.push(`/notificacion/${notif.pk}`)

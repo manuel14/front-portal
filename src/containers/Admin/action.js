@@ -61,7 +61,6 @@ export function getEmployees() {
                 dispatch(receiptsResponse(res))
             })
             .catch(err => {
-                console.log(err);
                 dispatch(receiptsError(err))
             });
     }

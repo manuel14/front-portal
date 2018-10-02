@@ -7,6 +7,7 @@ import Card from './Card';
 import CardContainer from './CardContainer';
 import CardHeader from './CardHeader';
 import Center from './Center';
+import Checkbox from './Checkbox';
 import CustomModal from './CustomModal'
 import CustomModalContainer from './CustomModalContainer';
 import CustomModalMain from './CustomModalMain';
@@ -50,6 +51,7 @@ export {
     CardContainer,
     CardHeader,
     Center,
+    Checkbox,
     CustomModal,
     CustomModalContainer,
     CustomModalMain,
