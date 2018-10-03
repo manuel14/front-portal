@@ -1,8 +1,7 @@
 import "whatwg-fetch";
 import { omitBy, isNil } from "lodash";
 import downloadjs from "downloadjs";
-import { api_url } from "./backend_config";
-
+const api_url = process.env.REACT_APP_API_URL;
 function parseJSON(response) {
   return response.status !== 204 && response.json();
 }
