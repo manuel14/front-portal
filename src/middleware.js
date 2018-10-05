@@ -13,7 +13,7 @@ const DEFAULT_ERROR = {
 };
 
 const authMiddleware = ({ dispatch }) => next => action => {
-  if (action.error && action.error.status === 401) {
+  if (action.error && action.error.status === 400) {
     //window.location = action.error.body.redirect;
     dispatch(logoutUser())
   }
