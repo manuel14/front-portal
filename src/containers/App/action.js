@@ -59,7 +59,7 @@ export function loginUser(user_creds) {
           dispatch(loginResponse(res))
         )
         .catch(err => {
-          if (err.status === 401){
+          if ((err.status === 401)|| (err.status===400)){
             const error401 = {
               // uid: 'once-please', // you can specify your own uid if required
               title: 'Error',
