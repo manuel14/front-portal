@@ -11,7 +11,7 @@ const DEFAULT_ERROR = {
 };
 
 const authMiddleware = ({ dispatch }) => next => action => {
-  if (action.error && action.error.status === 401) {
+  if (action.error && ((action.error.status === 400) || (action.error.status===401))) {
     //window.location = action.error.body.redirect;
     dispatch(logoutUser())
   }
@@ -22,7 +22,7 @@ const authMiddleware = ({ dispatch }) => next => action => {
 };
 
 const errorMiddleware = ({ dispatch }) => next => action => {
-  if (action.error && action.error.status !== 401) {
+  if (action.error && ((action.error.status !== 401) && (action.error.status !== 400))) {
     const error = get(action.error.body, 'error');
     const { title, message } = error ? error : DEFAULT_ERROR;
     const notification = {
