@@ -59,14 +59,16 @@ export function loginUser(user_creds) {
           dispatch(loginResponse(res))
         )
         .catch(err => {
-          const error401 = {
-            // uid: 'once-please', // you can specify your own uid if required
-            title: 'Error',
-            message: 'El usuario y/o la contraseña ingresada no son correctos',
-            position: 'tr',
-            autoDismiss: 0
-          };
+          if (err.status === 401){
+            const error401 = {
+              // uid: 'once-please', // you can specify your own uid if required
+              title: 'Error',
+              message: 'El usuario y/o la contraseña ingresada no son correctos',
+              position: 'tr',
+              autoDismiss: 0
+            };
           dispatch(error(error401))
+          }
           dispatch(userError(err))});
     }
 }
