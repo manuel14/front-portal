@@ -67,7 +67,7 @@ export function loginUser(user_creds) {
               position: 'tr',
               autoDismiss: 0
             };
-          dispatch(error(error401))
+            dispatch(error(error401))
           }
           dispatch(userError(err))});
     }
