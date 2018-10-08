@@ -12,7 +12,7 @@ import { HammerIcon, HomeIcon, BackIcon, CloseIcon, MenuIcon, UserIcon } from '.
 const homeIcon = <HomeIcon size={24} color="#ffffff" />;
 const menuIcon = <MenuIcon size={24} color="#ffffff" />;
 const backIcon = <BackIcon size={24} color="#ffffff" />;
-const userIcon = <UserIcon size={24} color="#ffffff" />;
+//const userIcon = <UserIcon size={24} color="#ffffff" />;
 const closeIcon = <CloseIcon size={24} color="#ffffff" />;
 const hammerIcon = <HammerIcon size={24} color="#ffffff" />;
 
@@ -38,6 +38,7 @@ class Nav extends Component {
   }
 
   render() {
+    console.log(typeof(this.props.staff));
     return (
       <Media query="(max-width: 64em)">
         {matches => (
@@ -51,7 +52,7 @@ class Nav extends Component {
                 color="rgba(0, 0, 0, 0.15)"
               />
               <NavLink to="/" icon={homeIcon} iconify />
-              {this.props.staff && <NavLink
+              {this.props.staff === "true" && <NavLink
                 to="/admin"
                 icon={hammerIcon}
                 iconify
@@ -63,9 +64,9 @@ class Nav extends Component {
               title={this.props.title || 'KBS'}
             />
             <NavGroup right>
-              <NavLink to="/user" icon={userIcon} iconify={matches}>
+              {/* <NavLink to="/user" icon={userIcon} iconify={matches}>
                 {this.props.userName}
-              </NavLink>
+              </NavLink> */}
               {matches && (
                 <NavLink
                   to="/menu"
