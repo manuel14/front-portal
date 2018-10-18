@@ -33,8 +33,7 @@ import {
       case ADMIN_RECEIPTS_ERROR: {
         return {
           ...state,
-          error: action.response,
-          employees: []
+          error: action.response
         };
       }
       default: {

@@ -13,6 +13,7 @@ class Admin extends Component {
         super(props);
         this.state = {
             files: [],
+            receipts: [],
             rejected: []
         }
         this.onDrop = this.onDrop.bind(this);
@@ -24,11 +25,13 @@ class Admin extends Component {
 
     onDrop(accepted, rejected) {
         let files = [];
+        let receipts = [];
         let denied = Array.from(rejected);
+        let formData = new FormData();
         for (let r of accepted) {
-            let emp;
-            let periodo;
             try {
+                let emp;
+                let periodo;
                 emp = r.name.split("-")[0];
                 periodo = r.name.split("-")[1].split(".")[0];
                 let d = moment(periodo);
@@ -48,40 +51,41 @@ class Admin extends Component {
                     denied.push(r);
                 }
                 else {
-                    periodo = r.name.split("-")[1].split(".")[0];
-                    files.push({ name: r.name, size: r.size, employee: employee });
+                    formData.append("archivo", r);
+                    formData.append("empleado", employee.id);
+                    let periodo = r.name.split("-")[1].split(".")[0];
+                    let periodoDate = moment();
+                    periodoDate.month(periodo.substring(0, 2) - 1);
+                    periodoDate.year(periodo.substring(2, 6));
+                    periodoDate = periodoDate.format('YYYY-MM-DD');
+                    formData.append("periodo", periodoDate);
+                    files.push({ name: r.name, size: r.size, employee: employee});
                 }
             }
             catch (err) {
+                console.log(err);
                 denied.push(r);
             }
         };
+        receipts.push(formData);
         this.setState(
             {
                 files,
+                receipts,
                 rejected: denied
             })
-
     }
 
     onClick() {
-        const receipts = this.state.files.map(r => {
-            let emp = r.employee.id;
-            let periodo = r.name.split("-")[1].split(".")[0];
-            let periodoDate = moment();
-            periodoDate.month(periodo.substring(0, 2) - 1);
-            periodoDate.year(periodo.substring(2, 6));
-            return { empleado: emp, periodo: periodoDate.format('YYYY-MM-DD') };
-
-        })
-        this.props.onUpload(receipts);
+        this.props.onUpload(this.state.receipts[0]);
         this.setState({
             files: [],
-            rejected: []
+            rejected: [],
+            receipts: []
         })
     }
     onDelete() {
-        this.setState({ files: [], rejected: [] })
+        this.setState({ files: [], rejected: [], receipts: [] })
     }
 
     onDeleteRejected(){

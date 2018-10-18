@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {Button, InputText, Label, Title, Text, TextArea} from '../../components/index';
+import {Button,Center, InputText, Label, Title, Text, TextArea} from '../../components/index';
 import {Box, Flex} from 'grid-styled';
 import {getNotification, patchNotification, postNotification} from './action';
 import {connect} from 'react-redux';
@@ -58,7 +58,7 @@ class NotificationDetail extends Component{
         return (
             <div>
                 <Flex mt={'40px'} align="center">
-                    <Box css={{backgroundColor:'#d5e1df'}} mx="auto" width={512}>
+                    <Box css={{backgroundColor:'#f0f0f0'}} mx="auto" width={512}>
                         <Label display={"block"}>Remitente: {notification.remitente ? notification.remitente.nombre : null}</Label>
                         <Text margin={'0px 5px 0px'}>Hora: {moment(notification.fecha_creacion, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS')}</Text>
                         <Label display={"block"}>Asunto: {notification.asunto}</Label>

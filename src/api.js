@@ -28,10 +28,12 @@ function checkStatus(response) {
 
 function getHeaders(contentType) {
   const headers = {
-    Accept: "application/json",
-    "Content-Type": "application/json",
     "Authorization": `JWT ${localStorage.jwtToken}`
   };
+  if (contentType !== "form"){
+    headers["Content-Type"] = "application/json";
+    headers["Accept"] = "application/json";
+  }
   return headers;
 }
 
@@ -46,13 +48,16 @@ export function request(url, options) {
     .then(parseJSON);
 }
 
-export function post(url, body) {
+export function post(url, body, headers="application/json") {
   const url_hard = api_url;
   const urlStr = `${url_hard}${url}`;
+  if(headers !== "form"){
+    body = JSON.stringify(body)
+  }
   return request(urlStr, {
     method: "POST",
-    headers: getHeaders(),
-    body: JSON.stringify(body)
+    headers: getHeaders(headers),
+    body: body
   });
 }
 

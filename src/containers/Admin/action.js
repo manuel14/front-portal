@@ -35,7 +35,7 @@ export function receiptsSuccess(response) {
 export function postReceipt(receipt){
     return dispatch => {
         dispatch(receiptsRequest());
-        return post(`/api/recibo/`, receipt)
+        return post(`/api/recibo/`, receipt, "form")
             .then(response => {
                 const notificationOpts = {
                     // uid: 'once-please', // you can specify your own uid if required
@@ -45,7 +45,6 @@ export function postReceipt(receipt){
                     autoDismiss: 0
                   };
                 dispatch(success(notificationOpts))
-                //dispatch(receiptsSuccess(response))
             })
             .catch(err => {
                 dispatch(receiptsError(err))
