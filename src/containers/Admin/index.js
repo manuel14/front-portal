@@ -53,6 +53,7 @@ class Admin extends Component {
                 else {
                     formData.append("archivo", r);
                     formData.append("empleado", employee.id);
+                    formData.append("tipo", "R");
                     let periodo = r.name.split("-")[1].split(".")[0];
                     let periodoDate = moment();
                     periodoDate.month(periodo.substring(0, 2) - 1);
