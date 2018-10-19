@@ -26,13 +26,16 @@ function checkStatus(response) {
     });
 }
 
-function getHeaders(contentType) {
+function getHeaders(action="get", contentType) {
   const headers = {
     "Authorization": `JWT ${localStorage.jwtToken}`
   };
   if (contentType !== "form"){
     headers["Content-Type"] = "application/json";
     headers["Accept"] = "application/json";
+  }
+  else if(action === "patch"){
+    headers["Content-Type"] = "multipart/form-data; boundary=AaB03x--AaB03x";
   }
   return headers;
 }
@@ -56,7 +59,7 @@ export function post(url, body, headers="application/json") {
   }
   return request(urlStr, {
     method: "POST",
-    headers: getHeaders(headers),
+    headers: getHeaders("post", headers),
     body: body
   });
 }
@@ -84,18 +87,21 @@ export function put(url, body) {
   const cleanBody = omitBy(body, isNil);
   return request(url, {
     method: "PUT",
-    headers: getHeaders(),
+    headers: getHeaders("put"),
     body: JSON.stringify(cleanBody)
   });
 }
 
-export function patch(url, body) {
+export function patch(url, body, headers="application/json") {
   const url_hard = api_url;
   const urlStr = `${url_hard}${url}`;
+  if(headers !== "form"){
+    body = JSON.stringify(body);
+  }
   return request(urlStr, {
     method: "PATCH",
-    headers: getHeaders(),
-    body: JSON.stringify(body)
+    headers: getHeaders("patch","form"),
+    body: body
   });
 }
 

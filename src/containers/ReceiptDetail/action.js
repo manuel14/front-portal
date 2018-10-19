@@ -1,5 +1,5 @@
 import { get, patch} from "../../api";
-
+import * as moment from 'moment';
 
 export const RECEIPT_REQUEST = 'RECEIPT_REQUEST';
 export function receiptRequest() {
@@ -42,12 +42,12 @@ export function getReceipt(receiptId) {
 export function patchReceipt(receiptId){
     return dispatch => {
         dispatch(receiptRequest());
-        const current = new Date().toISOString();
-        const body = {abierto: current}
-        return patch(`/api/recibo/${receiptId}/`, body)
+        const current = moment().format("YYYY-MM-DDThh:mm:ss");
+        let body = new FormData();
+        body.append("abierto", current);
+        return patch(`/api/recibo/${receiptId}/`, body, "form")
             .then(response => {
                 receiptResponse(response)
-
             })
             .catch(err => {
                 dispatch(receiptError(err))
