@@ -61,7 +61,7 @@ class Nav extends Component {
             </NavGroup>
             <NavBrand
               image={this.props.image}
-              title={this.props.title || 'KBS'}
+              title={this.props.title || 'Empleados'}
             />
             <NavGroup right>
               {/* <NavLink to="/user" icon={userIcon} iconify={matches}>

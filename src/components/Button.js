@@ -6,7 +6,6 @@ const Button = styled.button.attrs({
   font-family: Arial;
   color: #ffffff;
   background-color: #d6d6d6;
-  text-transform: uppercase;
   border: 0;
   border-radius: 15px;
   text-align: center;
@@ -31,7 +30,7 @@ const Button = styled.button.attrs({
     ${props =>
     props.large &&
     css`
-            width: 96px;
+            width: 128px;
             height: 32px
           `};
 

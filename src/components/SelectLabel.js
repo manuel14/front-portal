@@ -3,9 +3,7 @@ import styled from 'styled-components';
 const SelectLabel = styled.span`
   font-family: FiraSansMedium;
   display: inline-block;
-  font-size: 14px;
-  text-transform: uppercase;
-  color: #aaa;
+  font-size: 18px;
 `;
 
 export default SelectLabel;

@@ -26,14 +26,11 @@ class AdminNotifications extends Component {
                         <h1>Notificaciones</h1>
                         <Form id="notifs">
                             <Select options={this.props.empleados} value={this.state.selectedOption} onChange={this.handleChange} placeholder="Seleccione destinatario">
-
                             </Select>
                             <textarea></textarea>
                         </Form>
                     </Box>
                 </Flex>
-
-
             </div>
         )
     }

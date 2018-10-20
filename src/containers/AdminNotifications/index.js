@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
-import { Button, Label, Select, TextArea } from '../../components';
+import { Button, Center, Label, Select, TextArea, Title } from '../../components';
 import { getEmployees, postMensaje } from './action';
 import { connect } from 'react-redux';
+
 
 class AdminNotifications extends Component {
 
@@ -51,7 +52,10 @@ class AdminNotifications extends Component {
             <div>
                 <Flex align="center">
                     <Box mx="auto" width={512}>
-                        <h1>Notificaciones</h1>
+                        <Title margin={'10px 0px 10px 0px'} 
+                            color={'black'} 
+                            align={'center'}>Notificaciones
+                        </Title>
                         <Label color={"gray"} margin={'0px 0px 20px 0px'}>Seleccione un empleado o un sector al cual irá dirigida su notificación</Label>
                         <form onSubmit={this.onSubmit} id="notifs">
                             <Select required={"required"} name={"emp"} label={"Destinatario"} name={"emp"} options={this.props.employees.map(
@@ -63,7 +67,9 @@ class AdminNotifications extends Component {
                             <Box mt={10}>
                                 <Label margin={'0px 10px 0px 0px'}>Mensaje</Label>
                                 <TextArea name={"contenido"} required={"required"} rows="6" cols="50"></TextArea>
-                                <Button type={"submit"} margin={"10px auto 0px auto"} primary>Enviar</Button>
+                                <Center>
+                                    <Button large type={"submit"} margin={"10px auto 0px auto"} primary>Enviar</Button>
+                                </Center>
                             </Box>
                         </form>
                     </Box>

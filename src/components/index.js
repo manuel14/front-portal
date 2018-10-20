@@ -16,6 +16,7 @@ import Image from './Image';
 import InputText from './InputText';
 import Label from './Label';
 import List from './List';
+import ListItem from './ListItem';
 import LogoSpinner from './LogoSpinner';
 import Match from './Match';
 import Modal from './Modal';
@@ -60,6 +61,7 @@ export {
     InputText,
     Label,
     List,
+    ListItem,
     LogoSpinner,
     Match,
     Modal,
