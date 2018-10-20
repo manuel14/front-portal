@@ -119,7 +119,7 @@ class Admin extends Component {
                                 Recibos a crear:
                                 </Title >
                             <Card width={'240px'} height={"200px"} color={"#f0efef"} center mx="auto">
-                                <List image={require('../../assets/receiptIcon.svg')} height={'140px'}>
+                                <List height={'140px'}>
                                     {
                                         this.state.files.map(f => <ListItem key={f.name}>{f.name}</ListItem>)
                                     }
