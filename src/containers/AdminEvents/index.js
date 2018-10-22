@@ -90,7 +90,10 @@ class AdminEvents extends Component {
                     </Table>
                 ) : (
                         <Flex align="center">
-                            <Box mt={30} mx="auto" width={512}>
+                            <Box css={{
+                                backgroundColor:'#f0f0f0'
+                            }} 
+                            mt={30} mx="auto" width={512}>
                                 <form onSubmit={this.onSubmit} id="events">
                                     <Label>Nombre:</Label>
                                     <InputText id="nombre"></InputText>
@@ -118,7 +121,9 @@ class AdminEvents extends Component {
                                         <Checkbox name="allday" value="Todo el día?" checked={false}>Todo el día?</Checkbox>
                                     </Box>
                                     <Box mt={10}>
-                                        <Button margin={'0 auto 0 auto'} type={"submit"} margin={"10px auto 0px auto"} primary>Crear</Button>
+                                        <Center>
+                                            <Button large margin={'0 auto 0 auto'} type={"submit"} margin={"10px auto 0px auto"} primary>Crear</Button>
+                                        </Center>
                                     </Box>
                                 </form>
                             </Box>

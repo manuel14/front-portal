@@ -64,7 +64,9 @@ class NotificationDetail extends Component{
                         <Label display={"block"}>Asunto: {notification.asunto}</Label>
                         <Text block>{notification.contenido}</Text>
                         {!notification.contestado &&
-                        <Button onClick={this.onClick} margin={"10px 0px 0px 0px"} primary>Responder</Button>
+                        <Center>
+                            <Button onClick={this.onClick} margin={"10px 0px 0px 0px"} primary>Responder</Button>
+                        </Center>
                         }
                     </Box>
                 </Flex>

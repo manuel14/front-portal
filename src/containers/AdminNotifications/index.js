@@ -51,7 +51,9 @@ class AdminNotifications extends Component {
         return (
             <div>
                 <Flex align="center">
-                    <Box mx="auto" width={512}>
+                    <Box 
+                        css={{backgroundColor:'#f0f0f0'}}
+                        mx="auto" mt={'20px'} width={512}>
                         <Title margin={'10px 0px 10px 0px'} 
                             color={'black'} 
                             align={'center'}>Notificaciones
