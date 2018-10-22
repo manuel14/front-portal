@@ -95,14 +95,14 @@ class AdminEvents extends Component {
                             }} 
                             mt={30} mx="auto" width={512}>
                                 <form onSubmit={this.onSubmit} id="events">
-                                    <Label>Nombre:</Label>
-                                    <InputText id="nombre"></InputText>
-                                    <Label display={"block"}>Descripción:</Label>
-                                    <TextArea id="descripcion" cols={"50"} rows={"6"}></TextArea>
-                                    <Label>
+                                    <Label margin={'10px 0px 0px 10px'}>Nombre:</Label>
+                                    <InputText margin={'0px 10px'} id="nombre"></InputText>
+                                    <Label margin={'10px 0px 0px 10px'} display={"block"}>Descripción:</Label>
+                                    <TextArea margin={'0px 10px'} id="descripcion" cols={"50"} rows={"6"}></TextArea>
+                                    <Label margin={'10px 0px 0px 10px'}>
                                         Escoja una fecha y hora para el evento
                                     </Label>
-                                    <Box>
+                                    <Box ml={10} mt={10}>
                                         <DatePicker
                                             customInput={<InputText/>}
                                             selected={this.state.moment}
@@ -117,10 +117,10 @@ class AdminEvents extends Component {
                                             dateFormat="LLL"
                                         />
                                     </Box>
-                                    <Box mt={10}>
+                                    <Box ml={10} mt={10}>
                                         <Checkbox name="allday" value="Todo el día?" checked={false}>Todo el día?</Checkbox>
                                     </Box>
-                                    <Box mt={10}>
+                                    <Box ml={10} mt={10}>
                                         <Center>
                                             <Button large margin={'0 auto 0 auto'} type={"submit"} margin={"10px auto 0px auto"} primary>Crear</Button>
                                         </Center>

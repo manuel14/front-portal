@@ -58,17 +58,24 @@ class AdminNotifications extends Component {
                             color={'black'} 
                             align={'center'}>Notificaciones
                         </Title>
-                        <Label color={"gray"} margin={'0px 0px 20px 0px'}>Seleccione un empleado o un sector al cual irá dirigida su notificación</Label>
+                        <Label color={"gray"} margin={'0px 0px 20px 10px'}>Seleccione un empleado o un sector al cual irá dirigida su notificación</Label>
                         <form onSubmit={this.onSubmit} id="notifs">
-                            <Select required={"required"} name={"emp"} label={"Destinatario"} name={"emp"} options={this.props.employees.map(
+                            <Select 
+                                required={"required"} 
+                                name={"emp"} 
+                                label={"Destinatario"} 
+                                labelMargin={'0px 10px'}
+                                name={"emp"}
+                                margin = {'0px 10px'}
+                                options={this.props.employees.map(
                                 emp => ({ value: emp.id, label: emp.nombre })
                             )} value={this.state.selectedOption} onChange={this.handleChange} placeholder="Seleccione destinatario">
 
                             </Select>
 
                             <Box mt={10}>
-                                <Label margin={'0px 10px 0px 0px'}>Mensaje</Label>
-                                <TextArea name={"contenido"} required={"required"} rows="6" cols="50"></TextArea>
+                                <Label margin={'0px 10px 0px 10px'}>Mensaje</Label>
+                                <TextArea margin={'0px 0px 0px 10px'} name={"contenido"} required={"required"} rows="6" cols="50"></TextArea>
                                 <Center>
                                     <Button large type={"submit"} margin={"10px auto 0px auto"} primary>Enviar</Button>
                                 </Center>

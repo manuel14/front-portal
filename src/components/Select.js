@@ -16,9 +16,10 @@ const StyledSelect = styled(ReactSelect).attrs({
   margin: ${props => props.margin};
 `;
 
-const Select = ({ label, ...rest }) => (
+
+const Select = ({ label, labelMargin, ...rest }) => (
   <div>
-    {label && <SelectLabel>{label}</SelectLabel>}
+    {label && <SelectLabel margin={labelMargin}>{label}</SelectLabel>}
     <StyledSelect {...rest} />
   </div>
 );

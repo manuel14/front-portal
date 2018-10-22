@@ -59,10 +59,19 @@ class NotificationDetail extends Component{
             <div>
                 <Flex mt={'40px'} align="center">
                     <Box css={{backgroundColor:'#f0f0f0'}} mx="auto" width={512}>
-                        <Label display={"block"}>Remitente: {notification.remitente ? notification.remitente.nombre : null}</Label>
-                        <Text margin={'0px 5px 0px'}>Hora: {moment(notification.fecha_creacion, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS')}</Text>
-                        <Label display={"block"}>Asunto: {notification.asunto}</Label>
-                        <Text block>{notification.contenido}</Text>
+                        <Label 
+                            margin={'0px 0px 10px 10px'} 
+                            display={"block"}>
+                            Remitente: {notification.remitente ? notification.remitente.nombre : null}
+                        </Label>
+                        <Text 
+                            margin={'10px 0px 0px 10px'}>
+                            Hora: {moment(notification.fecha_creacion, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS')}
+                            </Text>
+                        <Label 
+                            margin={'10px 0px 0px 10px'} 
+                            display={"block"}>Asunto: {notification.asunto}</Label>
+                        <Text margin={'10px 0px 0px 10px'} block>{notification.contenido}</Text>
                         {!notification.contestado &&
                         <Center>
                             <Button onClick={this.onClick} margin={"10px 0px 0px 0px"} primary>Responder</Button>
