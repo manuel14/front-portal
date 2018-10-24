@@ -1,4 +1,4 @@
-import { post, get } from "../../api";
+import { post } from "../../api";
 import {error} from 'react-notification-system-redux';
 
 export const LOGIN_REQUEST = "portal/user/USER_REQUEST";
@@ -42,7 +42,7 @@ export function signUpUser(user_creds)
 {
   return dispatch => {
     dispatch(signupRequest())
-    return post( `/api/auth/users/create/`, user_creds)
+    return post( `/api/auth/`, user_creds)
       .then(res => {
         signupResponse(res)
       })
@@ -54,7 +54,7 @@ export function signUpUser(user_creds)
 export function loginUser(user_creds) {
     return dispatch => {
       dispatch(loginRequest())
-      return post( `/api/auth/jwt/create/`, user_creds)
+      return post( `/api/auth/`, user_creds)
         .then(res => 
           dispatch(loginResponse(res))
         )
