@@ -33,7 +33,6 @@ class NotificationDetail extends Component{
     onSend = id => event =>{
         const msg = document.querySelector("#msg").value;
         const asunto = document.querySelector("#asunto").value;
-        const current = new Date().toISOString();
         const notification = {
             asunto,
             contenido: msg,

@@ -18,7 +18,6 @@ import Label from './Label';
 import List from './List';
 import ListItem from './ListItem';
 import LogoSpinner from './LogoSpinner';
-import Match from './Match';
 import Modal from './Modal';
 import MySelect from './MySelect';
 import Nav from './Nav';
@@ -63,7 +62,6 @@ export {
     List,
     ListItem,
     LogoSpinner,
-    Match,
     Modal,
     MySelect,
     Nav,

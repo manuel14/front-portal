@@ -31,7 +31,7 @@ class Admin extends Component {
         for (let r of accepted) {
             try {
                 let emp = r.name.split("-")[0];
-                let periodo = r.name.split("-")[1].split(".")[0];
+                let periodo = r.name.split("-")[1];
                 const mes = parseInt(periodo.slice(0, 2));
                 const anio = periodo.slice(2);
                 if ((mes < 1 || mes > 12) || (anio.length !== 4)) {
@@ -55,9 +55,10 @@ class Admin extends Component {
                         denied.push(r);
                     }
                     else {
+                        const tipo = r.name.split("-")[2].split(".")[0];
                         formData.append("archivo", r);
                         formData.append("empleado", employee.id);
-                        formData.append("tipo", "R");
+                        formData.append("tipo", tipo);
                         let periodoDate = moment();
                         periodoDate.month(mes - 1);
                         periodoDate.year(anio);
