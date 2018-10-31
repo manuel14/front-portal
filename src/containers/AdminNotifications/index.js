@@ -68,9 +68,11 @@ class AdminNotifications extends Component {
                                 name={"emp"}
                                 margin = {'0px 10px'}
                                 options={this.props.employees.map(
-                                emp => ({ value: emp.id, label: emp.nombre })
-                            )} value={this.state.selectedOption} onChange={this.handleChange} placeholder="Seleccione destinatario">
-
+                                    emp => ({ value: emp.id, label: emp.nombre })
+                                )} 
+                                value={this.state.selectedOption} 
+                                onChange={this.handleChange} 
+                                placeholder="Seleccione destinatario">
                             </Select>
 
                             <Box mt={10}>

@@ -105,13 +105,18 @@ class Admin extends Component {
             <div className="admin">
                 <Flex align="center">
                     <Box mx="auto" mt="20px" >
-                        <Title align={"center"} margin={"0px 0px 10px 0px"} color={"black"}>Administración de recibos</Title>
+                        <Title 
+                            align={"center"} 
+                            margin={"0px 0px 10px 0px"} 
+                            color={"black"}>
+                            Administración de archivos
+                        </Title>
                         {this.state.files.length === 0 && this.state.rejected.length === 0 && <div className="Dropzone">
                             <Center>
                                 <Dropzone accept=".pdf" onDrop={this.onDrop}>
-                                    <p>Suelte los recibos dentro de este recuadro.</p>
-                                    <p>Recuerde que cada archivo debe respetar el formato legajo-período(mes año) por ejemplo:
-                                        67-012018.pdf</p>
+                                    <p>Suelte los archivos dentro de este recuadro.</p>
+                                    <p>Recuerde que cada archivo debe respetar el formato legajo-período-tipo por ejemplo:
+                                        67-012018-R.pdf</p>
                                 </Dropzone>
                             </Center>
                         </div>}

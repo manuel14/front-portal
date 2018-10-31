@@ -28,8 +28,10 @@ import RadioLabel from './RadioLabel';
 import RadioSpan from './RadioSpan';
 import RadioInput from './RadioInput';
 import Receipt from './Receipt';
+import Right from './Right';
 import Select from './Select';
 import SideBar from './SideBar';
+import SubmissionIndex from './SubmissionIndex';
 import Table from './Table';
 import TableBody from './TableBody';
 import TableData from './TableData';
@@ -72,8 +74,10 @@ export {
     RadioSpan,
     RadioInput,
     Receipt,
+    Right,
     Select,
     SideBar,
+    SubmissionIndex,
     Table,
     TableBody,
     TableData,

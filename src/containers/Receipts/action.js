@@ -1,4 +1,5 @@
 import { post, get, patch } from "../../api";
+import {warning} from 'react-notification-system-redux'
 
 export const RECEIPTS_REQUEST = 'RECEIPTS_REQUEST';
 export function receiptsRequest() {
@@ -28,6 +29,15 @@ export function getReceipts() {
         dispatch(receiptsRequest());
         return get(`/api/recibo/recibos_empleado/`)
             .then(res => {
+                const unopened = res.filter(r => !r.abierto);
+                const notificationOpts = {
+                    // uid: 'once-please', // you can specify your own uid if required
+                    title: 'Aviso',
+                    message: `Usted tiene ${unopened.length} recibos sin abrir`,
+                    position: 'tr',
+                    autoDismiss: 0
+                };
+                dispatch(warning(notificationOpts))
                 dispatch(receiptsResponse(res))
             })
             .catch(err => {

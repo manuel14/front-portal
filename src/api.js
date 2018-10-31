@@ -77,7 +77,9 @@ export function get(url, params) {
 }
 
 export function remove(url) {
-  return request(url, {
+  const url_hard = api_url;
+  const urlStr = `${url_hard}${url}`;
+  return request(urlStr, {
     method: "DELETE",
     headers: getHeaders()
   });
@@ -85,12 +87,16 @@ export function remove(url) {
 
 export function put(url, body) {
   const cleanBody = omitBy(body, isNil);
-  return request(url, {
+  const url_hard = api_url;
+  const urlStr = `${url_hard}${url}`;
+  return request(urlStr, {
     method: "PUT",
     headers: getHeaders("put"),
     body: JSON.stringify(cleanBody)
   });
 }
+
+
 
 export function patch(url, body, headers="application/json") {
   const url_hard = api_url;

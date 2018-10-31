@@ -1,8 +1,8 @@
 import {
-    ADMIN_RECEIPTS_REQUEST,
-    ADMIN_RECEIPTS_RESPONSE,
-    ADMIN_RECEIPTS_ERROR,
-    ADMIN_RECEIPTS_SUCCESS
+    ADMIN_EMPLOYEES_REQUEST,
+    ADMIN_EMPLOYEES_RESPONSE,
+    ADMIN_EMPLOYEES_ERROR,
+    ADMIN_EMPLOYEES_SUCCESS
   } from "./action";
   
   const defaultState = {
@@ -11,26 +11,26 @@ import {
   
   export default function(state = defaultState, action) {
     switch (action.type) {
-      case ADMIN_RECEIPTS_RESPONSE: {
+      case ADMIN_EMPLOYEES_RESPONSE: {
         return {
           ...state,
           employees: action.response,
 
         };
       }
-      case ADMIN_RECEIPTS_SUCCESS: {
+      case ADMIN_EMPLOYEES_SUCCESS: {
         return {
           ...state,
           employees: []
         };
       }
       
-      case ADMIN_RECEIPTS_REQUEST: {
+      case ADMIN_EMPLOYEES_REQUEST: {
         return {
           ...state
         };
       }
-      case ADMIN_RECEIPTS_ERROR: {
+      case ADMIN_EMPLOYEES_ERROR: {
         return {
           ...state,
           error: action.response

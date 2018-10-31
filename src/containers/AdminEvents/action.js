@@ -24,14 +24,6 @@ export function eventsError(error) {
     }
 }
 
-export const ADMIN_EVENTS_SUCCESS = 'ADMIN_EVENTS_SUCCESS';
-export function eventsSuccess(response) {
-    return {
-        type: ADMIN_EVENTS_SUCCESS,
-        response
-    }
-}
-
 export function getEvents() {
     return dispatch => {
         dispatch(eventsRequest());

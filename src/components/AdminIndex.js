@@ -12,7 +12,7 @@ class AdminIndex extends Component {
                     <Title color={'black'} margin={"10px 0px"} block center>Bienvenido {this.props.username}</Title>
                         <CardContainer>
                             <Card center width={"200px"} height={"200px"}>
-                                <Title center>Recibos</Title>
+                                <Title center>Archivos</Title>
                                 <Image 
                                 margin={'0px auto 0px auto'} 
                                 width={'100px'} 
@@ -52,8 +52,8 @@ class AdminIndex extends Component {
                                 </Image>
                                 <Link to ="/admin/eventos">
                                     <Button 
-                                        margin={'10px 0px 0px 0px'} 
-                                        large  
+                                        large
+                                        margin={'10px 10px 0px 0px'} 
                                         primary>Ir
                                     </Button>
                                 </Link>

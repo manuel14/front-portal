@@ -13,6 +13,7 @@ const Button = styled.button.attrs({
   padding: 0.5rem 1rem;
   margin: ${props => props.margin};
   font-size: 14px;
+  display: ${props => props.display || 'inline-block'};
 
   ${props =>
     props.primary &&

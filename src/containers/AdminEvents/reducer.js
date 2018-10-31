@@ -1,8 +1,7 @@
 import {
     ADMIN_EVENTS_REQUEST,
     ADMIN_EVENTS_RESPONSE,
-    ADMIN_EVENTS_ERROR,
-    ADMIN_EVENTS_SUCCESS
+    ADMIN_EVENTS_ERROR
   } from "./action";
   
   const defaultState = {

@@ -30,10 +30,11 @@ class Events extends Component {
     render() {
         const {events, loading} = this.props;
         const evs_fmt = events.map(event => ({
-            id: event.pk,
+            id: event.id,
             title: event.nombre,
             start: event.fecha,
-            end: event.fecha
+            end: event.fecha,
+            allDay: event.allday
 
         }))
         return (
@@ -56,9 +57,9 @@ class Events extends Component {
                             month: "Mes",
                             day: "Día"
                         }
-
                     }
                 />
+        
             </Box>
         )
     }

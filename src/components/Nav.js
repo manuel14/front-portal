@@ -38,7 +38,6 @@ class Nav extends Component {
   }
 
   render() {
-    console.log(typeof(this.props.staff));
     return (
       <Media query="(max-width: 64em)">
         {matches => (

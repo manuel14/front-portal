@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
-import { Button, Center, Checkbox,InputText, Label, LogoSpinner, Table, TableBody, TableData, TableHead, TableHeader, TableRow, Text, TextArea } from '../../components/index';
-import { Box, Flex } from 'grid-styled';
 import { connect } from 'react-redux';
+import { Button, Center, LogoSpinner, Right, Table, TableBody, TableData, TableHead, TableHeader, TableRow, Text, Title } from '../../components/index';
+import { Box, Flex } from 'grid-styled';
 import { getEvents, postEvent } from './action';
 import * as moment from 'moment';
-import DatePicker from 'react-datepicker';
-import './datepicker.css';
+import {Link} from 'react-router-dom';
+import {withRouter} from 'react-router';
 
 class AdminEvents extends Component {
 
@@ -30,15 +30,15 @@ class AdminEvents extends Component {
         });
     }
 
-    onSubmit(event){
+    onSubmit(event) {
         event.preventDefault();
         const nombre = document.querySelector("#nombre");
         const descripcion = document.querySelector("#descripcion");
         const all_day = document.querySelector("input[name='allday']");
-        const ev ={
+        const ev = {
             nombre: nombre.value,
             descripcion: descripcion.value,
-            fecha:this.state.moment,
+            fecha: this.state.moment,
             all_day: all_day.checked
         }
         this.props.send(ev);
@@ -49,12 +49,6 @@ class AdminEvents extends Component {
 
     render() {
         const { events, loading } = this.props;
-        const shortcuts = {
-            'Today': moment(),
-            'Yesterday': moment().subtract(1, 'days'),
-            'Clear': ''
-        };
-
         return (
             <Box style={{ height: '100%' }}>
                 {loading && (
@@ -62,80 +56,60 @@ class AdminEvents extends Component {
                         <LogoSpinner />
                     </Center>
                 )}
-                {events ? (
-                    <Table>
-                        <TableHead>
-                            <TableRow>
-                                <TableHeader>Evento</TableHeader>
-                                <TableHeader>Fecha</TableHeader>
-                                <TableHeader>Descripcion</TableHeader>
-
-                            </TableRow>
-                        </TableHead>
-                        <TableBody>
-                            {events.map(event => (
-                                <TableRow id={event.pk} onClick={e => {
-                                    e.preventDefault();
-                                    this.handleClick(event)
-                                }}
-                                    key={event.pk}>
-                                    <TableData>
-                                        <Text margin={'0px 5px 0px'}>{moment(event.fecha, moment.ISO_8601).format('DD/MM/YYYY')}</Text>
-                                    </TableData>
-                                    <TableData>{event.nombre}</TableData>
-                                    <TableData>{event.descripcion}</TableData>
+                {events && (
+                    <div>
+                        <Title
+                            align={'center'}
+                            color={'black'}
+                            >
+                            Eventos
+                        </Title>
+                        <Right>
+                            <Link to="/admin/eventos/0">
+                                <Button
+                                    margin={'10px 10px 10px 0px'}
+                                    large
+                                    primary
+                                    >Nuevo Evento
+                                </Button>
+                            </Link>
+                        </Right>
+                        <Table>
+                            <TableHead>
+                                <TableRow>
+                                    <TableHeader>Evento</TableHeader>
+                                    <TableHeader>Fecha</TableHeader>
+                                    <TableHeader>Descripción</TableHeader>
                                 </TableRow>
-                            ))}
-                        </TableBody>
-                    </Table>
-                ) : (
-                        <Flex align="center">
-                            <Box css={{
-                                backgroundColor:'#f0f0f0'
-                            }} 
-                            mt={30} mx="auto" width={512}>
-                                <form onSubmit={this.onSubmit} id="events">
-                                    <Label margin={'10px 0px 0px 10px'}>Nombre:</Label>
-                                    <InputText margin={'0px 10px'} id="nombre"></InputText>
-                                    <Label margin={'10px 0px 0px 10px'} display={"block"}>Descripción:</Label>
-                                    <TextArea margin={'0px 10px'} id="descripcion" cols={"50"} rows={"6"}></TextArea>
-                                    <Label margin={'10px 0px 0px 10px'}>
-                                        Escoja una fecha y hora para el evento
-                                    </Label>
-                                    <Box ml={10} mt={10}>
-                                        <DatePicker
-                                            customInput={<InputText/>}
-                                            selected={this.state.moment}
-                                            onChange={this.handleChange}
-                                            showTimeSelect
-                                            timeFormat="HH:mm"
-                                            injectTimes={[
-                                                moment().hours(0).minutes(1),
-                                                moment().hours(12).minutes(5),
-                                                moment().hours(23).minutes(59)
-                                            ]}
-                                            dateFormat="LLL"
-                                        />
-                                    </Box>
-                                    <Box ml={10} mt={10}>
-                                        <Checkbox name="allday" value="Todo el día?" checked={false}>Todo el día?</Checkbox>
-                                    </Box>
-                                    <Box ml={10} mt={10}>
-                                        <Center>
-                                            <Button large margin={'0 auto 0 auto'} type={"submit"} margin={"10px auto 0px auto"} primary>Crear</Button>
-                                        </Center>
-                                    </Box>
-                                </form>
-                            </Box>
-                        </Flex>
-                    )}
+                            </TableHead>
+                            <TableBody>
+                                {events.map(event => (
+                                    <TableRow id={event.pk} onClick={e => {
+                                        e.preventDefault()
+                                        this.props.history.push(`/admin/eventos/${event.id}`)
+                                      }}
+                                        key={event.pk}>
+                                        <TableData>
+                                            <Text
+                                                margin={'0px 5px 0px'}
+                                            >{moment(event.fecha, moment.ISO_8601).format('DD/MM/YYYY')}
+                                            </Text>
+                                        </TableData>
+                                        <TableData>{event.nombre}</TableData>
+                                        <TableData>{event.descripcion}</TableData>
+                                    </TableRow>
+                                ))}
+                            </TableBody>
+                        </Table>
+                    </div>
+                )}
             </Box>
-        );
+        )
     }
 }
 
 const mapStateToProps = state => ({
-    ...state.AdminEventsReducer
+    ...state.adminEventsReducer
 })
 
 const mapDispatchToProps = dispatch => ({
@@ -145,4 +119,4 @@ const mapDispatchToProps = dispatch => ({
 
 })
 
-export default connect(mapStateToProps, mapDispatchToProps)(AdminEvents);
+export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminEvents));
