@@ -35,7 +35,7 @@ class Receipts extends Component {
             <LogoSpinner />
           </Center>
         )}
-        {receipts ? (
+        {receipts.length !== 0 ? (
           <Table>
             <TableHead>
               <TableRow>
@@ -66,7 +66,11 @@ class Receipts extends Component {
           </Table>
         )
           : (
-            <h1>No hay recibos cargados</h1>
+            <Box>
+              <Center>
+                <h1>No hay recibos cargadas</h1>
+              </Center>
+            </Box>
           )}
       </Box>
     )

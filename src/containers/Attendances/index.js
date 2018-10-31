@@ -36,7 +36,7 @@ class Attendances extends Component {
             <LogoSpinner />
           </Center>
         )}
-        {attendances ? (
+        {attendances.length !== 0 ? (
           <Table>
             <TableHead>
               <TableRow>
@@ -68,7 +68,11 @@ class Attendances extends Component {
           </Table>
         )
           : (
-            <h1>No hay fichadas cargadas</h1>
+            <Box>
+              <Center>
+                <h1>No hay fichadas cargadas</h1>
+              </Center>
+            </Box>
           )}
       </Box>
     )

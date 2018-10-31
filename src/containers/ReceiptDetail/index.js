@@ -67,19 +67,24 @@ class ReceiptDetail extends Component {
                             Periodo: {moment(receipt.periodo, moment.ISO_8601).format('MM/YYYY')}
                         </Title>
                         <Box mt={'5px'}>
-                            <a href="#">
+                           {/*  <a href={receipt.archivo}>
                                 <Image 
                                     width={'48px'}
                                     onClick={this.onPrint} 
                                     src={require('../../assets/printer.png')}>
                                 </Image>
-                            </a>
+                            </a> */}
                             {/* <a href={receipt.archivo} download>
                                 <Image src={require('../../assets/download.png')}>
                                 </Image>
                             </a> */}
                         </Box>
-                        <iframe width="396px" height="426px" src={receipt.archivo}>
+                        <iframe 
+                            name="file" 
+                            id="file" 
+                            width="396px" 
+                            height="426px" 
+                            src={receipt.archivo}>
                         </iframe>
 
                     </Box>

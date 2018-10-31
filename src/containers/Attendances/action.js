@@ -30,14 +30,16 @@ export function getAttendances() {
         return get(`/api/recibo/recibos_empleado/?tipo=F`)
             .then(res => {
                 const unopened = res.filter(r => !r.abierto);
-                const notificationOpts = {
-                    // uid: 'once-please', // you can specify your own uid if required
-                    title: 'Aviso',
-                    message: `Usted tiene ${unopened.length} fichadas sin abrir`,
-                    position: 'tr',
-                    autoDismiss: 0
-                };
-                dispatch(warning(notificationOpts))
+                if (unopened.length !== 0){
+                    const notificationOpts = {
+                        // uid: 'once-please', // you can specify your own uid if required
+                        title: 'Aviso',
+                        message: `Usted tiene ${unopened.length} fichadas sin abrir`,
+                        position: 'tr',
+                        autoDismiss: 0
+                    };
+                    dispatch(warning(notificationOpts))
+                }
                 dispatch(attendancesResponse(res))
             })
             .catch(err => {
