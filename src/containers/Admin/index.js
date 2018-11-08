@@ -38,7 +38,7 @@ class Admin extends Component {
                     denied.push(r);
                 }
                 else {
-                    let d = moment(periodo);
+                    let d = moment(periodo, "MM-YYYY");
                     let employee = this.props.employees.find(e => e.legajo === parseInt(emp));
                     if (employee === undefined) {
                         const notificationOpts = {

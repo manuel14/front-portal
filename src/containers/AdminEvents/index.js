@@ -59,7 +59,7 @@ class AdminEvents extends Component {
                 {events && (
                     <div>
                         <Title
-                            align={'center'}
+                            center
                             color={'black'}
                             >
                             Eventos

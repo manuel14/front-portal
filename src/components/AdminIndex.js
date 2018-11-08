@@ -11,8 +11,8 @@ class AdminIndex extends Component {
                     <Box width={1024} mx="auto">
                     <Title color={'black'} margin={"10px 0px"} block center>Bienvenido {this.props.username}</Title>
                         <CardContainer>
-                            <Card center width={"200px"} height={"200px"}>
-                                <Title center>Archivos</Title>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
+                                <Title color={'black'} center>Archivos</Title>
                                 <Image 
                                 margin={'0px auto 0px auto'} 
                                 width={'100px'} 
@@ -26,8 +26,8 @@ class AdminIndex extends Component {
                                     </Button>
                                 </Link>
                             </Card>
-                            <Card center width={"200px"} height={"200px"}>
-                                <Title>Notificaciones</Title>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
+                                <Title color={'black'}>Notificaciones</Title>
                                 <Image
                                 margin={'0px auto 0px auto'}
                                 width={'100px'}
@@ -42,8 +42,8 @@ class AdminIndex extends Component {
                                     </Button>
                                 </Link>
                             </Card>
-                            <Card center width={"200px"} height={"200px"}>
-                                <Title center>Eventos</Title>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
+                                <Title color={'black'} center>Eventos</Title>
                                 <Image
                                 margin={'0px auto 0px auto'}
                                 width={'100px'}

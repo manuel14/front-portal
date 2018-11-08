@@ -34,7 +34,7 @@ class Notifications extends Component {
                         <LogoSpinner />
                     </Center>
                 )}
-                {notifications.length !== 0 && (
+                {notifications.length !== 0 ? (
                     <Table>
                         <TableHead>
                             <TableRow>
@@ -61,7 +61,14 @@ class Notifications extends Component {
                             ))}
                         </TableBody>
                     </Table>
-                )}
+                ) : (
+                        <Box>
+                            <Center>
+                                <h1>No tiene notificaciones</h1>
+                            </Center>
+                        </Box>
+                    )
+                }
             </Box>
         );
     }

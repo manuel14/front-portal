@@ -56,7 +56,7 @@ class AdminNotifications extends Component {
                         mx="auto" mt={'20px'} width={512}>
                         <Title margin={'10px 0px 10px 0px'} 
                             color={'black'} 
-                            align={'center'}>Notificaciones
+                            center>Notificaciones
                         </Title>
                         <Label color={"gray"} margin={'0px 0px 20px 10px'}>Seleccione un empleado o un sector al cual irá dirigida su notificación</Label>
                         <form onSubmit={this.onSubmit} id="notifs">

@@ -4,17 +4,11 @@ import NavContainer from './NavContainer';
 import NavGroup from './NavGroup';
 import NavLink from './NavLink';
 import NavBrand from './NavBrand';
-import {withRouter} from 'react-router';
-import {connect} from 'react-redux';
-import {push} from 'react-router-redux';
-import { HammerIcon, HomeIcon, BackIcon, CloseIcon, MenuIcon, UserIcon } from './icons';
+import { HomeIcon, BackIcon, MenuIcon} from './icons';
 
 const homeIcon = <HomeIcon size={24} color="#ffffff" />;
 const menuIcon = <MenuIcon size={24} color="#ffffff" />;
 const backIcon = <BackIcon size={24} color="#ffffff" />;
-//const userIcon = <UserIcon size={24} color="#ffffff" />;
-const closeIcon = <CloseIcon size={24} color="#ffffff" />;
-const hammerIcon = <HammerIcon size={24} color="#ffffff" />;
 
 class Nav extends Component {
   onBack(event){
@@ -53,9 +47,8 @@ class Nav extends Component {
               <NavLink to="/" icon={homeIcon} iconify />
               {this.props.staff === "true" && <NavLink
                 to="/admin"
-                icon={hammerIcon}
-                iconify
-                />
+                >Admin
+                </NavLink>
               }
             </NavGroup>
             <NavBrand
@@ -76,10 +69,9 @@ class Nav extends Component {
               )}
               <NavLink
                 to="/login"
-                icon={closeIcon}
-                onClick={this.props.handleLogout}
-                iconify
-                />
+                onClick={this.props.handleLogout}>
+                Salir
+              </NavLink>
             </NavGroup>
           </NavContainer>
         )}

@@ -73,8 +73,9 @@ class AdminReceipts extends Component {
                 {receipts && (
                     <div>
                         <Title
-                            align={'center'}
+                            margin={'10px 0px 0px 0px'}
                             color={'black'}
+                            center
                             >
                             Archivos
                         </Title>
@@ -126,7 +127,7 @@ class AdminReceipts extends Component {
                                             </Text>
                                         </TableData>
                                         <TableData>{receipt.tipo}</TableData>
-                                        <TableData>{receipt.abierto}</TableData>
+                                        <TableData>{receipt.abierto ? moment(receipt.abierto, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS') : 'No'}</TableData>
                                     </TableRow>
                                 ))}
                             </TableBody>
