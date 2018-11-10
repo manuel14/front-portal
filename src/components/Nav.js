@@ -4,11 +4,12 @@ import NavContainer from './NavContainer';
 import NavGroup from './NavGroup';
 import NavLink from './NavLink';
 import NavBrand from './NavBrand';
-import { HomeIcon, BackIcon, MenuIcon} from './icons';
+import { HomeIcon, BackIcon, MenuIcon, UserIcon} from './icons';
 
 const homeIcon = <HomeIcon size={24} color="#ffffff" />;
 const menuIcon = <MenuIcon size={24} color="#ffffff" />;
 const backIcon = <BackIcon size={24} color="#ffffff" />;
+const userIcon = <UserIcon size={24} color="#ffffff" />;
 
 class Nav extends Component {
   onBack(event){
@@ -56,9 +57,9 @@ class Nav extends Component {
               title={this.props.title || 'Empleados'}
             />
             <NavGroup right>
-              {/* <NavLink to="/user" icon={userIcon} iconify={matches}>
+              <NavLink to="/user" icon={userIcon} iconify={matches}>
                 {this.props.userName}
-              </NavLink> */}
+              </NavLink>
               {matches && (
                 <NavLink
                   to="/menu"

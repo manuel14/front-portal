@@ -22,22 +22,23 @@ class SubmissionIndex extends Component {
                                 source={require('../assets/money.png')}>
                                 </Image>
                                 <Link to="/solicitudes/adelanto">
-                                    <Button margin={'10px 0px 0px 0px'} 
+                                    <Button width={'120px'} margin={'10px 0px 0px 0px'} 
                                         large
                                         primary>Ir
                                     </Button>
                                 </Link>
                             </Card>
                             <Card center width={"200px"} height={"200px"}>
-                                <Title small color={'black'} center>Ausencia</Title>
+                                <Title small color={'black'} center>Vacaciones</Title>
                                 <Image
                                 margin={'0px auto 0px auto'}
                                 width={'100px'}
                                 height={'100px'} 
-                                source={require('../assets/notification.png')}>
+                                source={require('../assets/traveler.png')}>
                                 </Image>
-                                <Link to="/admin/notificaciones">
+                                <Link to="/solicitudes/vacaciones">
                                     <Button 
+                                        width={'120px'}
                                         margin={'10px 0px 0px 0px'} 
                                         large 
                                         primary>Ir
@@ -54,6 +55,7 @@ class SubmissionIndex extends Component {
                                 </Image>
                                 <Link to ="/admin/eventos">
                                     <Button 
+                                        width={'120px'}
                                         margin={'10px 0px 0px 0px'} 
                                         large  
                                         primary>Ir
@@ -70,6 +72,7 @@ class SubmissionIndex extends Component {
                                 </Image>
                                 <Link to ="/admin/eventos">
                                     <Button 
+                                        width={'120px'}
                                         margin={'10px 0px 0px 0px'} 
                                         large  
                                         primary>Ir

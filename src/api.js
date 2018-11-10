@@ -106,7 +106,7 @@ export function patch(url, body, headers="application/json") {
   }
   return request(urlStr, {
     method: "PATCH",
-    headers: getHeaders("patch","form"),
+    headers: getHeaders("patch", headers),
     body: body
   });
 }

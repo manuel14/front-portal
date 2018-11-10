@@ -81,13 +81,13 @@ class AttendanceDetail extends Component {
                             Periodo: {moment(attendance.periodo, moment.ISO_8601).format('MM/YYYY')}
                         </Title>
                         <Box mt={'5px'}>
-                            <a href="#">
+                           {/*  <a href="#">
                                 <Image
                                     width={'48px'} 
                                     onClick={this.onPrint} 
                                     src={require('../../assets/printer.png')}>
                                 </Image>
-                            </a>
+                            </a> */}
                             {/* <a href={attendance.archivo} download>
                                 <Image src={require('../../assets/download.png')}>
                                 </Image>

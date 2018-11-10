@@ -1,4 +1,5 @@
-import { post, get } from "../../api";
+import { get, patch } from "../../api";
+import {success} from 'react-notification-system-redux';
 
 export const USER_REQUEST = "prode/user/USER_REQUEST";
 export function userRequest() {
@@ -23,35 +24,58 @@ export function userError(error) {
   };
 }
 
-export function signUpUser(user_creds)
-{
-  return dispatch => {
-    dispatch(userRequest())
-    return post( `/auth/signup/`, user_creds)
-      .then(res => {
-        userResponse(res)
-      })
-      .catch(err => userError(err));
-  }
 
+
+export function getEmployee(employeeId){
+  return dispatch => {
+    dispatch(userRequest());
+    return get(`/api/empleado/${employeeId}/`)
+      .then(res => {
+        dispatch(userResponse(res));
+      })
+      .catch(err => {
+        dispatch(userError(err));
+      })
+  }
 }
 
-export function loginUser(user_creds) {
-    return dispatch => {
-      dispatch(userRequest())
-      return post( `/auth/login/`, user_creds)
-        .then(res => 
-          dispatch(userResponse(res))
-        )
-        .catch(err => userError(err));
-    }
-  }
-
-/* export function logoutUser() {
+export function updateEmployee(employee){
   return dispatch => {
-    dispatch(userRequest())
-    return post(`/api/user/logout`)
-        .then(res => userLogout(res))
-        .catch(err => userError(err));
+    dispatch(userRequest());
+    return patch(`/api/empleado/${employee.id}/`, employee)
+      .then(res => {
+        const notificationOpts = {
+          // uid: 'once-please', // you can specify your own uid if required
+          title: 'Éxito',
+          message: `Sus datos han sido actualizados correctamente`,
+          position: 'tr',
+          autoDismiss: 0
+        };
+        dispatch(success(notificationOpts))
+        dispatch(userResponse(res));
+      })
+      .catch(err =>  {
+        dispatch(userError(err));
+      })
   }
-} */
+}
+
+export function patchUser(data){
+  return dispatch => {
+    dispatch(userRequest());
+    return patch(`/api/usuario/reset_password/`, data)
+      .then(res => {
+        const notificationOpts = {
+          // uid: 'once-please', // you can specify your own uid if required
+          title: 'Éxito',
+          message: `Su contraseña ha sido actualizada correctamente, deberá ingresar nuevamente`,
+          position: 'tr',
+          autoDismiss: 0
+        };
+        dispatch(success(notificationOpts));
+      })
+      .catch(err => {
+        dispatch(userError(err))
+      })
+  }
+}

@@ -18,7 +18,6 @@ class AdminEventDetail extends Component {
             allday: false,
             nombre: "",
             descripcion: ""
-            
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);

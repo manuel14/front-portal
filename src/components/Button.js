@@ -11,6 +11,7 @@ const Button = styled.button.attrs({
   text-align: center;
   cursor: pointer;
   padding: 0.5rem 1rem;
+  width: ${props => props.width || 'auto'};
   margin: ${props => props.margin};
   font-size: 14px;
   display: ${props => props.display || 'inline-block'};
@@ -21,19 +22,7 @@ const Button = styled.button.attrs({
       background-color: #0e97e0;
     `};
   
-    ${props =>
-    props.small &&
-    css`
-        width: 64px;
-        height: 32px
-      `};
-    
-    ${props =>
-    props.large &&
-    css`
-            width: 128px;
-            height: 32px
-          `};
+   
 
   ${props =>
     props.danger &&
@@ -51,6 +40,7 @@ const Button = styled.button.attrs({
     css`
         background-color: #4CAF50;
       `};
+    
 `;
 
 export default Button;

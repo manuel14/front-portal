@@ -15,13 +15,14 @@ import AdminEvents from '../AdminEvents';
 import AdminEventDetail from '../AdminEventDetail';
 import AdminNotifications from '../AdminNotifications';
 import AdminReceipts from '../AdminReceipts';
+import MoneySubmission from '../MoneySubmission';
 import Attendances from '../Attendances'
 import AttendanceDetail from '../AttendanceDetail';
 import Events from '../Events';
 import './styles.css';
 import Notifications from 'react-notification-system-redux';
-import MoneySubmission from '../MoneySubmission';
 import 'react-select/dist/react-select.css';
+import User from '../User';
 
 
 class App extends Component {
@@ -163,7 +164,7 @@ class App extends Component {
                 <Route path="/user"
                   render={() => (
                     token ? (
-                      <h1>Logueado </h1>
+                      <User/>
                     )
                       : (
                         <Redirect to="/login" />

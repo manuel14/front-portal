@@ -1,29 +1,23 @@
-/* import {
+import {
     USER_REQUEST,
     USER_RESPONSE,
-    USER_ERROR,
-    USER_LOGIN,
-    USER_LOGOUT,
-    USER_SIGNUP
+    USER_ERROR
   } from "./action";
   
-  const defaultState = {
-    username: ""
-  };
+  const defaultState = {};
   
   export default function(state = defaultState, action) {
     switch (action.type) {
       case USER_RESPONSE: {
-        localStorage.setItem('jwtToken', action.response.token)
         return {
           ...state,
-          username: action.response.username
+          employee: action.response
         };
       }
-      case USER_LOGOUT:{
+      case USER_ERROR:{
           return{
               ...state,
-              username: ""
+              error: action.error
           }
       }
       case USER_REQUEST: {
@@ -36,4 +30,3 @@
       }
     }
   }
-   */

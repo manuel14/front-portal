@@ -20,7 +20,7 @@ class AdminIndex extends Component {
                                 source={require('../assets/recibo.png')}>
                                 </Image>
                                 <Link to="/admin/recibos">
-                                    <Button margin={'10px 0px 0px 0px'} 
+                                    <Button width={'120px'} margin={'10px 0px 0px 0px'} 
                                         large
                                         primary>Ir
                                     </Button>
@@ -35,7 +35,8 @@ class AdminIndex extends Component {
                                 source={require('../assets/notification.png')}>
                                 </Image>
                                 <Link to="/admin/notificaciones">
-                                    <Button 
+                                    <Button
+                                        width={'120px'} 
                                         margin={'10px 0px 0px 0px'} 
                                         large 
                                         primary>Ir
@@ -53,6 +54,24 @@ class AdminIndex extends Component {
                                 <Link to ="/admin/eventos">
                                     <Button 
                                         large
+                                        width={'120px'}
+                                        margin={'10px 10px 0px 0px'} 
+                                        primary>Ir
+                                    </Button>
+                                </Link>
+                            </Card>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
+                                <Title color={'black'} center>Solicitudes</Title>
+                                <Image
+                                margin={'0px auto 0px auto'}
+                                width={'120px'}
+                                height={'100px'} 
+                                source={require('../assets/submission.png')}>
+                                </Image>
+                                <Link to ="/admin/solicitudes">
+                                    <Button 
+                                        large
+                                        width={'120px'}
                                         margin={'10px 10px 0px 0px'} 
                                         primary>Ir
                                     </Button>

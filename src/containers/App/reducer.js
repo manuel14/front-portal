@@ -21,6 +21,7 @@ export default function (state = defaultState, action) {
       localStorage.setItem('staff', action.response.staff)
       localStorage.setItem('id', action.response.id)
       localStorage.setItem('legajo', action.response.legajo)
+      localStorage.setItem('user', action.response.user)
       return {
         ...state,
         username: action.response.username
@@ -37,6 +38,7 @@ export default function (state = defaultState, action) {
       localStorage.removeItem('staff');
       localStorage.removeItem('id');
       localStorage.removeItem('legajo');
+      localStorage.removeItem('user');
       push('/login')
       return {
         ...state,

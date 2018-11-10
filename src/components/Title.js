@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 import Badge from './Badge';
 
 const Title = styled.span`
-  display: block;
+  display: ${props => props.display || 'block'};
   font-size: 1.5rem;
   font-family: FiraSansMedium;
   padding-top: ${props => props.pt || 0};
@@ -10,6 +10,7 @@ const Title = styled.span`
   padding-left: ${props => props.pl || 0};
   padding-right: ${props => props.pr || 0};
   margin: ${props => props.margin};
+  text-transform: capitalize;
 
   ${Badge} {
     color: #fff;
