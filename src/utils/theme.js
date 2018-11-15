@@ -32,13 +32,10 @@ export const color = {
 
 export const font = {
   size: '14px',
-  regular: 'FiraSans',
-  medium: 'FiraSansMedium',
   transform: 'uppercase',
 };
 
 export const button = {
-  font: 'FiraSansMedium',
   textColor: '#ffffff',
   textTransform: 'uppercase',
   background: '#d6d6d6',

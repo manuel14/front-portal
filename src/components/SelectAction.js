@@ -19,7 +19,6 @@ const SelectAction = styled.button`
   ${props =>
     props.default &&
     css`
-      font-family: FiraSansMedium;
       text-transform: uppercase;
     `};
 

@@ -7,7 +7,7 @@ import {
   USER_LOGOUT,
 } from "./action";
 
-import {push} from 'react-router-redux';
+import {browserHistory} from 'react-router-redux';
 
 const defaultState = {
   username: ""
@@ -33,13 +33,8 @@ export default function (state = defaultState, action) {
       };
     }
     case USER_LOGOUT: {
-      localStorage.removeItem('jwtToken');
-      localStorage.removeItem('username');
-      localStorage.removeItem('staff');
-      localStorage.removeItem('id');
-      localStorage.removeItem('legajo');
-      localStorage.removeItem('user');
-      push('/login')
+      localStorage.clear();
+      browserHistory.push('/login');
       return {
         ...state,
         username: ""

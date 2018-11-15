@@ -14,7 +14,7 @@ import {
       case ADMIN_EVENTS_RESPONSE: {
         return {
           ...state,
-          events: action.response,
+          events: action.response.results,
           loading:false
         };
       }

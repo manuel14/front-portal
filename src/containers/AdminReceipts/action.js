@@ -32,12 +32,22 @@ export function receiptsSuccess(response) {
     }
 }
 
+export const ADMIN_RECEIPTS_PAGE_CHANGE = 'ADMIN_RECEIPTS_PAGE_CHANGE';
+export function pageChange(page){
+    return {
+        type: ADMIN_RECEIPTS_PAGE_CHANGE,
+        page
+    }
+
+}
 
 
-export function getReceipts() {
+
+
+export function getReceipts(page) {
     return dispatch => {
         dispatch(receiptsRequest());
-        return get(`/api/recibo/`)
+        return get(`/api/recibo/?page=${page}`)
             .then(res => {
                 dispatch(receiptsResponse(res))
             })

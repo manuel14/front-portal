@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import SideContainer from './SideContainer';
 import SideGroup from './SideGroup';
 import SideLink from './SideLink';
+import Title from './Title';
 
 
 class SideBar extends Component {
@@ -10,20 +11,22 @@ class SideBar extends Component {
   }
 
   render() {
-    const {links} = this.props;
+    const { links } = this.props;
     return (
-          <SideContainer>
-            <SideGroup>
-              {links.map((link) => {
-                return <SideLink
-                  to={link}
-                  color="rgba(0, 0, 0, 0.15)"
-                >
+      <SideContainer>
+        <SideGroup>
+          {links.map((link) => {
+            return <SideLink
+              to={link}
+              color="rgba(0, 0, 0, 0.15)"
+            >
+              <Title color={'#ffffff'}>
                 {link.replace('/', '')}
-                </SideLink>
-              })}
-            </SideGroup>
-          </SideContainer>
+              </Title>
+            </SideLink>
+          })}
+        </SideGroup>
+      </SideContainer>
     );
   }
 }

@@ -10,10 +10,10 @@ const Button = styled.button.attrs({
   border-radius: 15px;
   text-align: center;
   cursor: pointer;
-  padding: 0.5rem 1rem;
+  padding: 0.5rem 3.2rem;
   width: ${props => props.width || 'auto'};
   margin: ${props => props.margin};
-  font-size: 14px;
+  font-size: 18px;
   display: ${props => props.display || 'inline-block'};
 
   ${props =>

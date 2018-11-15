@@ -55,7 +55,7 @@ const LogoSpinnerContainer = styled(SizedContainer)`
   }
 `;
 
-function LogoSpinner({ size = 256, bg = '#555', color = 'blue' }) {
+function LogoSpinner({ size = 256, bg = '#555', color = '#034f84' }) {
   return (
     <LogoSpinnerContainer size={size}>
       <LoadingIcon2 size={size} color={color} />

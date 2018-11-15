@@ -8,11 +8,13 @@ const Input = styled.input.attrs({
   value: props => props.value || null,
   id: props => props.id
 })`
-  height: ${props => props.height || '20px'};
+  height: ${props => props.height || '30px'};
   padding: ${props => props.padding};
   margin: ${props => props.margin};
   display: ${props => props.display || 'inline-block'};
-  width: ${props => props.width || '220px'};
+  width: ${props => props.width || '240px'};
+  border:  1px solid;
+  border-radius: 4px;
 `;
 
 export default Input;

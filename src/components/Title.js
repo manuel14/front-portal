@@ -4,13 +4,13 @@ import Badge from './Badge';
 const Title = styled.span`
   display: ${props => props.display || 'block'};
   font-size: 1.5rem;
-  font-family: FiraSansMedium;
   padding-top: ${props => props.pt || 0};
   padding-bottom: ${props => props.pb || 0};
   padding-left: ${props => props.pl || 0};
   padding-right: ${props => props.pr || 0};
   margin: ${props => props.margin};
   text-transform: capitalize;
+  color: ${props => props.color || ' #3b3a30'};
 
   ${Badge} {
     color: #fff;
@@ -33,16 +33,12 @@ const Title = styled.span`
     css`
       font-size: 1.4rem;
     `};
-    ${props =>
-    props.color &&
+    
+  ${props =>
+    props.center &&
     css`
-        color: ${props.color};
-      `};
-      ${props =>
-        props.center &&
-        css`
-            text-align: center;
-          `};
+      text-align: center;
+    `};
 `;
 
 export default Title;

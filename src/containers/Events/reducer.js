@@ -14,7 +14,7 @@ export default function (state = defaultState, action) {
         case EVENTS_RESPONSE: {
             return {
                 ...state,
-                events: action.response,
+                events: action.response.results,
                 loading: false
             };
         }

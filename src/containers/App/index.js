@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Button, InputText, Label, Nav, SideBar, SubmissionIndex, AdminIndex} from '../../components';
+import { Nav, SideBar, SubmissionIndex, AdminIndex, LoginForm} from '../../components';
 import { Box, Flex } from 'grid-styled';
 import { getTheme } from '../../utils/theme';
-import { signUpUser, loginUser, logoutUser } from './action';
+import { loginUser, logoutUser } from './action';
 import Receipts from '../Receipts';
 import ReceiptDetail from '../ReceiptDetail';
 import Notification from '../Notifications';
@@ -16,26 +16,22 @@ import AdminEventDetail from '../AdminEventDetail';
 import AdminNotifications from '../AdminNotifications';
 import AdminReceipts from '../AdminReceipts';
 import MoneySubmission from '../MoneySubmission';
+import AdminSubmissions from '../AdminSubmission';
+import AdminSubmissionsDetail from '../AdminSubmissionDetail';
+import VacationsSubmission from '../VacationsSubmissions';
 import Attendances from '../Attendances'
 import AttendanceDetail from '../AttendanceDetail';
 import Events from '../Events';
 import './styles.css';
 import Notifications from 'react-notification-system-redux';
-import 'react-select/dist/react-select.css';
 import User from '../User';
 
 
 class App extends Component {
   constructor(props) {
     super(props);
-    this.state = {
-      selectedOption: ''
-    }
-    this.requireAuth = this.requireAuth.bind(this);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-    this.handleSignUp = this.handleSignUp.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
 
   }
 
@@ -47,46 +43,14 @@ class App extends Component {
     return window.history.go('/admin');
   }
   
-
-  onToggleMenu() {
-    this.setState(prevState => {
-      return { displayMenu: !prevState.displayMenu };
-    });
-  };
-
-  requireAuth(nextState, replace) {
-    if (!localStorage.jwt) {
-      replace({
-        pathname: '/login',
-        state: { nextPathname: nextState.location.pathname }
-      })
-    }
-  }
-
-  handleLogin() {
-    let username = document.querySelector("input[name='username']").value;
-    let password = document.querySelector("input[name='password']").value;
-    let user_creds = { username: username, password: password };
-    this.props.onLogin(user_creds);
+  handleLogin(data) {
+    this.props.onLogin(data);
   }
 
   handleLogout() {
     this.props.handleLogout();
   }
-  handleSignUp() {
-    let username = document.querySelector("input[name='username']").value;
-    let password = document.querySelector("input[name='password']").value;
-    let user_creds = { username: username, password: password };
-    this.props.onSignUp(user_creds);
-  }
-
-  handleSubmit(event) {
-    const name = event.target.username;
-    const password = event.target.password;
-    event.preventDefault();
-  }
-
-
+  
   render() {
     const token = localStorage.jwtToken;
     const staff = localStorage.staff;
@@ -96,7 +60,6 @@ class App extends Component {
         DefaultStyle: { // Applied to every notification, regardless of the notification level
           margin: '10px 5px 2px 1px'
         },
-
         success: { // Applied only to the success notification item
           color: 'green'
         }
@@ -116,7 +79,6 @@ class App extends Component {
                 compact={false}
                 title={'Empleados'}
                 onBack={this.onBack}
-                onMenu={this.onToggleMenu}
                 handleLogout={this.handleLogout}
                 userName={username}
                 staff={staff}
@@ -139,23 +101,11 @@ class App extends Component {
                     )
                     : (
                       <Flex align="center">
-                        <Box mt={100} mx='auto' width={512}>
-                          <div className="LoginForm">
-                            <form onSubmit={this.handleSubmit}>
-                              <Label>
-                                Usuario
-                                <InputText margin='0px 0px 0px 10px' name="username" />
-                              </Label>
-                              <Label>
-                                Contraseña
-                                <InputText margin={"0px 0px 0px 10px"} type="password" name="password" />
-                              </Label>
-                              <Box>
-                                <Button onClick={this.handleLogin} margin={'0px 5px 0px 5px'} center primary>Ingresar</Button>
-                                {/* <Button onClick={this.handleSignUp} center success>SignUp</Button> */}
-                              </Box>
-                            </form>
-                          </div>
+                        <Box mt={100} mx="auto" width={512}>
+                          <LoginForm
+                            handleSubmit={this.handleLogin}
+                            >
+                          </LoginForm>
                         </Box>
                       </Flex>
                     )
@@ -170,7 +120,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route onEnter={this.requireAuth} path="/recibos"
+                <Route path="/recibos"
                   render={() => (
                     token ? (
                       <Receipts />
@@ -180,7 +130,7 @@ class App extends Component {
                       )
                   )} />
                   
-                  <Route onEnter={this.requireAuth} path="/recibo/:receiptId"
+                  <Route path="/recibo/:receiptId"
                   render={() => (
                     token ? (
                       <ReceiptDetail />
@@ -189,7 +139,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )}/>
-                  <Route onEnter={this.requireAuth} path="/admin/recibos/nuevos"
+                  <Route path="/admin/recibos/nuevos"
                   render={() => (
                     token ? (
                       <Admin />
@@ -198,7 +148,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                <Route onEnter={this.requireAuth} path="/admin/recibos"
+                <Route path="/admin/recibos"
                   render={() => (
                     token ? (
                       <AdminReceipts />
@@ -207,8 +157,28 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
+
+                  <Route path="/admin/solicitudes/:submissionId/:tipo"
+                  render={() => (
+                    token ? (
+                      <AdminSubmissionsDetail />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )} />
                   
-                 <Route onEnter={this.requireAuth} path="/admin/notificaciones"
+                  <Route path="/admin/solicitudes"
+                  render={() => (
+                    token ? (
+                      <AdminSubmissions />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )} />
+                  
+                 <Route path="/admin/notificaciones"
                   render={() => (
                     token ? (
                       <AdminNotifications />
@@ -217,7 +187,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  <Route onEnter={this.requireAuth} path="/admin/eventos/:eventId"
+                  <Route path="/admin/eventos/:eventId"
                   render={() => (
                     token ? (
                       <AdminEventDetail />
@@ -226,7 +196,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  <Route onEnter={this.requireAuth} path="/admin/eventos"
+                  <Route path="/admin/eventos"
                   render={() => (
                     token ? (
                       <AdminEvents />
@@ -237,7 +207,7 @@ class App extends Component {
                   )} />
                    
             
-                 <Route onEnter={this.requireAuth} path="/admin"
+                 <Route path="/admin"
                   render={() => (
                     token ? (
                       <AdminIndex />
@@ -248,7 +218,7 @@ class App extends Component {
                   )} />
                 
                 />
-                <Route onEnter={this.requireAuth} path="/notificaciones"
+                <Route path="/notificaciones"
                   render={() => (
                     token ? (
                       <Notification />
@@ -258,7 +228,7 @@ class App extends Component {
                       )
                   )}
                 />
-                <Route onEnter={this.requireAuth} path="/eventos"
+                <Route path="/eventos"
                   render={() => (
                     token ? (
                       <Events />
@@ -268,9 +238,42 @@ class App extends Component {
                       )
                   )}
                 />
+
+                <Route path="/solicitudes/adelanto"
+                  render={() => (
+                    token ? (
+                      <MoneySubmission />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
+
+                <Route path="/solicitudes/vacaciones"
+                  render={() => (
+                    token ? (
+                      <VacationsSubmission/>
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
+
+                <Route path="/solicitudes"
+                  render={() => (
+                    token ? (
+                      <SubmissionIndex />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
                 
 
-                <Route onEnter={this.requireAuth} path="/fichadas"
+                <Route path="/fichadas"
                   render={() => (
                     token ? (
                       <Attendances />
@@ -281,7 +284,7 @@ class App extends Component {
                   )}
                 />
 
-                <Route onEnter={this.requireAuth} path="/fichada/:attendanceId"
+                <Route path="/fichada/:attendanceId"
                   render={() => (
                     token ? (
                       <AttendanceDetail />
@@ -292,7 +295,7 @@ class App extends Component {
                   )}
                 />
                 
-                <Route onEnter={this.requireAuth} path="/notificacion/:notificationId"
+                <Route path="/notificacion/:notificationId"
                   render={() => (
                     token ? (
                       <NotificationDetail />
@@ -302,7 +305,7 @@ class App extends Component {
                       )
                   )}
                 />
-                <Route onEnter={this.requireAuth} exact path='/' render={() => (
+                <Route exact path='/' render={() => (
                   token ? (
                     <Redirect to="/recibos" />)
                     : (
@@ -330,7 +333,6 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-  onSignUp: (user_creds) => dispatch(signUpUser(user_creds)),
   onLogin: (user_creds) => dispatch(loginUser(user_creds)),
   handleLogout: () => dispatch(logoutUser()),
   dispatch

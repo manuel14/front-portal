@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Center, LogoSpinner, Right, Select, Table, TableBody, TableData, TableHead, TableHeader, TableRow, Text, Title } from '../../components/index';
-import { Box, Flex} from 'grid-styled';
-import { getReceipts} from './action';
+import { Button, Center, LogoSpinner, Right, Select, Table, TableBody, TableData, TableHead, TableHeader, TableRow, TableToolbar, Text, Title } from '../../components/index';
+import { Box, Flex } from 'grid-styled';
+import { getReceipts, pageChange } from './action';
 import * as moment from 'moment';
-import {Link} from 'react-router-dom';
-import {withRouter} from 'react-router';
+import { Link } from 'react-router-dom';
+import { withRouter } from 'react-router';
 
 class AdminReceipts extends Component {
 
@@ -19,10 +19,12 @@ class AdminReceipts extends Component {
     }
 
     componentDidMount() {
-        this.props.onLoad();
+        this.props.onLoad(this.props.page);
     }
 
-    componentWillReceiveProps(nextProps){
+
+
+    componentWillReceiveProps(nextProps) {
         this.setState({
             receipts: nextProps.receipts
         })
@@ -31,18 +33,18 @@ class AdminReceipts extends Component {
     handleChange(event) {
         let newReceipts = [];
         let selectedOption;
-        if (!event){
+        if (!event) {
             newReceipts = this.props.receipts;
             selectedOption = null;
         }
-        else if (event.value === 'abierto'){
+        else if (event.value === 'abierto') {
             newReceipts = this.props.receipts.filter(
                 receipt => receipt.abierto
             )
             selectedOption = event.value;
-           
+
         }
-        else{
+        else {
             newReceipts = this.props.receipts.filter(
                 receipt => !receipt.abierto
             )
@@ -54,14 +56,18 @@ class AdminReceipts extends Component {
         })
     }
 
+    onPageChange = page => {
+        this.props.onPageChange(page);
+        this.props.onLoad(page);
+    };
 
     render() {
         console.log(this.props);
-        const {loading } = this.props;
+        const { loading } = this.props;
         const receipts = this.state.receipts;
         const opts = [
-            {value: 'abierto', label: "Abierto"},
-            {value: 'cerrado', label: "Cerrado"}
+            { value: 'abierto', label: "Abierto" },
+            { value: 'cerrado', label: "Cerrado" }
         ]
         return (
             <Box style={{ height: '100%' }}>
@@ -73,27 +79,25 @@ class AdminReceipts extends Component {
                 {receipts && (
                     <div>
                         <Title
-                            margin={'10px 0px 0px 0px'}
+                            margin={'20px 0px 0px 0px'}
                             color={'black'}
                             center
-                            >
+                        >
                             Archivos
                         </Title>
-
                         <Center>
                             <Box mt={'20px'} width={170}>
-                            <Select
-                                
-                                name={"abierto"} 
-                                label={"Filtre por estado"} 
-                                labelMargin={'0px 10px'}
-                                name={"abierto"}
-                                margin = {'0px 10px'}
-                                options={opts}
-                                value={this.state.selectedOption} 
-                                onChange={this.handleChange} 
-                                placeholder="Seleccione estado">
-                            </Select>
+                                <Select
+                                    name={"abierto"}
+                                    label={"Filtre por estado"}
+                                    labelMargin={'0px 10px'}
+                                    name={"abierto"}
+                                    margin={'0px 10px'}
+                                    options={opts}
+                                    value={this.state.selectedOption}
+                                    onChange={this.handleChange}
+                                    placeholder="Seleccione estado">
+                                </Select>
                             </Box>
                         </Center>
                         <Right>
@@ -102,7 +106,7 @@ class AdminReceipts extends Component {
                                     margin={'10px 10px 10px 0px'}
                                     large
                                     primary
-                                    >Nuevos
+                                >Nuevos
                                 </Button>
                             </Link>
                         </Right>
@@ -117,9 +121,13 @@ class AdminReceipts extends Component {
                             </TableHead>
                             <TableBody>
                                 {receipts.map(receipt => (
-                                    <TableRow 
+                                    <TableRow
                                         key={receipt.pk}>
-                                        <TableData>{receipt.empleado.nombre}</TableData>
+                                        <TableData>
+                                            <Title>
+                                                {receipt.empleado.nombre}
+                                            </Title>
+                                        </TableData>
                                         <TableData>
                                             <Text
                                                 margin={'0px 5px 0px'}
@@ -132,6 +140,16 @@ class AdminReceipts extends Component {
                                 ))}
                             </TableBody>
                         </Table>
+                        <Box m={16}>
+                            <TableToolbar
+                                items={this.props.items}
+                                size={this.props.size}
+                                page={this.props.page}
+                                showTotal
+                                onPageChange={this.onPageChange}
+                            >
+                            </TableToolbar>
+                        </Box>
                     </div>
                 )}
             </Box>
@@ -144,7 +162,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: () => dispatch(getReceipts()),
+    onLoad: page => dispatch(getReceipts(page)),
+    onPageChange: page => dispatch(pageChange(page)),
     dispatch
 
 })

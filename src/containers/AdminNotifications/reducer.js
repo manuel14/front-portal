@@ -14,7 +14,7 @@ import {
       case ADMIN_NOTIFICATIONS_RESPONSE: {
         return {
           ...state,
-          employees: action.response
+          employees: action.response.results
         };
       }
       case ADMIN_NOTIFICATIONS_SUCCESS: {

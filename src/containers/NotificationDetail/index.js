@@ -63,17 +63,22 @@ class NotificationDetail extends Component{
                             display={"block"}>
                             Remitente: {notification.remitente ? notification.remitente.nombre : null}
                         </Label>
-                        <Text 
+                        <Title
                             margin={'10px 0px 0px 10px'}>
                             Hora: {moment(notification.fecha_creacion, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS')}
-                            </Text>
+                        </Title>
                         <Label 
                             margin={'10px 0px 0px 10px'} 
                             display={"block"}>Asunto: {notification.asunto}</Label>
-                        <Text margin={'10px 0px 0px 10px'} block>{notification.contenido}</Text>
+                        <Title margin={'10px 0px 0px 10px'} block>{notification.contenido}</Title>
                         {!notification.contestado &&
                         <Center>
-                            <Button onClick={this.onClick} margin={"10px 0px 0px 0px"} primary>Responder</Button>
+                            <Button
+                                onClick={this.onClick} 
+                                margin={"10px 0px 10px 0px"} 
+                                primary
+                                >Responder
+                            </Button>
                         </Center>
                         }
                     </Box>

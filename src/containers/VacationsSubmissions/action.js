@@ -1,34 +1,34 @@
 import { post} from "../../api";
 import {success} from 'react-notification-system-redux'
 
-export const MONEY_REQUEST = 'MONEY_REQUEST';
-export function moneyRequest() {
+export const VACATION_REQUEST = 'VACATION_REQUEST';
+export function vacationRequest() {
     return {
-        type: MONEY_REQUEST
+        type: VACATION_REQUEST
     }
 }
 
-export const MONEY_RESPONSE = 'MONEY_RESPONSE';
-export function moneyResponse(response) {
+export const VACATION_RESPONSE = 'VACATION_RESPONSE';
+export function vacationResponse(response) {
     return {
-        type: MONEY_RESPONSE,
+        type: VACATION_RESPONSE,
         response
     }
 }
 
-export const MONEY_ERROR = 'MONEY_ERROR';
-export function moneyError(error) {
+export const VACATION_ERROR = 'VACATION_ERROR';
+export function vacationError(error) {
     return {
-        type: MONEY_REQUEST,
+        type: VACATION_REQUEST,
         error
     }
 }
 
 
-export function postMoney(data){
+export function postVacation(data){
     return dispatch => {
-        dispatch(moneyRequest());
-        return post(`/api/formularioAdelanto/`, data)
+        dispatch(vacationRequest());
+        return post(`/api/formularioVacaciones/`, data)
             .then(response => {
                 const msg = {
                     // uid: 'once-please', // you can specify your own uid if required
@@ -38,9 +38,10 @@ export function postMoney(data){
                     autoDismiss: 0
                   };
                 dispatch(success(msg));
+                dispatch(vacationResponse(response));
             })
             .catch(err => {
-                dispatch(moneyError(err))
+                dispatch(vacationError(err))
             })
     }
 }

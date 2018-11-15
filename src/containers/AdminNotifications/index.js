@@ -63,6 +63,7 @@ class AdminNotifications extends Component {
                             <Select 
                                 required={"required"} 
                                 name={"emp"} 
+                                clearable={false}
                                 label={"Destinatario"} 
                                 labelMargin={'0px 10px'}
                                 name={"emp"}

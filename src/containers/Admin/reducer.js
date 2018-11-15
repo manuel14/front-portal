@@ -14,7 +14,7 @@ import {
       case ADMIN_EMPLOYEES_RESPONSE: {
         return {
           ...state,
-          employees: action.response,
+          employees: action.response.results,
 
         };
       }

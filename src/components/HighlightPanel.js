@@ -7,7 +7,6 @@ const Panel = ({ children, borderTop, borderBottom, ...rest }) => (
 );
 
 const HighlightPanel = styled(Panel)`
-  font-family: 'FiraSans';
   background-color: #fff;
   padding: ${props => props.p || '16px'};
 

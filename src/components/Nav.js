@@ -48,7 +48,7 @@ class Nav extends Component {
               <NavLink to="/" icon={homeIcon} iconify />
               {this.props.staff === "true" && <NavLink
                 to="/admin"
-                >Admin
+                >Administrador
                 </NavLink>
               }
             </NavGroup>

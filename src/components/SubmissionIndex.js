@@ -13,8 +13,8 @@ class SubmissionIndex extends Component {
                         Solicitudes
                     </Title>
                         <CardContainer>
-                            <Card center width={"200px"} height={"200px"}>
-                                <Title small color={'black'} center>Adelanto de sueldo</Title>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
+                                <Title small color={'black'} center>Adelanto</Title>
                                 <Image 
                                 margin={'0px auto 0px auto'} 
                                 width={'100px'} 
@@ -28,7 +28,7 @@ class SubmissionIndex extends Component {
                                     </Button>
                                 </Link>
                             </Card>
-                            <Card center width={"200px"} height={"200px"}>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
                                 <Title small color={'black'} center>Vacaciones</Title>
                                 <Image
                                 margin={'0px auto 0px auto'}
@@ -45,7 +45,7 @@ class SubmissionIndex extends Component {
                                     </Button>
                                 </Link>
                             </Card>
-                            <Card center width={"200px"} height={"200px"}>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
                                 <Title small color={'black'} center>Vacaciones</Title>
                                 <Image
                                 margin={'0px auto 0px auto'}
@@ -62,7 +62,7 @@ class SubmissionIndex extends Component {
                                     </Button>
                                 </Link>
                             </Card>
-                            <Card center width={"200px"} height={"200px"}>
+                            <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
                                 <Title small color={'black'} center>Salida</Title>
                                 <Image
                                 margin={'0px auto 0px auto'}

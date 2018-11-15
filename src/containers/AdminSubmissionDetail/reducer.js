@@ -1,31 +1,30 @@
 import {
-    RECEIPTS_REQUEST,
-    RECEIPTS_RESPONSE,
-    RECEIPTS_ERROR
+    ADMIN_SUBMISSION_DETAIL_REQUEST,
+    ADMIN_SUBMISSION_DETAIL_RESPONSE,
+    ADMIN_SUBMISSION_DETAIL_ERROR
   } from "./action";
   
   const defaultState = {
-    loading: false,
-    receipts: []
+    submission: {},
+    loading: false
   };
   
   export default function(state = defaultState, action) {
     switch (action.type) {
-      case RECEIPTS_RESPONSE: {
+      case ADMIN_SUBMISSION_DETAIL_RESPONSE: {
         return {
           ...state,
-          receipts: action.response,
-          loading: false
+          submission: action.response,
+          loading:false
         };
       }
-      
-      case RECEIPTS_REQUEST: {
+      case ADMIN_SUBMISSION_DETAIL_REQUEST: {
         return {
           ...state,
           loading: true
         };
       }
-      case RECEIPTS_ERROR: {
+      case ADMIN_SUBMISSION_DETAIL_ERROR: {
         return {
           ...state,
           error: action.error,
