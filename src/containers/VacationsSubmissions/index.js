@@ -6,7 +6,6 @@ import {connect} from 'react-redux';
 import DatePicker from 'react-datepicker';
 import '../AdminEvents/datepicker.css';
 import {postVacation} from './action';
-import * as Holidays from 'date-holidays';
 
 
 
@@ -57,8 +56,6 @@ class VacationsSubmission extends Component {
     
 
     render() {
-        let hd  = new Holidays('AR');
-        console.log(hd.getHolidays(2018));
 
         return (
             <Flex align="center">
@@ -73,7 +70,6 @@ class VacationsSubmission extends Component {
                                 Fecha de inicio:
                             </Label>
                             <DatePicker
-                                //excludeDates={forbiddenDates}
                                 required={true}
                                 customInput={<InputText/>}
                                 onChangeRaw={this.handleDateChangeRaw}
