@@ -7,7 +7,7 @@ import {
   USER_LOGOUT,
 } from "./action";
 
-import {browserHistory} from 'react-router-redux';
+import {push} from 'react-router-redux';
 
 const defaultState = {
   username: ""
@@ -34,7 +34,7 @@ export default function (state = defaultState, action) {
     }
     case USER_LOGOUT: {
       localStorage.clear();
-      browserHistory.push('/login');
+      push('/login');
       return {
         ...state,
         username: ""

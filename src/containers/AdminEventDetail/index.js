@@ -87,6 +87,7 @@ class AdminEventDetail extends Component {
     }
 
     render() {
+        const evt = this.props.match.params.eventId;
         return (
             <Flex align="center">
                 <Box css={{
@@ -163,9 +164,9 @@ class AdminEventDetail extends Component {
                                     primary
                                     >Guardar
                                 </Button>
-                                <Button onClick={this.handleDelete} danger>
+                                {evt !== "0" && <Button onClick={this.handleDelete} danger>
                                     Eliminar
-                                </Button>
+                                </Button>}
                             </Center>
                         </Box>
                     </form>

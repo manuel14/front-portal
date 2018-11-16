@@ -6,6 +6,7 @@ const TextArea = styled.textarea.attrs({
 })`
     display: block;
     margin: ${props => props.margin || '0px'};
+    resize: none;
 `
 
 export default TextArea;

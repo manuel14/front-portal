@@ -21,9 +21,6 @@ const Button = styled.button.attrs({
     css`
       background-color: #0e97e0;
     `};
-  
-   
-
   ${props =>
     props.danger &&
     css`
@@ -40,7 +37,6 @@ const Button = styled.button.attrs({
     css`
         background-color: #4CAF50;
       `};
-    
 `;
 
 export default Button;

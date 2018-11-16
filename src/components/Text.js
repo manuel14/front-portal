@@ -2,12 +2,7 @@ import styled, { css } from 'styled-components';
 
 const Text = styled.span`
   /* prettier-ignore */
-  ${props =>
-    props.size &&
-    css`|
-      font-size: ${props.size};
-    `};
-  /* prettier-ignore */
+  font-size: ${props => props.size || '14px'};
   ${props =>
     props.color &&
     css`
