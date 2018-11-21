@@ -51,14 +51,17 @@ class ReceiptDetail extends Component {
                     showCloseIcon={false}
                     onOverlayClick={this.onOverlay}
                 >
-                    <Text block>Si presiona en abrir dará su consentimiento de haber visto este recibo de sueldo</Text>
+                    <Text
+                        size={'18px'} 
+                        block
+                    >Si hace click en abrir dará su consentimiento de haber visto este recibo de sueldo</Text>
                     <Button margin={"5px 5px 0px 20px"} className="open" id={receipt.pk} primary onClick={e => {
                         e.preventDefault()
                         this.onAccept(receipt.pk)
                     }}
                     >Abrir
                                         </Button>
-                    <Button margin={"5px 5px 0px 0px"} className="close" danger onClick={this.onCloseModal}>Cerrar
+                    <Button margin={"5px 5px 0px 20px"} className="close" danger onClick={this.onCloseModal}>Cerrar
                                         </Button>
                 </Modal>
                 <Flex align="center">

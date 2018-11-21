@@ -13,14 +13,23 @@ class NotificationDetail extends Component{
     constructor(props){
         super(props);
         this.state = {
-            open: false
+            open: false,
+            msg: "",
+            asunto:""
         }
         this.onClick = this.onClick.bind(this);
         this.onSend = this.onSend.bind(this);
+        this.handleChange = this.handleChange.bind(this);
     }
 
     componentDidMount() {
         this.props.onLoad(this.props.match.params.notificationId);
+    }
+
+    handleChange(event){
+        this.setState({
+            [event.target.name]: event.target.value
+        })
     }
 
     onClick(event){
@@ -31,24 +40,26 @@ class NotificationDetail extends Component{
     }
 
     onSend = id => event =>{
-        const msg = document.querySelector("#msg").value;
-        const asunto = document.querySelector("#asunto").value;
         const notification = {
-            asunto,
-            contenido: msg,
-            remitente: this.props.notification.empleado,
-            empleado: this.props.notification.remitente
+            asunto: this.state.asunto,
+            contenido: this.state.msg,
+            remitente: this.props.notification.empleado.id,
+            empleado: this.props.notification.remitente.id
         }
         this.props.onUpdate(id);
         this.props.send(notification);
         this.setState({
-            open: false
+            open: false,
+            asunto: "",
+            msg: ""
         })
     }
 
     closeModal(){
         this.setState({
-            open: false
+            open: false,
+            asunto: "",
+            msg: ""
         })
     }
     
@@ -92,10 +103,27 @@ class NotificationDetail extends Component{
                     onOverlayClick={this.onOverlay}
                   > 
                     <Label>Asunto: </Label>
-                    <InputText id="asunto"></InputText>
+                    <InputText
+                        id="asunto"
+                        name={'asunto'}
+                        onChange={this.handleChange}
+                        value={this.state.asunto}
+                        >
+                    </InputText>
                     <Label display={"block"}>{notification.remitente ? `Mensaje para ${notification.remitente.nombre}`: `Mensaje`}</Label>
-                    <TextArea id="msg" required={"required"} rows="6" cols="50"></TextArea>
-                    <Button margin={"5px 5px 0px 20px"} primary onClick={this.onSend(notification.pk)}
+                    <TextArea
+                        value={this.state.msg} 
+                        id="msg" 
+                        name={"msg"}
+                        required={"required"} 
+                        rows="6"
+                        onChange={this.handleChange} 
+                        cols="50">
+                    </TextArea>
+                    <Button 
+                        margin={"5px 5px 0px 20px"} 
+                        primary 
+                        onClick={this.onSend(notification.pk)}
                     >Responder
                     </Button>
                     <Button onClick={this.closeModal.bind(this)} danger>Cancelar</Button>

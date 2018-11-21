@@ -97,7 +97,7 @@ class User extends Component {
           showCloseIcon={false}
           onOverlayClick={this.onOverlay}
         >
-          <Title>
+          <Title center>
             Cambio de contraseña
           </Title>
           <Label

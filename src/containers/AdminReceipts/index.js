@@ -131,7 +131,7 @@ class AdminReceipts extends Component {
                                         <TableData>
                                             <Text
                                                 margin={'0px 5px 0px'}
-                                            >{moment(receipt.periodo, moment.ISO_8601).format('DD/MM/YYYY')}
+                                            >{moment(receipt.periodo, moment.ISO_8601).format('MM/YYYY')}
                                             </Text>
                                         </TableData>
                                         <TableData>{receipt.tipo}</TableData>
