@@ -24,7 +24,7 @@ import AttendanceDetail from '../AttendanceDetail';
 import Events from '../Events';
 import './styles.css';
 import Notifications from 'react-notification-system-redux';
-import Submissions from '../Submissions';
+//import Submissions from '../Submissions';
 import User from '../User';
 import * as Sentry from '@sentry/browser';
 Sentry.init({ dsn: process.env.REACT_APP_SENTRY_URL });
