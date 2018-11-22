@@ -1,28 +1,26 @@
 import {
-    NOTIFICATION_DETAIL_REQUEST,
-    NOTIFICATION_DETAIL_RESPONSE,
-    NOTIFICATION_DETAIL_ERROR
+    ABSENCE_REQUEST,
+    ABSENCE_RESPONSE,
+    ABSENCE_ERROR
   } from "./action";
   
-  const defaultState = {
-    notification: {}
-  };
+  const defaultState = {};
   
   export default function(state = defaultState, action) {
     switch (action.type) {
-      case NOTIFICATION_DETAIL_RESPONSE: {
+      case ABSENCE_RESPONSE: {
         return {
           ...state,
-          notification: action.response,
+          absence: action.response
         };
       }
       
-      case NOTIFICATION_DETAIL_REQUEST: {
+      case ABSENCE_REQUEST: {
         return {
           ...state
         };
       }
-      case NOTIFICATION_DETAIL_ERROR: {
+      case ABSENCE_ERROR: {
         return {
           ...state,
           error: action.error

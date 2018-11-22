@@ -1,25 +1,25 @@
 import { get, post, put, remove} from "../../api";
 import {success, error} from 'react-notification-system-redux';
 
-export const ADMIN_EVENT_REQUEST = 'ADMIN_EVENT_REQUEST';
+export const ADMIN_EVENT_DETAIL_REQUEST = 'ADMIN_EVENT_DETAIL_REQUEST';
 export function eventRequest() {
     return {
-        type: ADMIN_EVENT_REQUEST
+        type: ADMIN_EVENT_DETAIL_REQUEST
     }
 }
 
-export const ADMIN_EVENT_RESPONSE = 'ADMIN_EVENT_RESPONSE';
+export const ADMIN_EVENT_DETAIL_RESPONSE = 'ADMIN_EVENT_DETAIL_RESPONSE';
 export function eventResponse(response) {
     return {
-        type: ADMIN_EVENT_RESPONSE,
+        type: ADMIN_EVENT_DETAIL_RESPONSE,
         response
     }
 }
 
-export const ADMIN_EVENT_ERROR = 'ADMIN_EVENT_ERROR';
+export const ADMIN_EVENT_DETAIL_ERROR = 'ADMIN_EVENT_DETAIL_ERROR';
 export function eventError(error) {
     return {
-        type: ADMIN_EVENT_ERROR,
+        type: ADMIN_EVENT_DETAIL_ERROR,
         error
     }
 }

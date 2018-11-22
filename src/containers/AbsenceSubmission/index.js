@@ -1,24 +1,26 @@
 import React, { Component } from 'react';
 import { Box, Flex } from 'grid-styled';
-import { Button, Center, Label, Title, InputText } from '../../components/index';
+import { Button, Center, Label, TextArea, Title, InputText } from '../../components/index';
 import * as moment from 'moment';
 import {connect} from 'react-redux';
 import DatePicker from 'react-datepicker';
 import '../AdminEvents/datepicker.css';
-import {postVacation} from './action';
+import {postAbsence} from './action';
 
 
 
-class VacationsSubmission extends Component {
+class AbsenceSubmission extends Component {
 
     constructor(props) {
         super(props);
         this.state = {
             fechaInicio: moment(),
-            fechaFin: moment()
+            fechaFin: moment(),
+            motivo: ""
         }
         this.handleChangeInicio = this.handleChangeInicio.bind(this);
         this.handleChangeFin = this.handleChangeFin.bind(this);
+        this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
     }
     
@@ -35,6 +37,13 @@ class VacationsSubmission extends Component {
         });
     }
 
+    handleChange(event){
+        event.preventDefault();
+        this.setState({
+            [event.target.name]: event.target.value
+        })
+    }
+
     handleDateChangeRaw(e){
         e.preventDefault();
     }
@@ -46,25 +55,25 @@ class VacationsSubmission extends Component {
             alert("La fecha de fin debe ser mayor a la de inicio");
             return;
         }
-        const vacationsData = {
+        const absenceData = {
             empleado: localStorage.id,
             fecha_inicio: this.state.fechaInicio.format('YYYY-MM-DD'),
-            fecha_fin: this.state.fechaFin.format('YYYY-MM-DD')
+            fecha_fin: this.state.fechaFin.format('YYYY-MM-DD'),
+            observaciones: this.state.motivo
         };
-        this.props.onFormSubmit(vacationsData);
+        this.props.onFormSubmit(absenceData);
     }
     
 
     render() {
-
+        console.log(this.props.match);
         return (
             <Flex align="center">
-                <Box css={{
-                    backgroundColor: '#f0f0f0'
-                }}
+                <Box 
+                    css={{backgroundColor: '#f0f0f0'}}
                     mt={30} mx="auto" width={512}>
                     <form onSubmit={this.onSubmit} id="vacations">
-                        <Title center>Licencia por vacaciones</Title>
+                        <Title center>Permiso de ausencia</Title>
                         <Box ml={10} mt={10}>
                             <Label>
                                 Fecha de inicio:
@@ -94,10 +103,22 @@ class VacationsSubmission extends Component {
                                 dateFormat="DD/MM/YYYY"
                             />
                         </Box>
+                        <Label
+                            margin={'0px 0px 0px 10px'}>
+                            Motivo:
+                        </Label>
+                        <TextArea
+                            margin={'10px 0px 0px 10px'}
+                            cols={'50'}
+                            rows={'6'}
+                            name="motivo"
+                            value={this.state.motivo}
+                            onChange={this.handleChange}
+                            >
+                        </TextArea>
                         <Center>
                             <Button
                                 margin={'10px 0px 10px 0px'} 
-                                center 
                                 display={'block'} 
                                 large 
                                 primary 
@@ -114,15 +135,15 @@ class VacationsSubmission extends Component {
 }
 
 const mapStateToProps = state => ({
-    ...state.vacationsReducer
+    ...state.absenceReducer
 })
 
 const mapDispatchToProps = dispatch => ({
-    onFormSubmit: (data) => dispatch(postVacation(data)),
+    onFormSubmit: (data) => dispatch(postAbsence(data)),
     dispatch
 })
 
 
 
 
-export default connect(mapStateToProps, mapDispatchToProps)(VacationsSubmission);
+export default connect(mapStateToProps, mapDispatchToProps)(AbsenceSubmission);

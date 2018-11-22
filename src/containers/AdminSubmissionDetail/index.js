@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getSubmission, patchSubmission } from './action';
 import {Box, Flex} from 'grid-styled';
 import { withRouter } from 'react-router';
+import AbsenceSubmission from '../../components/Submissions/AbsenceSubmission';
 import MoneySubmission from '../../components/Submissions/MoneySubmission';
 import VacationSubmission from '../../components/Submissions/VacationSubmission';
 
@@ -28,6 +29,7 @@ class AdminSubmissionDetail extends Component {
         else{
             body = {estado: "R"};
         }
+        body["autoriza"] = localStorage.id;
         const tipo = this.props.match.params.tipo;
         this.props.onConfirm(tipo, this.props.submission.pk, body);
     }
@@ -36,12 +38,23 @@ class AdminSubmissionDetail extends Component {
 
     getComponent(tipo){
         switch(tipo){
+            case 'Ausencia': 
+              return <AbsenceSubmission
+                    empleado={this.props.submission.empleado ? this.props.submission.empleado.nombre : ''}
+                    motivo={this.props.submission.observaciones}
+                    fecha={this.props.submission.fecha_creacion}
+                    estado={this.props.submission.estado}
+                    onAccept={this.onAccept}
+                >
+
+                 </AbsenceSubmission>;
             case 'Adelanto': 
               return <MoneySubmission
                     importe={this.props.submission.importe}
                     empleado={this.props.submission.empleado ? this.props.submission.empleado.nombre : ''}
                     motivo={this.props.submission.motivo}
                     fecha={this.props.submission.fecha_creacion}
+                    estado={this.props.submission.estado}
                     onAccept={this.onAccept}
                 >
 
@@ -49,9 +62,11 @@ class AdminSubmissionDetail extends Component {
             case 'Vacaciones': 
               return <VacationSubmission
                     empleado={this.props.submission.empleado ? this.props.submission.empleado.nombre : ''}
-                    fecha_inicio={this.props.submission.fecha_inicio}
-                    fecha_fin={this.props.submission.fecha_fin}
+                    estado={this.props.submission.estado}
+                    fechaInicio={this.props.submission.fecha_inicio}
+                    fechaFin={this.props.submission.fecha_fin}
                     antiguedad={this.props.submission.empleado ? this.props.submission.empleado.antiguedad : ''}
+                    onAccept={this.onAccept}
                     >
 
               </VacationSubmission>;

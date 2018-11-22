@@ -1,7 +1,7 @@
 import {
-    RECEIPT_REQUEST,
-    RECEIPT_RESPONSE,
-    RECEIPT_ERROR
+    RECEIPT_DETAIL_REQUEST,
+    RECEIPT_DETAIL_RESPONSE,
+    RECEIPT_DETAIL_ERROR
   } from "./action";
   
   const defaultState = {
@@ -10,19 +10,19 @@ import {
   
   export default function(state = defaultState, action) {
     switch (action.type) {
-      case RECEIPT_RESPONSE: {
+      case RECEIPT_DETAIL_RESPONSE: {
         return {
           ...state,
           receipt: action.response,
         };
       }
       
-      case RECEIPT_REQUEST: {
+      case RECEIPT_DETAIL_REQUEST: {
         return {
           ...state
         };
       }
-      case RECEIPT_ERROR: {
+      case RECEIPT_DETAIL_ERROR: {
         return {
           ...state,
           error: action.response

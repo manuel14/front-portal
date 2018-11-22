@@ -10,21 +10,23 @@ import {
 import {push} from 'react-router-redux';
 
 const defaultState = {
-  username: ""
+  username: "",
+  token: localStorage.getItem('jwtToken') ? true: false
 };
 
 export default function (state = defaultState, action) {
   switch (action.type) {
     case LOGIN_RESPONSE: {
-      localStorage.setItem('jwtToken', action.response.token)
-      localStorage.setItem('username', action.response.username)
-      localStorage.setItem('staff', action.response.staff)
-      localStorage.setItem('id', action.response.id)
-      localStorage.setItem('legajo', action.response.legajo)
-      localStorage.setItem('user', action.response.user)
+      localStorage.setItem('jwtToken', action.response.token);
+      localStorage.setItem('username', action.response.username);
+      localStorage.setItem('staff', action.response.staff);
+      localStorage.setItem('id', action.response.id);
+      localStorage.setItem('legajo', action.response.legajo);
+      localStorage.setItem('user', action.response.user);
       return {
         ...state,
-        username: action.response.username
+        username: action.response.username,
+        token: true
       };
     }
     case SIGNUP_RESPONSE: {
@@ -37,12 +39,14 @@ export default function (state = defaultState, action) {
       push('/login');
       return {
         ...state,
-        username: ""
+        username: "",
+        token: false
       }
     }
     case LOGIN_REQUEST: {
       return {
-        ...state
+        ...state,
+        token: false
       };
     }
     case SIGNUP_REQUEST: {
@@ -53,7 +57,8 @@ export default function (state = defaultState, action) {
     case USER_ERROR: {
       return {
         ...state,
-        error:action.error
+        error:action.error,
+        token: false
       };
     }
     default: {

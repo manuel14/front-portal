@@ -6,6 +6,7 @@ import adminReducer from "./containers/Admin/reducer";
 import adminReceiptsReducer from './containers/AdminReceipts/reducer';
 import adminSubmissionsReducer from './containers/AdminSubmission/reducer';
 import adminSubmissionDetailReducer from './containers/AdminSubmissionDetail/reducer';
+import absenceReducer from './containers/AbsenceSubmission/reducer';
 import appReducer from "./containers/App/reducer";
 import attendancesReducer from './containers/Attendances/reducer';
 import attendanceDetailReducer from './containers/AttendanceDetail/reducer';
@@ -16,9 +17,11 @@ import notificationReducer from './containers/Notifications/reducer';
 import { reducer as notifications } from 'react-notification-system-redux';
 import receiptDetailReducer from "./containers/ReceiptDetail/reducer";
 import receiptReducer from "./containers/Receipts/reducer";
+import submissionsReducer from './containers/Submissions/reducer';
 import userReducer from "./containers/User/reducer";
 
 export default combineReducers({
+  absenceReducer,
   appReducer,
   attendancesReducer,
   attendanceDetailReducer,
@@ -36,5 +39,6 @@ export default combineReducers({
   notificationReducer,
   receiptDetailReducer,
   receiptReducer,
+  submissionsReducer,
   userReducer
 });

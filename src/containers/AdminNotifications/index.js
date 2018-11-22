@@ -11,6 +11,7 @@ class AdminNotifications extends Component {
         super(props);
         this.state = {
             selectedOption: null,
+            contenido: ""
         }
         this.handleChange = this.handleChange.bind(this);
         this.onSubmit = this.onSubmit.bind(this);
@@ -21,29 +22,35 @@ class AdminNotifications extends Component {
     }
 
     handleChange(event) {
-        this.setState({
-            selectedOption: event.value
-        })
+        if(event.target){
+            this.setState({
+                contenido: event.target.value
+            })
+        }
+        else{
+            this.setState({
+                selectedOption: event.value
+            })
+        }
     }
     onSubmit(e) {
-        const contenidoArea = document.querySelector('textarea[name="contenido"]');
-        const contenido = contenidoArea.value;
         e.preventDefault();
-        const rem = this.props.employees.find(emp =>
-            emp.id === parseInt(localStorage.id));
-        const emp = this.props.employees.find(emp =>
-            emp.id === this.state.selectedOption);
+        const contenido = this.state.contenido;
+        const remitente = this.props.employees.find(emp =>
+            emp.id === parseInt(localStorage.id)).id;
+        console.log(remitente);
+        const empleado = this.props.employees.find(emp =>
+            emp.id === this.state.selectedOption).id;
         const msg = {
             asunto: `Mensaje de ${localStorage.username}`,
             contenido,
-            empleado: emp,
-            remitente: rem
-
-        }
+            empleado,
+            remitente
+        };
         this.props.msgSend(msg);
-        contenidoArea.value = "";
         this.setState({
-            selectedOption: ""
+            selectedOption: "",
+            contenido: ""
         })
     }
 
@@ -58,7 +65,10 @@ class AdminNotifications extends Component {
                             color={'black'} 
                             center>Notificaciones
                         </Title>
-                        <Label color={"gray"} margin={'0px 0px 20px 10px'}>Seleccione un empleado o un sector al cual irá dirigida su notificación</Label>
+                        <Label color={"gray"} 
+                            margin={'0px 0px 20px 10px'}
+                            >Seleccione un empleado o un sector al cual irá dirigida su notificación
+                        </Label>
                         <form onSubmit={this.onSubmit} id="notifs">
                             <Select 
                                 required={"required"} 
@@ -75,12 +85,25 @@ class AdminNotifications extends Component {
                                 onChange={this.handleChange} 
                                 placeholder="Seleccione destinatario">
                             </Select>
-
                             <Box mt={10}>
                                 <Label margin={'0px 10px 0px 10px'}>Mensaje</Label>
-                                <TextArea margin={'0px 0px 0px 10px'} name={"contenido"} required={"required"} rows="6" cols="50"></TextArea>
+                                <TextArea 
+                                    margin={'0px 0px 0px 10px'} 
+                                    name={"contenido"} 
+                                    required={"required"} 
+                                    rows="6" 
+                                    value={this.state.contenido}
+                                    onChange={this.handleChange}
+                                    cols="50">
+                                </TextArea>
                                 <Center>
-                                    <Button large type={"submit"} margin={"10px auto 0px auto"} primary>Enviar</Button>
+                                    <Button 
+                                        large 
+                                        type={"submit"} 
+                                        margin={"10px auto 0px auto"} 
+                                        primary
+                                        >Enviar
+                                    </Button>
                                 </Center>
                             </Box>
                         </form>

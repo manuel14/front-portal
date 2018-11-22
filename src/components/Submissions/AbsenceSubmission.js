@@ -1,9 +1,9 @@
 import React, { Component } from 'react';
-import { Button, Card, CardContainer, Label, Title } from '../index';
+import { Button, Card, CardContainer, Label, Text,  Title } from '../index';
 import { Box } from 'grid-styled';
 import * as moment from 'moment';
 
-class VacationSubmission extends Component {
+class AbsenceSubmission extends Component {
 
 
 
@@ -12,25 +12,22 @@ class VacationSubmission extends Component {
             <CardContainer>
                 <Card color={'#f0f0f0'} center width={"500px"} height={"300px"}>
                     <Box mt={3} mb={3}>
-                        <Title color={'black'} margin={'10px 0px 10px 0px'}>Licencia por vacaciones</Title>
+                        <Title color={'black'} margin={'10px 0px 10px 0px'}>Permiso de ausencia</Title>
                         <Label>Empleado:</Label>
                         <Title
                             display={"inline-block"}
+                            color={'black'}
                             margin={'10px 0px 10px 0px'}>
                             {this.props.empleado}
                         </Title>
                         <br></br>
-                        {this.props.antiguedad &&
-                            <div>
-                                <Label>Antiguedad:</Label>
-                                <Title
-                                    display={"inline-block"}
-                                    color={'black'}
-                                    margin={'10px 0px 10px 0px'}>
-                                    {this.props.antiguedad}
-                                </Title>
-                            </div>
-                        }
+                        <Label>Motivo:</Label>
+                        <Text
+                            display={"inline-block"}
+                            color={'black'}
+                            margin={'10px 0px 10px 0px'}>
+                            {this.props.motivo}
+                        </Text>
                         <br></br>
                         <Label>Fecha de inicio:</Label>
                         <Title
@@ -39,10 +36,7 @@ class VacationSubmission extends Component {
                             color={' #3b3a30'}>{moment(this.props.fecha_inicio).format("DD-MM-YYYY")}</Title>
                         <br></br>
                         <Label>Fecha de fin:</Label>
-                        <Title 
-                            display={'inline-block'}
-                            >{moment(this.props.fecha_fin).format("DD-MM-YYYY")}
-                        </Title>
+                        <Title display={'inline-block'}>{moment(this.props.fecha_fin).format("DD-MM-YYYY")}</Title>
                         <br></br>
                     </Box>
                     {this.props.estado === "Pendiente" &&
@@ -69,4 +63,4 @@ class VacationSubmission extends Component {
 
 }
 
-export default VacationSubmission;
+export default AbsenceSubmission;

@@ -1,7 +1,7 @@
 import {
-    ATTENDANCE_REQUEST,
-    ATTENDANCE_RESPONSE,
-    ATTENDANCE_ERROR
+    ATTENDANCE_DETAIL_REQUEST,
+    ATTENDANCE_DETAIL_RESPONSE,
+    ATTENDANCE_DETAIL_ERROR
   } from "./action";
   
   const defaultState = {
@@ -10,19 +10,19 @@ import {
   
   export default function(state = defaultState, action) {
     switch (action.type) {
-      case ATTENDANCE_RESPONSE: {
+      case ATTENDANCE_DETAIL_RESPONSE: {
         return {
           ...state,
           attendance: action.response,
         };
       }
       
-      case ATTENDANCE_REQUEST: {
+      case ATTENDANCE_DETAIL_REQUEST: {
         return {
           ...state
         };
       }
-      case ATTENDANCE_ERROR: {
+      case ATTENDANCE_DETAIL_ERROR: {
         return {
           ...state,
           error: action.response

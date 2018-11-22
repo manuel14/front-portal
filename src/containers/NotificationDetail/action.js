@@ -1,25 +1,25 @@
 import {get, patch, post} from '../../api';
 import {success} from 'react-notification-system-redux';
 
-export const NOTIFICATION_REQUEST = 'NOTIFICATION_REQUEST';
+export const NOTIFICATION_DETAIL_REQUEST = 'NOTIFICATION_DETAIL_REQUEST';
 export function notificationRequest() {
     return {
-        type: NOTIFICATION_REQUEST
+        type: NOTIFICATION_DETAIL_REQUEST
     }
 }
 
-export const NOTIFICATION_RESPONSE = 'NOTIFICATION_RESPONSE';
+export const NOTIFICATION_DETAIL_RESPONSE = 'NOTIFICATION_DETAIL_RESPONSE';
 export function notificationResponse(response) {
     return {
-        type: NOTIFICATION_RESPONSE,
+        type: NOTIFICATION_DETAIL_RESPONSE,
         response
     }
 }
 
-export const NOTIFICATION_ERROR = 'NOTIFICATION_ERROR';
+export const NOTIFICATION_DETAIL_ERROR = 'NOTIFICATION_DETAIL_ERROR';
 export function notificationError(error) {
     return {
-        type: NOTIFICATION_REQUEST,
+        type: NOTIFICATION_DETAIL_REQUEST,
         error
     }
 }

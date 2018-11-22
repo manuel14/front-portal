@@ -5,7 +5,8 @@ import {
   } from "./action";
   
   const defaultState = {
-    attendances: []
+    attendances: [],
+    loading: false
   };
   
   export default function(state = defaultState, action) {
@@ -13,19 +14,22 @@ import {
       case ATTENDANCES_RESPONSE: {
         return {
           ...state,
-          attendances: action.response
+          attendances: action.response,
+          loading: false
         };
       }
       
       case ATTENDANCES_REQUEST: {
         return {
-          ...state
+          ...state,
+          loading: true
         };
       }
       case ATTENDANCES_ERROR: {
         return {
           ...state,
-          error: action.error
+          error: action.error,
+          loading: false
         };
       }
       default: {

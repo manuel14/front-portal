@@ -28,7 +28,6 @@ class Attendances extends Component {
 
   render() {
     const { loading, attendances } = this.props;
-    console.log(attendances);
     return (
       <Box style={{ height: '100%' }}>
         {loading && (

@@ -1,38 +1,44 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Center, LogoSpinner, Right, Table, TableBody, TableData, TableHead, TableHeader, TableRow, Text, Title } from '../../components/index';
-import { Box, Flex } from 'grid-styled';
-import { getMoneySubmissions, getSubmissions} from './action';
+import { Center, LogoSpinner, Table, TableBody, TableData, TableHead, TableHeader, TableRow, TableToolbar,Text, Title } from '../../components/index';
+import { Box} from 'grid-styled';
+import { getSubmissions, pageChange} from './action';
 import * as moment from 'moment';
-import {Link} from 'react-router-dom';
-import {withRouter} from 'react-router';
 
-class AdminSubmissions extends Component {
+class Submissions extends Component {
 
 
     componentDidMount() {
-        this.props.onLoad();
+        this.props.onLoad(this.props.page);
     }
+
+    onPageChange = page => {
+        this.props.onPageChange(page);
+        this.props.onLoad(page);
+    };
 
     render() {
         const { absenceSubmissions, moneySubmissions, vacationsSubmissions, loading } = this.props;
-        
-        let abs = absenceSubmissions.map( a => ({
-            tipo:"Ausencia", pk:a.pk,
+        let absences = absenceSubmissions.map( a => ({
+            tipo:"Licencia", pk:a.pk,
             empleado: a.empleado,
-            estado: a.estado, fecha:a.fecha_creacion
+            estado: a.estado, fecha:a.fecha_creacion,
+            autoriza: a.autoriza
         }))
+        
         let money = moneySubmissions.map( m => ({
             tipo:"Adelanto", pk:m.pk,
             empleado: m.empleado,
-            estado: m.estado, fecha:m.fecha_creacion
+            estado: m.estado, fecha:m.fecha_creacion,
+            autoriza: m.autoriza
         }))
         let vacations = vacationsSubmissions.map( v => ({
             tipo:"Vacaciones", pk:v.pk,
             empleado: v.empleado,
-            estado: v.estado, fecha:v.fecha_creacion
+            estado: v.estado, fecha:v.fecha_creacion,
+            autoriza: v.autoriza
         }))
-        const submissions = abs.concat(money.concat(vacations));
+        const submissions = absences.concat(money.concat(vacations));
         return (
             <Box style={{ height: '100%' }}>
                 {loading && (
@@ -52,25 +58,16 @@ class AdminSubmissions extends Component {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    
-                                    <TableHeader>Solicitante</TableHeader>
                                     <TableHeader>Tipo</TableHeader>
-                                    <TableHeader>Fecha</TableHeader>
+                                    <TableHeader>Fecha de Solicitud</TableHeader>
                                     <TableHeader>Estado</TableHeader>
+                                    <TableHeader>Autorizado por</TableHeader>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
                                 {submissions.map(sub => (
-                                    <TableRow id={sub.pk} onClick={e => {
-                                        e.preventDefault()
-                                        this.props.history.push(`/admin/solicitudes/${sub.pk}/${sub.tipo}`)
-                                      }}
+                                    <TableRow id={sub.pk} 
                                         key={money.pk}>
-                                        <TableData>
-                                            <Title>
-                                                {sub.empleado.nombre}
-                                            </Title>
-                                        </TableData>
                                         <TableData>{sub.tipo}</TableData>
                                         <TableData>
                                             <Text
@@ -79,10 +76,25 @@ class AdminSubmissions extends Component {
                                             </Text>
                                         </TableData>
                                         <TableData>{sub.estado}</TableData>
+                                        <TableData>
+                                            <Title>
+                                                {sub.autoriza ? sub.autoriza.nombre : ""}
+                                            </Title>
+                                        </TableData>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
+                        <Box m={16}>
+                            <TableToolbar
+                                items={this.props.items}
+                                size={this.props.size}
+                                page={this.props.page}
+                                showTotal
+                                onPageChange={this.onPageChange}
+                            >
+                            </TableToolbar>
+                        </Box>
                     </div>
                 )}
             </Box>
@@ -91,13 +103,14 @@ class AdminSubmissions extends Component {
 }
 
 const mapStateToProps = state => ({
-    ...state.adminSubmissionsReducer
+    ...state.submissionsReducer
 })
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: () => dispatch(getSubmissions()),
+    onLoad: (page) => dispatch(getSubmissions(page)),
+    onPageChange: page => dispatch(pageChange(page)),
     dispatch
 
 })
 
-export default withRouter(connect(mapStateToProps, mapDispatchToProps)(AdminSubmissions));
+export default connect(mapStateToProps, mapDispatchToProps)(Submissions);

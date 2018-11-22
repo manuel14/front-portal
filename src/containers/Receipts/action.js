@@ -19,7 +19,7 @@ export function receiptsResponse(response) {
 export const RECEIPTS_ERROR = 'RECEIPTS_ERROR';
 export function receiptsError(error) {
     return {
-        type: RECEIPTS_REQUEST,
+        type: RECEIPTS_ERROR,
         error
     }
 }

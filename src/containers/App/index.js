@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { BrowserRouter, Route, Switch, Redirect} from 'react-router-dom';
+import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom';
 import { ThemeProvider } from 'styled-components';
-import { Nav, SideBar, SubmissionIndex, AdminIndex, LoginForm} from '../../components';
+import { Nav, SideBar, SubmissionIndex, AdminIndex, LoginForm } from '../../components';
 import { Box, Flex } from 'grid-styled';
 import { getTheme } from '../../utils/theme';
 import { loginUser, logoutUser } from './action';
@@ -15,6 +15,7 @@ import AdminEvents from '../AdminEvents';
 import AdminEventDetail from '../AdminEventDetail';
 import AdminNotifications from '../AdminNotifications';
 import AdminReceipts from '../AdminReceipts';
+import AbsenceSubmission from '../AbsenceSubmission';
 import MoneySubmission from '../MoneySubmission';
 import AdminSubmissions from '../AdminSubmission';
 import AdminSubmissionsDetail from '../AdminSubmissionDetail';
@@ -24,7 +25,7 @@ import AttendanceDetail from '../AttendanceDetail';
 import Events from '../Events';
 import './styles.css';
 import Notifications from 'react-notification-system-redux';
-//import Submissions from '../Submissions';
+import Submissions from '../Submissions';
 import User from '../User';
 import * as Sentry from '@sentry/browser';
 Sentry.init({ dsn: process.env.REACT_APP_SENTRY_URL });
@@ -35,7 +36,6 @@ class App extends Component {
     super(props);
     this.handleLogin = this.handleLogin.bind(this);
     this.handleLogout = this.handleLogout.bind(this);
-
   }
 
   onBack() {
@@ -53,11 +53,10 @@ class App extends Component {
   handleLogout() {
     this.props.handleLogout();
   }
-  
-  render() {
-    const token = localStorage.jwtToken;
+
+  render() {;
     const staff = localStorage.staff;
-    const { username } = this.props;
+    const { username, token } = this.props;
     const style = {
       NotificationItem: { // Override the notification item
         DefaultStyle: { // Applied to every notification, regardless of the notification level
@@ -72,7 +71,7 @@ class App extends Component {
       <BrowserRouter>
         <ThemeProvider theme={getTheme(this.props.theme)}>
           <div className="App">
-          <Notifications
+            <Notifications
               notifications={this.props.notifications}
               style={style}
               noAnimation={true}
@@ -91,7 +90,7 @@ class App extends Component {
             {
               token && <div className="App-employeesBar">
                 <SideBar
-                  links={["/recibos", "/notificaciones", "/eventos", "/fichadas"]}
+                  links={["/recibos", "/notificaciones", "/eventos", "/fichadas", "/solicitudes"]}
                 />
               </div>
             }
@@ -107,7 +106,7 @@ class App extends Component {
                         <Box mt={100} mx="auto" width={512}>
                           <LoginForm
                             handleSubmit={this.handleLogin}
-                            >
+                          >
                           </LoginForm>
                         </Box>
                       </Flex>
@@ -132,8 +131,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  
-                  <Route path="/recibo/:receiptId"
+                <Route path="/recibo/:receiptId"
                   render={() => (
                     token ? (
                       <ReceiptDetail />
@@ -141,8 +139,8 @@ class App extends Component {
                       : (
                         <Redirect to="/login" />
                       )
-                  )}/>
-                  <Route path="/admin/recibos/nuevos"
+                  )} />
+                <Route path="/admin/recibos/nuevos"
                   render={() => (
                     token ? (
                       <Admin />
@@ -160,8 +158,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-
-                  <Route path="/admin/solicitudes/:submissionId/:tipo"
+                <Route path="/admin/solicitudes/:submissionId/:tipo"
                   render={() => (
                     token ? (
                       <AdminSubmissionsDetail />
@@ -170,8 +167,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  
-                  <Route path="/admin/solicitudes"
+                <Route path="/admin/solicitudes"
                   render={() => (
                     token ? (
                       <AdminSubmissions />
@@ -180,8 +176,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  
-                 <Route path="/admin/notificaciones"
+                <Route path="/admin/notificaciones"
                   render={() => (
                     token ? (
                       <AdminNotifications />
@@ -190,7 +185,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  <Route path="/admin/eventos/:eventId"
+                <Route path="/admin/eventos/:eventId"
                   render={() => (
                     token ? (
                       <AdminEventDetail />
@@ -199,7 +194,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                  <Route path="/admin/eventos"
+                <Route path="/admin/eventos"
                   render={() => (
                     token ? (
                       <AdminEvents />
@@ -208,9 +203,7 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                   
-            
-                 <Route path="/admin"
+                <Route path="/admin"
                   render={() => (
                     token ? (
                       <AdminIndex />
@@ -219,8 +212,6 @@ class App extends Component {
                         <Redirect to="/login" />
                       )
                   )} />
-                
-                />
                 <Route path="/notificaciones"
                   render={() => (
                     token ? (
@@ -241,7 +232,6 @@ class App extends Component {
                       )
                   )}
                 />
-
                 <Route path="/solicitudes/adelanto"
                   render={() => (
                     token ? (
@@ -252,18 +242,36 @@ class App extends Component {
                       )
                   )}
                 />
-
-                <Route path="/solicitudes/vacaciones"
+                <Route path="/solicitudes/ausencia"
                   render={() => (
                     token ? (
-                      <VacationsSubmission/>
+                      <AbsenceSubmission />
                     )
                       : (
                         <Redirect to="/login" />
                       )
                   )}
                 />
-
+                <Route path="/solicitudes/mis"
+                  render={() => (
+                    token ? (
+                      <Submissions />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
+                <Route path="/solicitudes/vacaciones"
+                  render={() => (
+                    token ? (
+                      <VacationsSubmission />
+                    )
+                      : (
+                        <Redirect to="/login" />
+                      )
+                  )}
+                />
                 <Route path="/solicitudes"
                   render={() => (
                     token ? (
@@ -274,8 +282,6 @@ class App extends Component {
                       )
                   )}
                 />
-                
-
                 <Route path="/fichadas"
                   render={() => (
                     token ? (
@@ -286,7 +292,6 @@ class App extends Component {
                       )
                   )}
                 />
-
                 <Route path="/fichada/:attendanceId"
                   render={() => (
                     token ? (
@@ -297,7 +302,6 @@ class App extends Component {
                       )
                   )}
                 />
-                
                 <Route path="/notificacion/:notificationId"
                   render={() => (
                     token ? (

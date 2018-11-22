@@ -1,25 +1,25 @@
 import { get, patch} from "../../api";
 import * as moment from 'moment';
 
-export const ATTENDANCE_REQUEST = 'ATTENDANCE_REQUEST';
+export const ATTENDANCE_DETAIL_REQUEST = 'ATTENDANCE_DETAIL_REQUEST';
 export function attendanceRequest() {
     return {
-        type: ATTENDANCE_REQUEST
+        type: ATTENDANCE_DETAIL_REQUEST
     }
 }
 
-export const ATTENDANCE_RESPONSE = 'ATTENDANCE_RESPONSE';
+export const ATTENDANCE_DETAIL_RESPONSE = 'ATTENDANCE_DETAIL_RESPONSE';
 export function attendanceResponse(response) {
     return {
-        type: ATTENDANCE_RESPONSE,
+        type: ATTENDANCE_DETAIL_RESPONSE,
         response
     }
 }
 
-export const ATTENDANCE_ERROR = 'ATTENDANCE_ERROR';
+export const ATTENDANCE_DETAIL_ERROR = 'ATTENDANCE_DETAIL_ERROR';
 export function attendanceError(error) {
     return {
-        type: ATTENDANCE_REQUEST,
+        type: ATTENDANCE_DETAIL_REQUEST,
         error
     }
 }

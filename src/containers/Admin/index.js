@@ -124,15 +124,20 @@ class Admin extends Component {
                             <Title small align={"center"} color={"black"} >
                                 Recibos a crear:
                                 </Title >
-                            <Card width={'240px'} height={"200px"} color={"#f0efef"} center mx="auto">
+                            <Card width={'340px'} height={"240px"} color={"#f0efef"} center mx="auto">
                                 <List height={'140px'}>
                                     {
                                         this.state.files.map(f => <ListItem key={f.name}>{f.name}</ListItem>)
                                     }
-
                                 </List>
-                                <Button margin={"0px 5px 0px 0px"} onClick={this.onClick.bind(this)} primary>Crear</Button>
-                                <Button onClick={this.onDelete.bind(this)} danger>Borrar</Button>
+                                <Button
+                                    margin={"0px 5px 0px 0px"} 
+                                    onClick={this.onClick.bind(this)} 
+                                    primary>Crear
+                                </Button>
+                                <Button
+                                    onClick={this.onDelete.bind(this)} danger>Borrar
+                                </Button>
                             </Card>
                         </div>
                         }

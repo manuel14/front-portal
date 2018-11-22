@@ -62,7 +62,6 @@ class AdminReceipts extends Component {
     };
 
     render() {
-        console.log(this.props);
         const { loading } = this.props;
         const receipts = this.state.receipts;
         const opts = [
@@ -79,7 +78,7 @@ class AdminReceipts extends Component {
                 {receipts && (
                     <div>
                         <Title
-                            margin={'20px 0px 0px 0px'}
+                            margin={'10px 0px 0px 0px'}
                             color={'black'}
                             center
                         >
@@ -103,7 +102,7 @@ class AdminReceipts extends Component {
                         <Right>
                             <Link to="/admin/recibos/nuevos">
                                 <Button
-                                    margin={'10px 10px 10px 0px'}
+                                    margin={'0px 10px 10px 0px'}
                                     large
                                     primary
                                 >Nuevos

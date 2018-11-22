@@ -62,6 +62,7 @@ class MoneySubmission extends Component {
                         <Title center>Adelanto de sueldo</Title>
                         <Label margin={'20px 0px 0px 10px'}>Monto</Label>
                         <InputText
+                            type={'number'}
                             margin={'0px 0px 0px 10px'}
                             value={this.state.amount}
                             display={'block'}
@@ -100,7 +101,7 @@ class MoneySubmission extends Component {
                                 margin={'10px 0px 10px 0px'} 
                                 primary 
                                 center
-                                >Enviar
+                                >Crear
                             </Button>
                         </Center>
                     </form>

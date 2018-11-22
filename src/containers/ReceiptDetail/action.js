@@ -1,25 +1,25 @@
 import { get, patch} from "../../api";
 import * as moment from 'moment';
 
-export const RECEIPT_REQUEST = 'RECEIPT_REQUEST';
+export const RECEIPT_DETAIL_REQUEST = 'RECEIPT_DETAIL_REQUEST';
 export function receiptRequest() {
     return {
-        type: RECEIPT_REQUEST
+        type: RECEIPT_DETAIL_REQUEST
     }
 }
 
-export const RECEIPT_RESPONSE = 'RECEIPT_RESPONSE';
+export const RECEIPT_DETAIL_RESPONSE = 'RECEIPT_DETAIL_RESPONSE';
 export function receiptResponse(response) {
     return {
-        type: RECEIPT_RESPONSE,
+        type: RECEIPT_DETAIL_RESPONSE,
         response
     }
 }
 
-export const RECEIPT_ERROR = 'RECEIPT_ERROR';
+export const RECEIPT_DETAIL_ERROR = 'RECEIPT_DETAIL_ERROR';
 export function receiptError(error) {
     return {
-        type: RECEIPT_REQUEST,
+        type: RECEIPT_DETAIL_REQUEST,
         error
     }
 }

@@ -1,4 +1,29 @@
 import { get } from "../../api";
+
+export const ADMIN_SUBMISSIONS_ABSENCE_REQUEST = 'ADMIN_SUBMISSIONS_ABSENCE_REQUEST';
+export function submissionsAbsenceRequest() {
+    return {
+        type: ADMIN_SUBMISSIONS_ABSENCE_REQUEST
+    }
+}
+
+export const ADMIN_SUBMISSIONS_ABSENCE_RESPONSE = 'ADMIN_SUBMISSIONS_ABSENCE_RESPONSE';
+export function submissionsAbsenceResponse(response) {
+    return {
+        type: ADMIN_SUBMISSIONS_ABSENCE_RESPONSE,
+        response
+    }
+}
+
+export const ADMIN_SUBMISSIONS_ABSENCE_ERROR = 'ADMIN_SUBMISSIONS_ABSENCE_ERROR';
+export function submissionsAbsenceError(error) {
+    return {
+        type: ADMIN_SUBMISSIONS_ABSENCE_ERROR,
+        error
+    }
+}
+
+
 export const ADMIN_SUBMISSIONS_MONEY_REQUEST = 'ADMIN_SUBMISSIONS_MONEY_REQUEST';
 export function submissionsMoneyRequest() {
     return {
@@ -46,6 +71,17 @@ export function submissionsVacationsError(error) {
     }
 }
 
+function getAbsenceSubmissions(){
+    return dispatch => {
+        dispatch(submissionsAbsenceRequest());
+        return get(`/api/formularioAusencia/`)
+            .then(response => { 
+                dispatch(submissionsAbsenceResponse(response)) })
+            .catch(err => dispatch(submissionsAbsenceError(err)))
+
+    }
+}
+
 function getMoneySubmissions() {
     return dispatch => {
         dispatch(submissionsMoneyRequest());
@@ -72,6 +108,7 @@ function getVacationsSubmissions() {
 export function getSubmissions() {
     return dispatch => {
         return Promise.all([
+            dispatch(getAbsenceSubmissions()),
             dispatch(getMoneySubmissions()),
             dispatch(getVacationsSubmissions())])
     }
