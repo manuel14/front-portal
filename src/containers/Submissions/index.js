@@ -42,16 +42,15 @@ class Submissions extends Component {
     }
 
     handleChange(event) {
-        let newSubs = [];
         let absences = this.props.absenceSubmissions.map(a => ({ ...a, tipo: "Licencia" }))
         let money = this.props.moneySubmissions.map(m => ({ ...m, tipo: "Adelanto" }))
         let vacations = this.props.vacationsSubmissions.map(v => ({ ...v, tipo: "Vacaciones" }))
         let subs = absences.concat(vacations.concat(money));
         let selectedOption;
         let newOpts = this.state.opts;
+        let newSubs = subs;
         if (event == false) {
-            newSubs = subs;
-            selectedOption = null;
+            selectedOption = [];
             newOpts = [
                 {label:"Estado", options:
                 [{ value: "pendiente", label: "Pendiente", tipo:"estado" },
@@ -63,14 +62,21 @@ class Submissions extends Component {
                 { value: "adelanto", label: "Adelanto", tipo:"tipo" }]}
             ]
         }
-        else {
+        else if(event.length !== undefined)  {
             newSubs = subs.filter(sub => event.some( e => e.label === sub[e.tipo]));
             selectedOption = event;
-            console.log(event);
             newOpts = newOpts.filter(opt => 
                 opt.label === (event[0].tipo[0].toUpperCase() + event[0].tipo.slice(1))
             );
-            console.log(newOpts);
+        }
+        else{
+            //event in this case is not an Array
+            //Happens strangely when you select a filter with no values
+            newSubs = subs.filter(sub => event.label === sub[event.tipo]);
+            selectedOption = event;
+            newOpts = newOpts.filter(opt => 
+                opt.label === (event.tipo[0].toUpperCase() + event.tipo.slice(1))
+            );
         }
         this.setState({
             selected: selectedOption,
@@ -161,9 +167,10 @@ class Submissions extends Component {
                                     label={"Filtre"}
                                     labelMargin={'0px 10px'}
                                     name={"estado"}
+                                    isMulti
                                     margin={'0px 10px 20px 0px'}
                                     options={this.state.opts}
-                                    value={this.state.selectedOption}
+                                    value={this.state.selected}
                                     onChange={this.handleChange}
                                     placeholder="Seleccione estado">
                                 </Select>

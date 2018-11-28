@@ -14,15 +14,19 @@ class AdminSubmissions extends Component {
         this.state = {
             selected: [],
             submissions: [],
-            opts : [
-                {label:"Estado", options:
-                [{ value: "pendiente", label: "Pendiente", tipo:"estado" },
-                { value: "autorizada", label: "Aprobado", tipo:"estado" },
-                { value: "rechazada", label: "Rechazado", tipo:"estado" }]},
-                {label: "Tipo", options: [
-                { value: "vacaciones", label: "Vacaciones", tipo:"tipo" },
-                { value: "licencia", label: "Licencia", tipo:"tipo" },
-                { value: "adelanto", label: "Adelanto", tipo:"tipo" }]}
+            opts: [
+                {
+                    label: "Estado", options:
+                        [{ value: "pendiente", label: "Pendiente", tipo: "estado" },
+                        { value: "autorizada", label: "Aprobado", tipo: "estado" },
+                        { value: "rechazada", label: "Rechazado", tipo: "estado" }]
+                },
+                {
+                    label: "Tipo", options: [
+                        { value: "vacaciones", label: "Vacaciones", tipo: "tipo" },
+                        { value: "licencia", label: "Licencia", tipo: "tipo" },
+                        { value: "adelanto", label: "Adelanto", tipo: "tipo" }]
+                }
             ]
         }
         this.handleChange = this.handleChange.bind(this);
@@ -43,44 +47,56 @@ class AdminSubmissions extends Component {
     }
 
     handleChange(event) {
-        let newSubs = [];
         let absences = this.props.absenceSubmissions.map(a => ({ ...a, tipo: "Licencia" }))
         let money = this.props.moneySubmissions.map(m => ({ ...m, tipo: "Adelanto" }))
         let vacations = this.props.vacationsSubmissions.map(v => ({ ...v, tipo: "Vacaciones" }))
         let subs = absences.concat(vacations.concat(money));
         let selectedOption;
         let newOpts = this.state.opts;
+        let newSubs = subs;
         if (event == false) {
-            newSubs = subs;
-            selectedOption = null;
+            selectedOption = [];
             newOpts = [
-                {label:"Estado", options:
-                [{ value: "pendiente", label: "Pendiente", tipo:"estado" },
-                { value: "autorizada", label: "Aprobado", tipo:"estado" },
-                { value: "rechazada", label: "Rechazado", tipo:"estado" }]},
-                {label: "Tipo", options: [
-                { value: "vacaciones", label: "Vacaciones", tipo:"tipo" },
-                { value: "licencia", label: "Licencia", tipo:"tipo" },
-                { value: "adelanto", label: "Adelanto", tipo:"tipo" }]}
+                {
+                    label: "Estado", options:
+                        [{ value: "pendiente", label: "Pendiente", tipo: "estado" },
+                        { value: "autorizada", label: "Aprobado", tipo: "estado" },
+                        { value: "rechazada", label: "Rechazado", tipo: "estado" }]
+                },
+                {
+                    label: "Tipo", options: [
+                        { value: "vacaciones", label: "Vacaciones", tipo: "tipo" },
+                        { value: "licencia", label: "Licencia", tipo: "tipo" },
+                        { value: "adelanto", label: "Adelanto", tipo: "tipo" }]
+                }
             ]
         }
-        else {
-            newSubs = subs.filter(sub => event.some( e => e.label === sub[e.tipo]));
+        else if (event.length !== undefined) {
+            newSubs = subs.filter(sub => event.some(e => e.label === sub[e.tipo]));
             selectedOption = event;
-            newOpts = newOpts.filter(opt => 
+            newOpts = newOpts.filter(opt =>
                 opt.label === (event[0].tipo[0].toUpperCase() + event[0].tipo.slice(1))
+            );
+        }
+        else {
+            //event in this case is not an Array
+            //Happens strangely when you select a filter with no values
+            newSubs = subs.filter(sub => event.label === sub[event.tipo]);
+            selectedOption = event;
+            newOpts = newOpts.filter(opt =>
+                opt.label === (event.tipo[0].toUpperCase() + event.tipo.slice(1))
             );
         }
         this.setState({
             selected: selectedOption,
             submissions: newSubs,
-            opts : newOpts
+            opts: newOpts
         })
     }
 
 
     render() {
-        const { loading } = this.props;  
+        const { loading } = this.props;
         return (
             <Box style={{ height: '100%' }}>
                 {loading && (
@@ -94,7 +110,7 @@ class AdminSubmissions extends Component {
                             margin={'10px 0px 20px 0px'}
                             center
                             color={'black'}
-                            >
+                        >
                             Solicitudes
                         </Title>
                         <Center>
@@ -116,7 +132,7 @@ class AdminSubmissions extends Component {
                         <Table>
                             <TableHead>
                                 <TableRow>
-                                    
+
                                     <TableHeader>Solicitante</TableHeader>
                                     <TableHeader>Tipo</TableHeader>
                                     <TableHeader>Fecha</TableHeader>
@@ -128,7 +144,7 @@ class AdminSubmissions extends Component {
                                     <TableRow id={sub.pk} onClick={e => {
                                         e.preventDefault()
                                         this.props.history.push(`/admin/solicitudes/${sub.pk}/${sub.tipo}`)
-                                      }}
+                                    }}
                                         key={sub.pk}>
                                         <TableData>
                                             <Title>
@@ -165,21 +181,22 @@ class AdminSubmissions extends Component {
                                     label={"Elija estado"}
                                     labelMargin={'0px 10px'}
                                     name={"estado"}
+                                    isMulti
                                     margin={'0px 10px 20px 0px'}
                                     options={this.state.opts}
                                     value={this.state.selected}
                                     onChange={this.handleChange}
                                     placeholder="Seleccione estado">
                                 </Select>
-                                <Text 
-                                    color={'black'} 
-                                    size={'16px'} 
-                                    >
+                                <Text
+                                    color={'black'}
+                                    size={'16px'}
+                                >
                                     No hay datos para el criterio seleccionado, escoja otro filtro
                                 </Text>
                             </Box>
                         </Center>
-                        
+
                     </div>
                 )}
             </Box>
