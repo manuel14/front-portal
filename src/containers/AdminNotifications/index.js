@@ -65,17 +65,13 @@ class AdminNotifications extends Component {
                             color={'black'} 
                             center>Notificaciones
                         </Title>
-                        <Label color={"gray"} 
-                            margin={'0px 0px 20px 10px'}
-                            >Seleccione un empleado o un sector al cual irá dirigida su notificación
-                        </Label>
                         <form onSubmit={this.onSubmit} id="notifs">
                             <Select 
                                 required={"required"} 
                                 name={"emp"} 
                                 clearable={false}
                                 label={"Destinatario"} 
-                                labelMargin={'0px 10px'}
+                                labelMargin={'0px 0px 5px 10px'}
                                 name={"emp"}
                                 margin = {'0px 10px'}
                                 options={this.props.employees.map(
@@ -100,7 +96,7 @@ class AdminNotifications extends Component {
                                     <Button 
                                         large 
                                         type={"submit"} 
-                                        margin={"10px auto 0px auto"} 
+                                        margin={"10px auto 10px auto"} 
                                         primary
                                         >Enviar
                                     </Button>

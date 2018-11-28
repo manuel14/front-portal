@@ -58,7 +58,7 @@ class Nav extends Component {
             />
             <NavGroup right>
               <NavLink to="/user" icon={userIcon} iconify={matches}>
-                {this.props.userName}
+                {this.props.username}
               </NavLink>
               {matches && (
                 <NavLink

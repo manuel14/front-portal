@@ -7,15 +7,13 @@ import {
     SUBMISSIONS_MONEY_ERROR,
     SUBMISSIONS_VACATIONS_REQUEST,
     SUBMISSIONS_VACATIONS_RESPONSE,
-    SUBMISSIONS_VACATIONS_ERROR,
+    SUBMISSIONS_VACATIONS_ERROR
   } from "./action";
   
   const defaultState = {
     absenceSubmissions: [],
     moneySubmissions: [],
-    vacationsSubmissions: [],
-    size: 5,
-    page:1
+    vacationsSubmissions: []
   };
   
   export default function(state = defaultState, action) {

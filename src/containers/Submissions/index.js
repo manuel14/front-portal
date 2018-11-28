@@ -1,44 +1,86 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Center, LogoSpinner, Table, TableBody, TableData, TableHead, TableHeader, TableRow, TableToolbar,Text, Title } from '../../components/index';
-import { Box} from 'grid-styled';
-import { getSubmissions, pageChange} from './action';
+import { Center, LogoSpinner, Select, Table, TableBody, TableData, TableHead, TableHeader, TableRow, Text, Title } from '../../components/index';
+import { Box } from 'grid-styled';
+import { getSubmissions, pageChange } from './action';
 import * as moment from 'moment';
+
 
 class Submissions extends Component {
 
-
-    componentDidMount() {
-        this.props.onLoad(this.props.page);
+    constructor(props) {
+        super(props);
+        this.state = {
+            selected: [],
+            submissions: [],
+            opts :  [
+                {label:"Estado", options:
+                [{ value: "pendiente", label: "Pendiente", tipo:"estado" },
+                { value: "autorizada", label: "Aprobado", tipo:"estado" },
+                { value: "rechazada", label: "Rechazado", tipo:"estado" }]},
+                {label: "Tipo", options: [
+                { value: "vacaciones", label: "Vacaciones", tipo:"tipo" },
+                { value: "licencia", label: "Licencia", tipo:"tipo" },
+                { value: "adelanto", label: "Adelanto", tipo:"tipo" }]}
+            ]
+        }
+        this.handleChange = this.handleChange.bind(this);
     }
 
-    onPageChange = page => {
-        this.props.onPageChange(page);
-        this.props.onLoad(page);
-    };
+
+    componentDidMount() {
+        this.props.onLoad();
+    }
+
+    componentWillReceiveProps(nextProps) {
+        let absences = nextProps.absenceSubmissions.map(a => ({ ...a, tipo: "Licencia" }))
+        let money = nextProps.moneySubmissions.map(m => ({ ...m, tipo: "Adelanto" }))
+        let vacations = nextProps.vacationsSubmissions.map(v => ({ ...v, tipo: "Vacaciones" }))
+        this.setState({
+            submissions: absences.concat(money.concat(vacations))
+        })
+    }
+
+    handleChange(event) {
+        let newSubs = [];
+        let absences = this.props.absenceSubmissions.map(a => ({ ...a, tipo: "Licencia" }))
+        let money = this.props.moneySubmissions.map(m => ({ ...m, tipo: "Adelanto" }))
+        let vacations = this.props.vacationsSubmissions.map(v => ({ ...v, tipo: "Vacaciones" }))
+        let subs = absences.concat(vacations.concat(money));
+        let selectedOption;
+        let newOpts = this.state.opts;
+        if (event == false) {
+            newSubs = subs;
+            selectedOption = null;
+            newOpts = [
+                {label:"Estado", options:
+                [{ value: "pendiente", label: "Pendiente", tipo:"estado" },
+                { value: "autorizada", label: "Aprobado", tipo:"estado" },
+                { value: "rechazada", label: "Rechazado", tipo:"estado" }]},
+                {label: "Tipo", options: [
+                { value: "vacaciones", label: "Vacaciones", tipo:"tipo" },
+                { value: "licencia", label: "Licencia", tipo:"tipo" },
+                { value: "adelanto", label: "Adelanto", tipo:"tipo" }]}
+            ]
+        }
+        else {
+            newSubs = subs.filter(sub => event.some( e => e.label === sub[e.tipo]));
+            selectedOption = event;
+            console.log(event);
+            newOpts = newOpts.filter(opt => 
+                opt.label === (event[0].tipo[0].toUpperCase() + event[0].tipo.slice(1))
+            );
+            console.log(newOpts);
+        }
+        this.setState({
+            selected: selectedOption,
+            submissions: newSubs,
+            opts : newOpts
+        })
+    }
 
     render() {
-        const { absenceSubmissions, moneySubmissions, vacationsSubmissions, loading } = this.props;
-        let absences = absenceSubmissions.map( a => ({
-            tipo:"Licencia", pk:a.pk,
-            empleado: a.empleado,
-            estado: a.estado, fecha:a.fecha_creacion,
-            autoriza: a.autoriza
-        }))
-        
-        let money = moneySubmissions.map( m => ({
-            tipo:"Adelanto", pk:m.pk,
-            empleado: m.empleado,
-            estado: m.estado, fecha:m.fecha_creacion,
-            autoriza: m.autoriza
-        }))
-        let vacations = vacationsSubmissions.map( v => ({
-            tipo:"Vacaciones", pk:v.pk,
-            empleado: v.empleado,
-            estado: v.estado, fecha:v.fecha_creacion,
-            autoriza: v.autoriza
-        }))
-        const submissions = absences.concat(money.concat(vacations));
+        const { loading } = this.props;
         return (
             <Box style={{ height: '100%' }}>
                 {loading && (
@@ -46,33 +88,49 @@ class Submissions extends Component {
                         <LogoSpinner />
                     </Center>
                 )}
-                {submissions && (
+                {this.state.submissions.length !== 0 && (
                     <div>
                         <Title
                             margin={'10px 0px 20px 0px'}
                             center
                             color={'black'}
-                            >
+                        >
                             Solicitudes
                         </Title>
+                        <Center>
+                            <Box mt={'20px'} width={170}>
+                                <Select
+                                    name={"estado"}
+                                    label={"Filtre"}
+                                    isMulti
+                                    labelMargin={'0px 10px'}
+                                    name={"estado"}
+                                    margin={'0px 10px 10px 0px'}
+                                    options={this.state.opts}
+                                    value={this.state.selected}
+                                    onChange={this.handleChange}
+                                    placeholder="Seleccione estado o tipo">
+                                </Select>
+                            </Box>
+                        </Center>
                         <Table>
                             <TableHead>
                                 <TableRow>
                                     <TableHeader>Tipo</TableHeader>
                                     <TableHeader>Fecha de Solicitud</TableHeader>
                                     <TableHeader>Estado</TableHeader>
-                                    <TableHeader>Autorizado por</TableHeader>
+                                    <TableHeader>Encargado</TableHeader>
                                 </TableRow>
                             </TableHead>
                             <TableBody>
-                                {submissions.map(sub => (
-                                    <TableRow id={sub.pk} 
-                                        key={money.pk}>
+                                {this.state.submissions.map(sub => (
+                                    <TableRow id={sub.pk}
+                                        key={sub.pk}>
                                         <TableData>{sub.tipo}</TableData>
                                         <TableData>
                                             <Text
                                                 margin={'0px 5px 0px'}
-                                            >{moment(sub.fecha, moment.ISO_8601).format('DD/MM/YYYY')}
+                                            >{moment(sub.fecha_creacion, moment.ISO_8601).format('DD/MM/YYYY')}
                                             </Text>
                                         </TableData>
                                         <TableData>{sub.estado}</TableData>
@@ -85,16 +143,39 @@ class Submissions extends Component {
                                 ))}
                             </TableBody>
                         </Table>
-                        <Box m={16}>
-                            <TableToolbar
-                                items={this.props.items}
-                                size={this.props.size}
-                                page={this.props.page}
-                                showTotal
-                                onPageChange={this.onPageChange}
-                            >
-                            </TableToolbar>
-                        </Box>
+                    </div>
+                )}
+                {this.state.submissions.length === 0 && (
+                    <div>
+                        <Title
+                            margin={'10px 0px 20px 0px'}
+                            center
+                            color={'black'}
+                        >
+                            Solicitudes
+                    </Title>
+                        <Center>
+                            <Box mt={'20px'} width={170}>
+                                <Select
+                                    name={"estado"}
+                                    label={"Filtre"}
+                                    labelMargin={'0px 10px'}
+                                    name={"estado"}
+                                    margin={'0px 10px 20px 0px'}
+                                    options={this.state.opts}
+                                    value={this.state.selectedOption}
+                                    onChange={this.handleChange}
+                                    placeholder="Seleccione estado">
+                                </Select>
+                                <Text 
+                                    color={'black'} 
+                                    size={'16px'} 
+                                    >
+                                    No hay datos para el criterio seleccionado, escoja otro filtro
+                                </Text>
+                            </Box>
+                        </Center>
+                        
                     </div>
                 )}
             </Box>
@@ -107,8 +188,7 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: (page) => dispatch(getSubmissions(page)),
-    onPageChange: page => dispatch(pageChange(page)),
+    onLoad: () => dispatch(getSubmissions()),
     dispatch
 
 })

@@ -73,7 +73,7 @@ class AbsenceSubmission extends Component {
                     css={{backgroundColor: '#f0f0f0'}}
                     mt={30} mx="auto" width={512}>
                     <form onSubmit={this.onSubmit} id="vacations">
-                        <Title center>Permiso de ausencia</Title>
+                        <Title margin={'10px 0px'} center>Permiso de ausencia</Title>
                         <Box ml={10} mt={10}>
                             <Label>
                                 Fecha de inicio:

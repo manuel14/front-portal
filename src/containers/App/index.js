@@ -82,7 +82,7 @@ class App extends Component {
                 title={'Empleados'}
                 onBack={this.onBack}
                 handleLogout={this.handleLogout}
-                userName={username}
+                username={username}
                 staff={staff}
                 onAdmin={this.onAdmin}
               />
@@ -116,7 +116,7 @@ class App extends Component {
                 <Route path="/user"
                   render={() => (
                     token ? (
-                      <User/>
+                      <User />
                     )
                       : (
                         <Redirect to="/login" />
@@ -143,7 +143,7 @@ class App extends Component {
                 <Route path="/admin/recibos/nuevos"
                   render={() => (
                     token ? (
-                      <Admin />
+                      <Admin/>
                     )
                       : (
                         <Redirect to="/login" />
@@ -206,7 +206,7 @@ class App extends Component {
                 <Route path="/admin"
                   render={() => (
                     token ? (
-                      <AdminIndex />
+                      <AdminIndex username={username} />
                     )
                       : (
                         <Redirect to="/login" />

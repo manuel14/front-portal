@@ -4,7 +4,6 @@ import { Button, Center, Label, Select, TextArea, Title, InputText } from '../..
 import { postMoney } from './action';
 import * as moment from 'moment';
 import {connect} from 'react-redux';
-import 'react-select/dist/react-select.css';
 
 class MoneySubmission extends Component {
 
@@ -59,7 +58,7 @@ class MoneySubmission extends Component {
                 }}
                     mt={30} mx="auto" width={512}>
                     <form onSubmit={this.onSubmit} id="money">
-                        <Title center>Adelanto de sueldo</Title>
+                        <Title margin={'10px 0px'} center>Adelanto de sueldo</Title>
                         <Label margin={'20px 0px 0px 10px'}>Monto</Label>
                         <InputText
                             type={'number'}

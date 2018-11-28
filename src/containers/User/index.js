@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Flex, Box } from 'grid-styled';
 import { getEmployee, updateEmployee, patchUser } from './action';
-import { Center, Label, Button, InputText, Right, Title } from '../../components/index';
+import { Center, Label, Button, InputText, Right, Text, Title } from '../../components/index';
 import Modal from 'react-responsive-modal';
 import {withRouter} from 'react-router';
 import {logoutUser} from '../App/action';
@@ -81,7 +81,7 @@ class User extends Component {
     })
     const data={new_password: this.state.password}
     this.props.onChangePassword(data);
-    setTimeout(() => {this.props.onLogout()}, 3000)
+    setTimeout(() => {this.props.onLogout()}, 3000);
     
   }
 
@@ -97,9 +97,9 @@ class User extends Component {
           showCloseIcon={false}
           onOverlayClick={this.onOverlay}
         >
-          <Title center>
+          <Text size={'18px'} center>
             Cambio de contraseña
-          </Title>
+          </Text>
           <Label
             display={'block'}
             >
@@ -135,7 +135,7 @@ class User extends Component {
               e.preventDefault()
               this.onAccept()
             }}
-            >Enviar
+            >Guardar
           </Button>
           <Button 
             margin={"5px 5px 0px 0px"} 

@@ -10,7 +10,7 @@ import {
 import {push} from 'react-router-redux';
 
 const defaultState = {
-  username: "",
+  username: localStorage.getItem('username') ? localStorage.username : "",
   token: localStorage.getItem('jwtToken') ? true: false
 };
 

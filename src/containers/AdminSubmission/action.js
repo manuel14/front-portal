@@ -74,7 +74,7 @@ export function submissionsVacationsError(error) {
 function getAbsenceSubmissions(){
     return dispatch => {
         dispatch(submissionsAbsenceRequest());
-        return get(`/api/formularioAusencia/`)
+        return get(`/api/formularioLicencia/`)
             .then(response => { 
                 dispatch(submissionsAbsenceResponse(response)) })
             .catch(err => dispatch(submissionsAbsenceError(err)))

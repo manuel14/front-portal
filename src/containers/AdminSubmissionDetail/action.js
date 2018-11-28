@@ -27,7 +27,7 @@ export function submissionDetailError(error) {
 export function getSubmission(submissionId, tipo) {
     return dispatch => {
         dispatch(submissionDetailRequest());
-        return get(`/api/formulario${tipo}/${submissionId}`)
+        return get(`/api/formulario${tipo}/${submissionId}/`)
             .then(res => {
                 console.log(res.empleado.nombre);
                 dispatch(submissionDetailResponse(res))

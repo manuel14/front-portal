@@ -105,7 +105,7 @@ class AdminReceipts extends Component {
                                     margin={'0px 10px 10px 0px'}
                                     large
                                     primary
-                                >Nuevos
+                                >Subir recibos
                                 </Button>
                             </Link>
                         </Right>
@@ -134,7 +134,7 @@ class AdminReceipts extends Component {
                                             </Text>
                                         </TableData>
                                         <TableData>{receipt.tipo}</TableData>
-                                        <TableData>{receipt.abierto ? moment(receipt.abierto, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS') : 'No'}</TableData>
+                                        <TableData>{receipt.abierto ? moment(receipt.abierto, moment.ISO_8601).format('DD/MM/YYYY HH:MM') : 'No'}</TableData>
                                     </TableRow>
                                 ))}
                             </TableBody>

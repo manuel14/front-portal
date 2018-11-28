@@ -52,7 +52,7 @@ class AttendanceDetail extends Component {
                     showCloseIcon={false}
                     onOverlayClick={this.onOverlay}
                 >
-                    <Text block>
+                    <Text  size={'18px'}  block>
                         Si presiona en abrir dará su consentimiento de haber visto esta fichada
                     </Text>
                     <Button 

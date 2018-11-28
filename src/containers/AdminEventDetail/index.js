@@ -14,7 +14,7 @@ class AdminEventDetail extends Component {
         super(props);
         this.state = {
             open: false,
-            fecha: moment(),
+            fecha: moment().add(1, 'days'),
             allday: false,
             nombre: "",
             descripcion: ""
@@ -88,6 +88,7 @@ class AdminEventDetail extends Component {
 
     render() {
         const evt = this.props.match.params.eventId;
+        const fecha_act = moment();
         return (
             <Flex align="center">
                 <Box css={{
@@ -152,9 +153,8 @@ class AdminEventDetail extends Component {
                                 checked={this.state.allday}
                                 type="checkbox"
                                />Todo el día?
-                            
                         </Box>
-                        <Box mb={10} ml={10} mt={10}>
+                        {this.state.fecha > fecha_act && <Box mb={10} ml={10} mt={10}>
                             <Center>
                                 <Button 
                                     large 
@@ -164,11 +164,15 @@ class AdminEventDetail extends Component {
                                     primary
                                     >Guardar
                                 </Button>
-                                {evt !== "0" && <Button onClick={this.handleDelete} danger>
-                                    Eliminar
-                                </Button>}
+                                {evt !== "0" && 
+                                    <Button 
+                                        margin={'0px 10px 0px 0px'} 
+                                        onClick={this.handleDelete} 
+                                        danger>
+                                        Eliminar
+                                    </Button>}
                             </Center>
-                        </Box>
+                        </Box>}
                     </form>
                 </Box>
             </Flex>

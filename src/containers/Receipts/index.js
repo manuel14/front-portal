@@ -57,7 +57,7 @@ class Receipts extends Component {
                   <TableData>
                     <Text margin={'0px 5px 0px'}>{moment(receipt.periodo).format('MM/YYYY')}</Text>
                   </TableData>
-                  <TableData>{receipt.abierto ? moment(receipt.abierto, moment.ISO_8601).format('DD/MM/YYYY HH:MM:SS') : 'No'}</TableData>
+                  <TableData>{receipt.abierto ? moment(receipt.abierto, moment.ISO_8601).format('DD/MM/YYYY HH:MM') : 'No'}</TableData>
                   <TableData>{receipt.tipo}</TableData>
 
                 </TableRow>

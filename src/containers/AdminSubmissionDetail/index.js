@@ -32,13 +32,14 @@ class AdminSubmissionDetail extends Component {
         body["autoriza"] = localStorage.id;
         const tipo = this.props.match.params.tipo;
         this.props.onConfirm(tipo, this.props.submission.pk, body);
+        setTimeout(() => {this.props.history.push('/admin/solicitudes')}, 3000);
     }
 
 
 
     getComponent(tipo){
         switch(tipo){
-            case 'Ausencia': 
+            case 'Licencia': 
               return <AbsenceSubmission
                     empleado={this.props.submission.empleado ? this.props.submission.empleado.nombre : ''}
                     motivo={this.props.submission.observaciones}

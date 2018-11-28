@@ -70,10 +70,10 @@ export function submissionsVacationsError(error) {
     }
 }
 
-function getAbsenceSubmissions(page) {
+function getAbsenceSubmissions() {
     return dispatch => {
         dispatch(submissionsAbsenceRequest());
-        return get(`/api/formularioAusencia/empleado/?page=${page}`)
+        return get(`/api/formularioLicencia/empleado/`)
             .then(response => {
                 dispatch(submissionsAbsenceResponse(response));
             })
@@ -81,10 +81,10 @@ function getAbsenceSubmissions(page) {
     }
 }
 
-function getMoneySubmissions(page) {
+function getMoneySubmissions() {
     return dispatch => {
         dispatch(submissionsMoneyRequest());
-        return get(`/api/formularioAdelanto/empleado/?page=${page}`)
+        return get(`/api/formularioAdelanto/empleado/`)
             .then(response => { 
                 dispatch(submissionsMoneyResponse(response)) })
             .catch(err => dispatch(submissionsMoneyError(err)))
@@ -92,10 +92,10 @@ function getMoneySubmissions(page) {
     }
 }
 
-function getVacationsSubmissions(page) {
+function getVacationsSubmissions() {
     return dispatch => {
         dispatch(submissionsVacationsRequest());
-        return get(`/api/formularioVacaciones/empleado/?page=${page}`)
+        return get(`/api/formularioVacaciones/empleado/`)
             .then(response => {
                 dispatch(submissionsVacationsResponse(response));
             })
@@ -104,20 +104,12 @@ function getVacationsSubmissions(page) {
 }
 
 
-export function getSubmissions(page) {
+export function getSubmissions() {
     return dispatch => {
         return Promise.all([
-            dispatch(getAbsenceSubmissions(page)),
-            dispatch(getMoneySubmissions(page)),
-            dispatch(getVacationsSubmissions(page))])
+            dispatch(getAbsenceSubmissions()),
+            dispatch(getMoneySubmissions()),
+            dispatch(getVacationsSubmissions())])
     }
 }
 
-export const SUBMISSIONS_PAGE_CHANGE = 'SUBMISSIONS_PAGE_CHANGE';
-export function pageChange(page){
-    return {
-        type: SUBMISSIONS_PAGE_CHANGE,
-        page
-    }
-
-}

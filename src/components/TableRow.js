@@ -2,6 +2,7 @@ import styled, { css } from 'styled-components';
 
 const TableRow = styled.tr`
   height: auto;
+  background-color: #eeeeee;
 
   ${props =>
     props.bordered &&
@@ -47,7 +48,7 @@ const TableRow = styled.tr`
     ${props =>
       props.onClick &&
       css`
-        background-color: #eeeeee;
+        background-color: #87bdd8;
       `};
   }
 `;
