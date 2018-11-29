@@ -145,7 +145,7 @@ class AdminEventDetail extends Component {
                                 dateFormat="LLL"
                             />
                         </Box>
-                        <Box ml={10} mt={10}>
+                        <Box mb={10} ml={10} mt={10}>
                             <input
                                 name="allday" 
                                 value="Todo el día?"

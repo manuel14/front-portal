@@ -81,7 +81,10 @@ class NotificationDetail extends Component{
                         <Label 
                             margin={'10px 0px 0px 10px'} 
                             display={"block"}>Asunto: {notification.asunto}</Label>
-                        <Title margin={'10px 0px 0px 10px'} block>{notification.contenido}</Title>
+                        <Label  margin={'10px 0px 0px 10px'} >
+                            Mensaje:
+                        </Label>
+                        <Title display={'inline-block'} margin={'10px 0px 0px 0px'}>{notification.contenido}</Title>
                         {!notification.contestado &&
                         <Center>
                             <Button

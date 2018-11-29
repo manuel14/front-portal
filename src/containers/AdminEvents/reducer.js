@@ -6,7 +6,9 @@ import {
   
   const defaultState = {
     events: [],
-    loading: false
+    loading: false,
+    size: 5,
+    page:1
   };
   
   export default function(state = defaultState, action) {
@@ -15,7 +17,8 @@ import {
         return {
           ...state,
           events: action.response.results,
-          loading:false
+          loading:false,
+          items: action.response.count
         };
       }
       case ADMIN_EVENTS_REQUEST: {

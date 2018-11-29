@@ -9,7 +9,7 @@ class AdminIndex extends Component {
             <div>
                 <Flex align="center">
                     <Box width={1024} mx="auto">
-                    <Title color={'black'} margin={"10px 0px"} block center>Bienvenido {this.props.username}</Title>
+                    <Title color={'black'} margin={"10px 0px 20px 0px"} block center>Bienvenido {this.props.username}</Title>
                         <CardContainer>
                             <Card color={'#f0f0f0'} center width={"200px"} height={"200px"}>
                                 <Title color={'black'} center>Archivos</Title>

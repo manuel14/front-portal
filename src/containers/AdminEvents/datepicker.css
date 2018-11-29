@@ -209,6 +209,7 @@
 
 .react-datepicker__navigation--next--with-time:not(.react-datepicker__navigation--next--with-today-button) {
   right: 80px;
+  left: 200px;
 }
 
 .react-datepicker__navigation--next:hover {

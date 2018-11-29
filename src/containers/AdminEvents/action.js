@@ -24,10 +24,19 @@ export function eventsError(error) {
     }
 }
 
-export function getEvents() {
+export const ADMIN_EVENTS_PAGE_CHANGE = 'ADMIN_EVENTS_PAGE_CHANGE';
+export function pageChange(page){
+    return {
+        type: ADMIN_EVENTS_PAGE_CHANGE,
+        page
+    }
+
+}
+
+export function getEvents(page) {
     return dispatch => {
         dispatch(eventsRequest());
-        return get(`/api/evento/`)
+        return get(`/api/evento/?page=${page}`)
             .then(res => {
                 dispatch(eventsResponse(res))
             })

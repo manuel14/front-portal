@@ -97,9 +97,9 @@ class User extends Component {
           showCloseIcon={false}
           onOverlayClick={this.onOverlay}
         >
-          <Text size={'18px'} center>
+          <Title center>
             Cambio de contraseña
-          </Text>
+          </Title>
           <Label
             display={'block'}
             >

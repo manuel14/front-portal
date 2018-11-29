@@ -29,7 +29,7 @@ class AdminNotifications extends Component {
         }
         else{
             this.setState({
-                selectedOption: event.value
+                selectedOption: event
             })
         }
     }
@@ -38,9 +38,8 @@ class AdminNotifications extends Component {
         const contenido = this.state.contenido;
         const remitente = this.props.employees.find(emp =>
             emp.id === parseInt(localStorage.id)).id;
-        console.log(remitente);
         const empleado = this.props.employees.find(emp =>
-            emp.id === this.state.selectedOption).id;
+            emp.id === this.state.selectedOption.value).id;
         const msg = {
             asunto: `Mensaje de ${localStorage.username}`,
             contenido,
@@ -63,7 +62,7 @@ class AdminNotifications extends Component {
                         mx="auto" mt={'20px'} width={512}>
                         <Title margin={'10px 0px 10px 0px'} 
                             color={'black'} 
-                            center>Notificaciones
+                            center>Notificación
                         </Title>
                         <form onSubmit={this.onSubmit} id="notifs">
                             <Select 

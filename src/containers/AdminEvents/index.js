@@ -1,8 +1,8 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Button, Center, LogoSpinner, Right, Table, TableBody, TableData, TableHead, TableHeader, TableRow, Text, Title } from '../../components/index';
+import { Button, Center, LogoSpinner, Right, Table, TableBody, TableData, TableHead, TableHeader, TableRow, TableToolbar,Text, Title } from '../../components/index';
 import { Box, Flex } from 'grid-styled';
-import { getEvents, postEvent } from './action';
+import { getEvents, pageChange, postEvent } from './action';
 import * as moment from 'moment';
 import {Link} from 'react-router-dom';
 import {withRouter} from 'react-router';
@@ -20,8 +20,9 @@ class AdminEvents extends Component {
     }
 
     componentDidMount() {
-        this.props.onLoad();
+        this.props.onLoad(this.props.page);
     }
+
 
     handleChange(moment) {
         this.setState({
@@ -29,6 +30,11 @@ class AdminEvents extends Component {
             open: false
         });
     }
+
+    onPageChange = page => {
+        this.props.onPageChange(page);
+        this.props.onLoad(page);
+    };
 
     onSubmit(event) {
         event.preventDefault();
@@ -59,6 +65,7 @@ class AdminEvents extends Component {
                 {events && (
                     <div>
                         <Title
+                            margin={'10px 0px 0px 0px'}
                             center
                             color={'black'}
                             >
@@ -89,18 +96,28 @@ class AdminEvents extends Component {
                                         this.props.history.push(`/admin/eventos/${event.id}`)
                                       }}
                                         key={event.pk}>
+                                        <TableData>{event.nombre}</TableData>
                                         <TableData>
                                             <Text
                                                 margin={'0px 5px 0px'}
                                             >{moment(event.fecha, moment.ISO_8601).format('DD/MM/YYYY')}
                                             </Text>
                                         </TableData>
-                                        <TableData>{event.nombre}</TableData>
                                         <TableData>{event.descripcion}</TableData>
                                     </TableRow>
                                 ))}
                             </TableBody>
                         </Table>
+                        <Box m={16}>
+                            <TableToolbar
+                                items={this.props.items}
+                                size={this.props.size}
+                                page={this.props.page}
+                                showTotal
+                                onPageChange={this.onPageChange}
+                            >
+                            </TableToolbar>
+                        </Box>
                     </div>
                 )}
             </Box>
@@ -113,7 +130,8 @@ const mapStateToProps = state => ({
 })
 
 const mapDispatchToProps = dispatch => ({
-    onLoad: () => dispatch(getEvents()),
+    onLoad: page => dispatch(getEvents(page)),
+    onPageChange: page => dispatch(pageChange(page)),
     send: (ev) => dispatch(postEvent(ev)),
     dispatch
 

@@ -28,7 +28,7 @@ export function absenceError(error) {
 export function postAbsence(data){
     return dispatch => {
         dispatch(absenceRequest());
-        return post(`/api/formularioAusencia/`, data)
+        return post(`/api/formularioLicencia/`, data)
             .then(response => {
                 const msg = {
                     // uid: 'once-please', // you can specify your own uid if required
