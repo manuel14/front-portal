@@ -195,6 +195,7 @@ class User extends Component {
             >Teléfono:
             </Label>
             <InputText
+              type={'number'}
               margin={'0px 10px'}
               id="telefono"
               name="telefono"
